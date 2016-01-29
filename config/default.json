@@ -1,0 +1,9 @@
+{
+    "app": {
+        "livereload": false 
+    },
+    "server": {
+        "host": "localhost",
+        "port": 8000
+    }
+}

@@ -31,8 +31,23 @@
     "gulp-sloc": "^1.0.4",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
+    "material-ui": "^0.14.3",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.1.1",
+    "react-tap-event-plugin": "^0.2.1",
+    "socket.io-client": "^1.4.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "config": "^1.19.0",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "log4js": "^0.6.30",
+    "redux": "^3.1.2",
+    "sanitize.css": "^3.0.0",
+    "socket.io": "^1.4.5"
   }
 }
