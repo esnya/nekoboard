@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { open } from '../actions/Dialog';
 import { App as Component } from '../components/App';
-import { mapStateToProps, mapActionCreatorsToProps } from './Container';
+import { mapActionCreatorsToProps } from './Container';
 
 export const App = connect(
-    mapStateToProps('board'),
+    (state) => ({
+        ...state.board,
+    }),
     mapActionCreatorsToProps({
         open,
     })

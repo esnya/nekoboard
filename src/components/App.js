@@ -1,20 +1,44 @@
-import { AppBar, IconButton } from 'material-ui';
+import { AppBar, IconButton, Styles } from 'material-ui';
 import React from 'react';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
+import { Canvas } from '../containers/Canvas';
 
-export const App = ({board, open}) =>
-    (
-        <div>
+const Style = {
+    Container: {
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: Styles.Colors.grey300,
+        height: '100%',
+    },
+    CanvasContainer: {
+        flex: '1 1 auto',
+        display: 'flex',
+        justifyContent: 'center',
+        overflow: 'auto',
+    },
+};
+
+export const App = ({title, open}) => {
+    document.title = title
+        ? `${title} - Nekoboard`
+        : 'Nekoboard';
+
+    return (
+        <div style={Style.Container}>
             <AppBar
-                title={board && board.title || 'Nekoboard'}
+                title={title || 'Nekoboard'}
                 iconElementRight = {
                     <IconButton
                         iconClassName="material-icons"
                         iconStyle={{color: 'white'}}
                         onTouchTap={() => open('config')} >
-                        mode_edit
+                        settings
                     </IconButton>
                 } />
+            <div style={Style.CanvasContainer} >
+                <Canvas />
+            </div>
             <BoardConfigDialog />
         </div>
     );
+};

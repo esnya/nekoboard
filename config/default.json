@@ -3,7 +3,10 @@
         "livereload": false 
     },
     "board": {
-        "title": "New Board"
+        "title": "New Board",
+        "width": 800, "height": 600,
+        "grid": true,
+        "gridSize": 50
     },
     "browser": {
     },
