@@ -1,0 +1,3 @@
+{
+    "extends": "./beniimo-dev/.eslintrc"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "nekoboard",
+  "version": "1.0.0",
+  "description": "Online whiteboard made for tabletop role-play games.",
+  "main": "lib/server/index.js",
+  "scripts": {
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ukatama/nekoboard.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ukatama/nekoboard/issues"
+  },
+  "homepage": "https://github.com/ukatama/nekoboard#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-2": "^6.3.13",
+    "browserify": "^13.0.0",
+    "eslint-plugin-react": "^3.16.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-eslint": "^1.1.1",
+    "gulp-live-server": "0.0.29",
+    "gulp-sloc": "^1.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}
