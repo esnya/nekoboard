@@ -2,6 +2,11 @@
     "app": {
         "livereload": false 
     },
+    "board": {
+        "title": "New Board"
+    },
+    "browser": {
+    },
     "server": {
         "host": "localhost",
         "port": 8000
