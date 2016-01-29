@@ -86,6 +86,7 @@ export class BoardConfigDialog extends Component {
             <Dialog
                 {...otherProps}
                 actions={actions}
+                autoScrollBodyContent={true}
                 title="Board Config"
                 open={dialog.config} >
                 <form onSubmit={(e) => this.onSubmit(e)} >
