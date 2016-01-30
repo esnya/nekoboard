@@ -38,7 +38,8 @@ export const App = ({title, open}) => {
                         onTouchTap={() => open('config')} >
                         settings
                     </IconButton>
-                } />
+                }
+                showMenuIconButton={false} />
             <div style={Style.CanvasContainer} >
                 <Canvas />
             </div>

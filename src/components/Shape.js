@@ -41,6 +41,8 @@ export const Text = ({
             WebkitUserSelect: 'none',
             MSUserSelect: 'none',
         }}
+        textAnchor="middle"
+        dominantBaseline="middle"
         onTouchTap={onTouchTap}>
         {text}
     </text>

@@ -64,7 +64,7 @@ const moveTo = (shape, x, y) => {
                 y2: shape.y2 + y - shape.y1,
             };
         default:
-            return setSize(shape, x, y);
+            return setPos(shape, x, y);
     }
 };
 
