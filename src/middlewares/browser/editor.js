@@ -68,13 +68,23 @@ export const editor = ({dispatch, getState}) => (next) => (action) => {
             break;
         case EDITOR.EDIT_UPDATE:
             if (e.edit) {
-                if (e.mode === MODE.EDIT) {
-                    const shape = setSize(
-                        getState().shapes.find(({id}) => id === e.edit),
-                        action.x, action.y
-                    );
+                const shape = getState().shapes.find(({id}) => id === e.edit);
 
-                    dispatch(update(shape));
+                if (!shape) return next(action);
+
+                switch(e.mode) {
+                    case MODE.EDIT:
+                        dispatch(update(setSize(
+                            shape,
+                            action.x, action.y
+                        )));
+                        break;
+                    case MODE.MOVE:
+                        dispatch(update(setPos(
+                            shape,
+                            action.x, action.y
+                        )));
+                        break;
                 }
             }
             break;
