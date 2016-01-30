@@ -15,8 +15,7 @@ const Style = {
     },
     CanvasContainer: {
         flex: '1 1 auto',
-        display: 'flex',
-        justifyContent: 'center',
+        textAlign: 'center',
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',
     },

@@ -3,11 +3,6 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { Shape } from './Shape';
 
-const Style = {
-    display: 'inline-block',
-    margin: 32,
-};
-
 const GridLine = ({width, height, step}) => {
     const lines = [];
 
@@ -55,11 +50,18 @@ const GridLabel = ({width, height, step}) => {
     return <g fill={Styles.Colors.grey300}>{labels}</g>;
 };
 
+const Style = {
+    display: 'inline-block',
+    margin: 32,
+};
+
 export class Canvas extends Component {
     toLocalPos(e) {
         const canvas = findDOMNode(this.refs.canvas);
-        const x = e.clientX - canvas.offsetLeft;
-        const y = e.clientY - canvas.offsetTop;
+        const parent = canvas.parentElement;
+
+        const x = e.pageX - canvas.offsetLeft + parent.scrollLeft;
+        const y = e.pageY - canvas.offsetTop + parent.scrollTop;
 
         return {x, y};
     }
