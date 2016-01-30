@@ -136,8 +136,8 @@ export class Canvas extends Component {
                 onMouseLeave={(e) => this.onMouseLeave(e)}>
                 <svg width={width} height={height}>
                     {gridElements}
-                    {edit && <Shape {...edit} />}
                     {shapes.map((shape, i) => <Shape key={i} {...shape} />)}
+                    {edit && <Shape {...edit} />}
                 </svg>
             </Paper>
         );

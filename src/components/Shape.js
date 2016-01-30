@@ -18,7 +18,13 @@ export const Text = ({x, y, width, height, text, fill, stroke}) => (
     <text
         x={x} y={y}
         width={width} height={height}
-        stroke={stroke} fill={fill}>
+        fill={fill !== 'none' ? fill : stroke}
+        style={{
+            userSelect: 'none',
+            MozUserSelect: 'none',
+            WebkitUserSelect: 'none',
+            MSUserSelect: 'none',
+        }}>
         {text}
     </text>
 );

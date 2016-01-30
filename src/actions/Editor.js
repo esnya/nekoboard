@@ -8,6 +8,11 @@ export const setShape = (shape) => ({
     type: EDITOR.SHAPE,
     shape,
 });
+export const setStyle = (stroke, fill) => ({
+    type: EDITOR.STYLE,
+    stroke,
+    fill,
+});
 export const beginEdit = (x, y) => ({
     type: EDITOR.EDIT_BEGIN,
     x, y,

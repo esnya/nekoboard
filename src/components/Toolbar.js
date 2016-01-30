@@ -37,13 +37,22 @@ const ModeButton = ({name, mode, icon, setMode}) => (
     </IconButton>
 );
 
-const ShapeButton = ({name, shape, icon, children, setShape}) => {
+const ShapeButton = ({
+    name,
+    shape,
+    fill,
+    stroke,
+    icon,
+    children,
+    setShape,
+}) => {
     if (icon) {
-        const style = {
-            color: name === shape
-                ? Style.SelectedColor
-                : null,
-        };
+        const style = name === shape
+            ? {
+                color: fill,
+            } : {
+                color: Styles.Colors.grey500,
+            };
 
         return (
             <IconButton
@@ -55,12 +64,14 @@ const ShapeButton = ({name, shape, icon, children, setShape}) => {
         );
     }
 
-    const svgStyle = {
-        stroke: name === shape
-            ? Style.SelectedColor
-            : 'black',
-        fill: 'none',
-    };
+    const svgStyle = name === shape
+        ? {
+            stroke,
+            fill,
+        } : {
+            stroke: Styles.Colors.grey500,
+            fill: 'none',
+        };
 
     return (
         <IconButton onTouchTap={() => setShape(name)}>
@@ -73,45 +84,66 @@ const ShapeButton = ({name, shape, icon, children, setShape}) => {
     );
 };
 
-export const Toolbar = ({mode, shape, setMode, setShape}) => (
-    <Paper style={Style.Toolbar}>
-        <ModeButton
-            mode={mode}
-            name={MODE.MOVE}
-            icon="open_with"
-            setMode={setMode} />
-        <ModeButton
-            mode={mode}
-            name={MODE.EDIT}
-            icon="editor"
-            setMode={setMode} />
-        <ModeButton
-            mode={mode}
-            name={MODE.ERASE}
-            icon="clear"
-            setMode={setMode} />
-        <div style={Style.Separator} />
-        <IconButton iconClassName="material-icons">
-            color_lens
-        </IconButton>
-        {mode === MODE.EDIT ? (
-            <div style={Style.Toolbar}>
+export const Toolbar = (props) => {
+    const {
+        mode,
+        shape,
+        fill,
+        stroke,
+        open,
+        setMode,
+        setShape,
+    } = props;
+    const menuProps = {
+        mode,
+        setMode,
+    };
+    const shapeProps = {
+        shape,
+        fill,
+        stroke,
+        setShape,
+    };
+
+    return (
+        <Paper style={Style.Toolbar}>
+            <ModeButton
+                {...menuProps}
+                name={MODE.MOVE}
+                icon="open_with" />
+            <ModeButton
+                {...menuProps}
+                name={MODE.EDIT}
+                icon="editor" />
+            <ModeButton
+                {...menuProps}
+                name={MODE.ERASE}
+                icon="clear" />
+            {mode === MODE.EDIT ? (
+                <div style={Style.Toolbar}>
+                    <div style={Style.Separator} />
+                    <ShapeButton
+                        {...shapeProps}
+                        name={SHAPE.RECT}>
+                        <Rect x={0} y={0} width={24} height={24} />
+                    </ShapeButton>
+                    <ShapeButton
+                        {...shapeProps}
+                        name={SHAPE.CIRCLE}>
+                        <Circle cx={12} cy={12} r={11} />
+                    </ShapeButton>
+                    <ShapeButton
+                        {...shapeProps}
+                        name={SHAPE.TEXT}
+                        icon="text_fields" />
                 <div style={Style.Separator} />
-                <ShapeButton
-                    name={SHAPE.RECT}
-                    shape={shape} setShape={setShape}>
-                    <Rect x={0} y={0} width={24} height={24} />
-                </ShapeButton>
-                <ShapeButton
-                    name={SHAPE.CIRCLE}
-                    shape={shape} setShape={setShape}>
-                    <Circle cx={12} cy={12} r={11} />
-                </ShapeButton>
-                <ShapeButton
-                    name={SHAPE.TEXT}
-                    icon="text_fields"
-                    shape={shape} setShape={setShape} />
-            </div>
-    ) : null}
-    </Paper>
-);
+                <IconButton
+                    iconClassName="material-icons"
+                    onTouchTap={() => open('editStyle')}>
+                    color_lens
+                </IconButton>
+                </div>
+        ) : null}
+        </Paper>
+    );
+};

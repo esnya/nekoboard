@@ -6,7 +6,7 @@ const InitialState = {
     mode: MODE.DEFAULT,
     shape: SHAPE.DEFAULT,
     fill: 'none',
-    stroke: 'black',
+    stroke: '#000000',
     edit: null,
 };
 
@@ -52,6 +52,12 @@ export const editor = (state = InitialState, action) => {
             return {
                 ...state,
                 shape: action.shape,
+            };
+        case EDITOR.STYLE:
+            return {
+                ...state,
+                stroke: action.stroke,
+                fill: action.fill,
             };
         case EDITOR.EDIT_BEGIN:
             if (state.mode !== MODE.EDIT) return state;
