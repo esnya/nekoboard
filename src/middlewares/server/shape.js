@@ -1,4 +1,4 @@
-import { push, update } from '../../actions/Shape';
+import { push, update, remove } from '../../actions/Shape';
 import * as SHAPE from '../../constants/actions/Shape';
 
 export const shape = () => (next) => (action) => {
@@ -12,6 +12,12 @@ export const shape = () => (next) => (action) => {
         case SHAPE.UPDATE:
             return next({
                 ...update(action.item),
+                sync: false,
+                socket: action.socket,
+            });
+        case SHAPE.REMOVE:
+            return next({
+                ...remove(action.id),
                 sync: false,
                 socket: action.socket,
             });

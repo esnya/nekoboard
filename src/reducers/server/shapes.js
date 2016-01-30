@@ -4,9 +4,9 @@ export const shapes = (state = {}, action) => {
     const socket = action.socket;
     const boardId = socket && socket.boardId;
 
+    if (!boardId) return state;
     switch(action.type) {
         case SHAPE.PUSH:
-            if (!boardId) return state;
             return {
                 ...state,
                 [boardId]: [
@@ -18,7 +18,6 @@ export const shapes = (state = {}, action) => {
                 ],
             };
         case SHAPE.UPDATE:
-            if (!boardId) return state;
             return {
                 ...state,
                 [boardId]: (state[boardId] || [])
@@ -28,6 +27,12 @@ export const shapes = (state = {}, action) => {
                             ...action.item,
                         } : item
                     ),
+            };
+        case SHAPE.REMOVE:
+            return {
+                ...state,
+                [boardId]: (state[boardId] || [])
+                    .filter(({id}) => id !== action.id),
             };
         default:
             return state;

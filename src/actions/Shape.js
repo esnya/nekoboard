@@ -20,3 +20,9 @@ export const update = (item) => ({
     broadcast: true,
     item,
 });
+export const remove = (id) => ({
+    type: SHAPE.REMOVE,
+    sync: true,
+    broadcast: true,
+    id,
+});

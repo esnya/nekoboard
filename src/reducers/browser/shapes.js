@@ -17,6 +17,8 @@ export const shapes = (state = [], action) => {
                         ...action.item,
                     } : item
             );
+        case SHAPE.REMOVE:
+            return state.filter(({id}) => id !== action.id);
         default:
             return state;
     }

@@ -1,6 +1,6 @@
 import { open } from '../../actions/Dialog';
 import { endEdit } from '../../actions/Editor';
-import { push, update } from '../../actions/Shape';
+import { push, update, remove } from '../../actions/Shape';
 import * as EDITOR from '../../constants/actions/Editor';
 import * as MODE from '../../constants/Mode';
 import * as SHAPE from '../../constants/Shape';
@@ -62,6 +62,8 @@ export const editor = ({dispatch, getState}) => (next) => (action) => {
                     ...action,
                     id: shape.id,
                 });
+            } else if (e.mode === MODE.ERASE && action.id) {
+                dispatch(remove(action.id));
             }
             break;
         case EDITOR.EDIT_UPDATE:
