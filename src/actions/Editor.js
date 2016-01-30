@@ -13,6 +13,10 @@ export const setStyle = (stroke, fill) => ({
     stroke,
     fill,
 });
+export const setSnap = (snap) => ({
+    type: EDITOR.SNAP,
+    snap,
+});
 export const beginEdit = ({x, y, id}) => ({
     type: EDITOR.EDIT_BEGIN,
     x, y, id,

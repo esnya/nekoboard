@@ -90,9 +90,11 @@ export const Toolbar = (props) => {
         shape,
         fill,
         stroke,
+        snap,
         open,
         setMode,
         setShape,
+        setSnap,
     } = props;
     const menuProps = {
         mode,
@@ -119,6 +121,15 @@ export const Toolbar = (props) => {
                 {...menuProps}
                 name={MODE.ERASE}
                 icon="clear" />
+            <div style={Style.Separator} />
+            <IconButton
+                iconClassName="material-icons"
+                iconStyle={{
+                    color: snap ? null : Styles.Colors.grey300,
+                }}
+                onTouchTap={() => setSnap(!snap)}>
+                grid_on
+            </IconButton>
             {mode === MODE.EDIT ? (
                 <div style={Style.Toolbar}>
                     <div style={Style.Separator} />

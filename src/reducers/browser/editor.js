@@ -9,6 +9,7 @@ const InitialState = {
     stroke: '#000000',
     edit: null,
     move: null,
+    snap: null,
 };
 
 export const editor = (state = InitialState, action) => {
@@ -28,6 +29,11 @@ export const editor = (state = InitialState, action) => {
                 ...state,
                 stroke: action.stroke,
                 fill: action.fill,
+            };
+        case EDITOR.SNAP:
+            return {
+                ...state,
+                snap: action.snap,
             };
         case EDITOR.EDIT_BEGIN:
             return {

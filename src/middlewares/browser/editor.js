@@ -53,8 +53,30 @@ const setSize = (shape, x, y) => {
     }
 };
 
+const moveTo = (shape, x, y) => {
+    switch(shape.shape) {
+        case SHAPE.LINE:
+            return {
+                ...shape,
+                x1: x,
+                y1: y,
+                x2: shape.x2 + x - shape.x1,
+                y2: shape.y2 + y - shape.y1,
+            };
+        default:
+            return setSize(shape, x, y);
+    }
+};
+
+const snapToGrid = (snap, value, size) => snap
+    ? Math.round(value / size * 2) * size / 2
+    : value;
+
 export const editor = ({dispatch, getState}) => (next) => (action) => {
     const e = getState().editor;
+    const b = getState().board;
+    const x = action.x && snapToGrid(e.snap, action.x, b.gridSize);
+    const y = action.y && snapToGrid(e.snap, action.y, b.gridSize);
 
     switch(action.type) {
         case EDITOR.EDIT_BEGIN:
@@ -70,7 +92,7 @@ export const editor = ({dispatch, getState}) => (next) => (action) => {
                     shape: e.shape,
                     fill: e.fill,
                     stroke: e.stroke,
-                }, action.x, action.y);
+                }, x, y);
 
                 dispatch(push(shape));
 
@@ -92,13 +114,13 @@ export const editor = ({dispatch, getState}) => (next) => (action) => {
                     case MODE.EDIT:
                         dispatch(update(setSize(
                             shape,
-                            action.x, action.y
+                            x, y
                         )));
                         break;
                     case MODE.MOVE:
-                        dispatch(update(setPos(
+                        dispatch(update(moveTo(
                             shape,
-                            action.x, action.y
+                            x, y
                         )));
                         break;
                 }
