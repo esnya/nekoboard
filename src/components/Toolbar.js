@@ -5,7 +5,7 @@ import {
     Styles,
 } from 'material-ui';
 import React from 'react';
-import { Rect, Circle } from '../components/Shape';
+import { Line, Rect, Circle, Ellipse } from '../components/Shape';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 
@@ -51,7 +51,7 @@ const ShapeButton = ({
             ? {
                 color: fill === 'none' ? stroke : fill,
             } : {
-                color: Styles.Colors.grey500,
+                color: Styles.Colors.grey300,
             };
 
         return (
@@ -69,7 +69,7 @@ const ShapeButton = ({
             stroke,
             fill,
         } : {
-            stroke: Styles.Colors.grey500,
+            stroke: Styles.Colors.grey300,
             fill: 'none',
         };
 
@@ -124,6 +124,11 @@ export const Toolbar = (props) => {
                     <div style={Style.Separator} />
                     <ShapeButton
                         {...shapeProps}
+                        name={SHAPE.LINE}>
+                        <Line x1={24} y1={0} x2={0} y2={24} />
+                    </ShapeButton>
+                    <ShapeButton
+                        {...shapeProps}
                         name={SHAPE.RECT}>
                         <Rect x={0} y={0} width={24} height={24} />
                     </ShapeButton>
@@ -131,6 +136,11 @@ export const Toolbar = (props) => {
                         {...shapeProps}
                         name={SHAPE.CIRCLE}>
                         <Circle cx={12} cy={12} r={11} />
+                    </ShapeButton>
+                    <ShapeButton
+                        {...shapeProps}
+                        name={SHAPE.ELLIPSE}>
+                        <Ellipse cx={12} cy={12} rx={11} ry={6} />
                     </ShapeButton>
                     <ShapeButton
                         {...shapeProps}

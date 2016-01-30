@@ -8,6 +8,8 @@ import { generate } from '../../utility/id';
 
 const setPos = (shape, x, y) => {
     switch(shape.shape) {
+        case SHAPE.LINE:
+            return {...shape, x1: x, y1: y};
         case SHAPE.RECT:
         case SHAPE.TEXT:
             return {...shape, x, y};
@@ -19,21 +21,35 @@ const setPos = (shape, x, y) => {
 
 const setSize = (shape, x, y) => {
     switch(shape.shape) {
-        case SHAPE.RECT:
-        case SHAPE.TEXT:
+        case SHAPE.LINE:
             return {
                 ...shape,
-                width: x - shape.x,
-                height: y - shape.y,
+                x2: x,
+                y2: y,
+            };
+        case SHAPE.RECT:
+            return {
+                ...shape,
+                x: Math.min(x, shape.x),
+                y: Math.min(y, shape.y),
+                width: Math.abs(x - shape.x),
+                height: Math.abs(y - shape.y),
             };
         case SHAPE.CIRCLE:
-        case SHAPE.ELLIPSE:
             return {
                 ...shape,
                 r: Math.sqrt(
                     Math.pow(x - shape.cx, 2) + Math.pow(y - shape.cy, 2)
                 ),
             };
+        case SHAPE.ELLIPSE:
+            return {
+                ...shape,
+                rx: Math.abs(x - shape.cx),
+                ry: Math.abs(y - shape.cy),
+            };
+        case SHAPE.TEXT:
+            return shape;
     }
 };
 

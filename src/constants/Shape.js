@@ -1,3 +1,4 @@
+export const LINE = 'SHAPE_LINE';
 export const RECT = 'SHAPE_RECT';
 export const CIRCLE = 'SHAPE_CIRCLE';
 export const ELLIPSE = 'SHAPE_ELLIPSE';
