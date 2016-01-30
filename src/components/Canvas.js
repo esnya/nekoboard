@@ -76,17 +76,6 @@ export class Canvas extends Component {
         }
     }
 
-    onMouseLeave() {
-        const {
-            edit,
-            cancelEdit,
-        } = this.props;
-
-        if (edit) {
-            cancelEdit();
-        }
-    }
-
     onTouchTap(e, id) {
         e.stopPropagation();
         this.props.beginEdit({
@@ -124,7 +113,6 @@ export class Canvas extends Component {
                 ref="canvas"
                 style={{...Style, width, height}}
                 onMouseMove={(e) => this.onMouseMove(e)}
-                onMouseLeave={(e) => this.onMouseLeave(e)}
                 onTouchTap={(e) => this.onTouchTap(e)}>
                 <svg width={width} height={height}>
                     {gridElements}
