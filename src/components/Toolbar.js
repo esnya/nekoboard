@@ -49,7 +49,7 @@ const ShapeButton = ({
     if (icon) {
         const style = name === shape
             ? {
-                color: fill,
+                color: fill === 'none' ? stroke : fill,
             } : {
                 color: Styles.Colors.grey500,
             };

@@ -1,7 +1,6 @@
 import { Paper, Styles } from 'material-ui';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import * as SHAPE from '../constants/Shape';
 import { Shape } from './Shape';
 
 const Style = {
@@ -92,7 +91,6 @@ export class Canvas extends Component {
             gridSize,
             edit,
             shapes,
-            beginEdit,
         } = this.props;
 
         const gridElements = grid && [

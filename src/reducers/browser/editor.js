@@ -11,37 +11,6 @@ const InitialState = {
     move: null,
 };
 
-const beginShape = (shape, x, y) => {
-    switch(shape.shape) {
-        case SHAPE.RECT:
-        case SHAPE.TEXT:
-            return {...shape, x, y};
-        case SHAPE.CIRCLE:
-        case SHAPE.ELLIPSE:
-            return {...shape, cx: x, cy: y};
-    }
-};
-
-const updateShape = (shape, x, y) => {
-    switch(shape.shape) {
-        case SHAPE.RECT:
-        case SHAPE.TEXT:
-            return {
-                ...shape,
-                width: x - shape.x,
-                height: y - shape.y,
-            };
-        case SHAPE.CIRCLE:
-        case SHAPE.ELLIPSE:
-            return {
-                ...shape,
-                r: Math.sqrt(
-                    Math.pow(x - shape.cx, 2) + Math.pow(y - shape.cy, 2)
-                ),
-            };
-    }
-};
-
 export const editor = (state = InitialState, action) => {
     switch(action.type) {
         case EDITOR.MODE:
