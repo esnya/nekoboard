@@ -5,7 +5,7 @@ export const dialog = (state = {}, action) => {
         case DIALOG.OPEN:
             return {
                 ...state,
-                [action.id]: true,
+                [action.id]: action.data || true,
             };
         case DIALOG.CLOSE:
             return {

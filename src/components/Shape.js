@@ -40,6 +40,8 @@ export const Shape = (props) => {
             return <Rect {...otherProps} />;
         case SHAPE.CIRCLE:
             return <Circle {...otherProps} />;
+        case SHAPE.TEXT:
+            return <Text {...otherProps} />;
         default:
             return <Text {...otherProps} text="??" />;
     }

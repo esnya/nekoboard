@@ -1,6 +1,7 @@
 import { Paper, Styles } from 'material-ui';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import * as SHAPE from '../constants/Shape';
 import { Shape } from './Shape';
 
 const Style = {
@@ -65,7 +66,18 @@ export class Canvas extends Component {
     }
 
     onMouseDown(e) {
-        this.props.beginEdit(...this.toLocalPos(e));
+        const {
+            shape,
+            beginEdit,
+            open,
+        } = this.props;
+        const pos = this.toLocalPos(e);
+
+        if (shape === SHAPE.TEXT) {
+            open('editText', pos);
+        } else {
+            beginEdit(...pos);
+        }
     }
 
     onMouseMove(e) {

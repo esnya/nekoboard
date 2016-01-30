@@ -5,6 +5,7 @@ import {
     endEdit,
     cancelEdit,
 } from '../actions/Editor';
+import { open } from '../actions/Dialog';
 import { push } from '../actions/Shape';
 import { Canvas as Component } from '../components/Canvas';
 import { mapActionCreatorsToProps } from './Container';
@@ -13,6 +14,7 @@ export const Canvas = connect(
     (state) => ({
         ...state.board,
         edit: state.editor.edit,
+        shape: state.editor.shape,
         shapes: state.shapes,
     }),
     mapActionCreatorsToProps({
@@ -20,6 +22,7 @@ export const Canvas = connect(
         updateEdit,
         endEdit,
         cancelEdit,
+        open,
         push,
     })
 )(Component);

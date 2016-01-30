@@ -3,6 +3,7 @@ import React from 'react';
 import { Canvas } from '../containers/Canvas';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
 import { EditStyleDialog } from '../containers/EditStyleDialog';
+import { EditTextDialog } from '../containers/EditTextDialog';
 import { Toolbar } from '../containers/Toolbar';
 
 const Style = {
@@ -44,6 +45,7 @@ export const App = ({title, open}) => {
             <Toolbar />
             <BoardConfigDialog />
             <EditStyleDialog />
+            <EditTextDialog />
         </div>
     );
 };
