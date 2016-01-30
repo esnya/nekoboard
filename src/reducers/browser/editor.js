@@ -8,6 +8,7 @@ const InitialState = {
     fill: 'none',
     stroke: '#000000',
     edit: null,
+    move: null,
 };
 
 const beginShape = (shape, x, y) => {
@@ -60,25 +61,11 @@ export const editor = (state = InitialState, action) => {
                 fill: action.fill,
             };
         case EDITOR.EDIT_BEGIN:
-            if (state.mode !== MODE.EDIT) return state;
             return {
                 ...state,
-                edit: beginShape({
-                    shape: state.shape,
-                    fill: state.fill,
-                    stroke: state.stroke,
-                }, action.x, action.y),
-            };
-        case EDITOR.EDIT_UPDATE:
-            return {
-                ...state,
-                edit: updateShape(state.edit, action.x, action.y),
+                edit: action.id,
             };
         case EDITOR.EDIT_END:
-            return {
-                ...state,
-                edit: null,
-            };
         case EDITOR.EDIT_CANCEL:
             return {
                 ...state,

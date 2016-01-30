@@ -1,4 +1,4 @@
-import { Dialog, FlatButton, TextField, Toggle } from 'material-ui';
+import { Dialog, FlatButton, Toggle } from 'material-ui';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 

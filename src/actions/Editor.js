@@ -13,18 +13,28 @@ export const setStyle = (stroke, fill) => ({
     stroke,
     fill,
 });
-export const beginEdit = (x, y) => ({
+export const beginEdit = ({x, y, id}) => ({
     type: EDITOR.EDIT_BEGIN,
-    x, y,
+    x, y, id,
 });
-export const updateEdit = (x, y) => ({
+export const updateEdit = ({x, y}) => ({
     type: EDITOR.EDIT_UPDATE,
     x, y,
 });
-export const endEdit = (x, y) => ({
+export const endEdit = () => ({
     type: EDITOR.EDIT_END,
-    x, y,
 });
 export const cancelEdit = () => ({
     type: EDITOR.EDIT_CANCEL,
+});
+export const beginMove = (id) => ({
+    type: EDITOR.MOVE_BEGIN,
+    id,
+});
+export const updateMove = (x, y) => ({
+    type: EDITOR.MOVE_UPDATE,
+    x, y,
+});
+export const endMove = () => ({
+    type: EDITOR.MOVE_END,
 });

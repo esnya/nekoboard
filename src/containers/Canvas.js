@@ -4,6 +4,9 @@ import {
     updateEdit,
     endEdit,
     cancelEdit,
+    beginMove,
+    updateMove,
+    endMove,
 } from '../actions/Editor';
 import { open } from '../actions/Dialog';
 import { push } from '../actions/Shape';
@@ -14,6 +17,7 @@ export const Canvas = connect(
     (state) => ({
         ...state.board,
         edit: state.editor.edit,
+        move: state.editor.move,
         shape: state.editor.shape,
         shapes: state.shapes,
     }),
@@ -22,6 +26,9 @@ export const Canvas = connect(
         updateEdit,
         endEdit,
         cancelEdit,
+        beginMove,
+        updateMove,
+        endMove,
         open,
         push,
     })

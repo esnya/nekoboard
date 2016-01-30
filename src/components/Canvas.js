@@ -62,22 +62,7 @@ export class Canvas extends Component {
         const x = e.clientX - canvas.offsetLeft;
         const y = e.clientY - canvas.offsetTop;
 
-        return [x, y];
-    }
-
-    onMouseDown(e) {
-        const {
-            shape,
-            beginEdit,
-            open,
-        } = this.props;
-        const pos = this.toLocalPos(e);
-
-        if (shape === SHAPE.TEXT) {
-            open('editText', pos);
-        } else {
-            beginEdit(...pos);
-        }
+        return {x, y};
     }
 
     onMouseMove(e) {
@@ -87,20 +72,7 @@ export class Canvas extends Component {
         } = this.props;
 
         if (edit) {
-            updateEdit(...this.toLocalPos(e));
-        }
-    }
-
-    onMouseUp(e) {
-        const {
-            edit,
-            endEdit,
-            push,
-        } = this.props;
-
-        if (edit) {
-            push(edit);
-            endEdit(...this.toLocalPos(e));
+            updateEdit(this.toLocalPos(e));
         }
     }
 
@@ -115,6 +87,14 @@ export class Canvas extends Component {
         }
     }
 
+    onTouchTap(e, id) {
+        e.stopPropagation();
+        this.props.beginEdit({
+            ...this.toLocalPos(e.nativeEvent),
+            id,
+        });
+    }
+
     render() {
         const {
             width,
@@ -123,6 +103,7 @@ export class Canvas extends Component {
             gridSize,
             edit,
             shapes,
+            beginEdit,
         } = this.props;
 
         const gridElements = grid && [
@@ -142,13 +123,17 @@ export class Canvas extends Component {
             <Paper
                 ref="canvas"
                 style={{...Style, width, height}}
-                onMouseDown={(e) => this.onMouseDown(e)}
                 onMouseMove={(e) => this.onMouseMove(e)}
-                onMouseUp={(e) => this.onMouseUp(e)}
-                onMouseLeave={(e) => this.onMouseLeave(e)}>
+                onMouseLeave={(e) => this.onMouseLeave(e)}
+                onTouchTap={(e) => this.onTouchTap(e)}>
                 <svg width={width} height={height}>
                     {gridElements}
-                    {shapes.map((shape, i) => <Shape key={i} {...shape} />)}
+                    {shapes.map((shape, i) => (
+                        <Shape
+                            {...shape}
+                            key={i}
+                            onTouchTap={(e) => this.onTouchTap(e, shape.id)} />
+                    ))}
                     {edit && <Shape {...edit} />}
                 </svg>
             </Paper>

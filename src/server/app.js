@@ -3,7 +3,7 @@ import livereload from 'connect-livereload';
 import express from 'express';
 import { connectLogger, getLogger, levels } from 'log4js';
 import { join } from 'path';
-import { generate } from './id';
+import { generate } from '../utility/id';
 
 const logger = getLogger('[APP]');
 

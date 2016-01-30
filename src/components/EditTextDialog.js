@@ -11,9 +11,9 @@ export class EditTextDialog extends Component {
         } = this.props;
 
         push({
-            x: dialog.editText[0],
-            y: dialog.editText[1],
             shape: editor.shape,
+            x: dialog.editText.x,
+            y: dialog.editText.y,
             text: this.refs.text.getValue(),
             fill: editor.fill,
             stroke: editor.stroke,

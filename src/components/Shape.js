@@ -1,20 +1,28 @@
 import React from 'react';
 import * as SHAPE from '../constants/Shape';
 
-export const Rect = ({x, y, width, height, fill, stroke}) => (
+export const Rect = ({x, y, width, height, fill, stroke, onTouchTap}) => (
     <rect
         x={x} y={y}
         width={width} height={height}
-        stroke={stroke} fill={fill} />
+        stroke={stroke} fill={fill}
+        onTouchTap={onTouchTap} />
 );
 
-export const Circle = ({cx, cy, r, fill, stroke}) => (
+export const Circle = ({cx, cy, r, fill, stroke, onTouchTap}) => (
     <circle
         cx={cx} cy={cy} r={r}
-        stroke={stroke} fill={fill} />
+        stroke={stroke} fill={fill}
+        onTouchTap={onTouchTap} />
 );
 
-export const Text = ({x, y, width, height, text, fill, stroke}) => (
+export const Text = ({
+    x, y,
+    width, height,
+    text,
+    fill, stroke,
+    onTouchTap,
+}) => (
     <text
         x={x} y={y}
         width={width} height={height}
@@ -24,7 +32,8 @@ export const Text = ({x, y, width, height, text, fill, stroke}) => (
             MozUserSelect: 'none',
             WebkitUserSelect: 'none',
             MSUserSelect: 'none',
-        }}>
+        }}
+        onTouchTap={onTouchTap}>
         {text}
     </text>
 );

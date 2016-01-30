@@ -4,9 +4,19 @@ export const shapes = (state = [], action) => {
     switch(action.type) {
         case SHAPE.PUSH:
             return [
-                ...state,
+                ...state.filter(
+                    (a) => !action.items.find((b) => a.id === b.id)
+                ),
                 ...action.items,
             ];
+        case SHAPE.UPDATE:
+            return state.map((item) =>
+                item.id === action.item.id
+                    ? {
+                        ...item,
+                        ...action.item,
+                    } : item
+            );
         default:
             return state;
     }
