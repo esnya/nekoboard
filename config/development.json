@@ -1,5 +1,8 @@
 {
     "app": {
         "livereload": true
+    },
+    "browser": {
+        "debug": true
     }
 }

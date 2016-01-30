@@ -1,5 +1,7 @@
 import { Paper, Styles } from 'material-ui';
-import React from 'react';
+import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
+import { Shape } from './Shape';
 
 const Style = {
     display: 'inline-block',
@@ -53,25 +55,91 @@ const GridLabel = ({width, height, step}) => {
     return <g fill={Styles.Colors.grey300}>{labels}</g>;
 };
 
-export const Canvas = ({width, height, grid, gridSize}) => {
-    const gridElements = grid && [
-        <GridLine
-            key="line"
-            width={width}
-            height={height}
-            step={+gridSize} />,
-        <GridLabel
-            key="lebel"
-            width={width}
-            height={height}
-            step={+gridSize} />,
-    ] || null;
+export class Canvas extends Component {
+    toLocalPos(e) {
+        const canvas = findDOMNode(this.refs.canvas);
+        const x = e.clientX - canvas.offsetLeft;
+        const y = e.clientY - canvas.offsetTop;
 
-    return (
-        <Paper style={{...Style, width, height}}>
-            <svg width={width} height={height}>
-                {gridElements}
-            </svg>
-        </Paper>
-    );
-};
+        return [x, y];
+    }
+
+    onMouseDown(e) {
+        this.props.beginEdit(...this.toLocalPos(e));
+    }
+
+    onMouseMove(e) {
+        const {
+            edit,
+            updateEdit,
+        } = this.props;
+
+        if (edit) {
+            updateEdit(...this.toLocalPos(e));
+        }
+    }
+
+    onMouseUp(e) {
+        const {
+            edit,
+            endEdit,
+            push,
+        } = this.props;
+
+        if (edit) {
+            push(edit);
+            endEdit(...this.toLocalPos(e));
+        }
+    }
+
+    onMouseLeave() {
+        const {
+            edit,
+            cancelEdit,
+        } = this.props;
+
+        if (edit) {
+            cancelEdit();
+        }
+    }
+
+    render() {
+        const {
+            width,
+            height,
+            grid,
+            gridSize,
+            edit,
+            shapes,
+        } = this.props;
+
+        const gridElements = grid && [
+            <GridLine
+                key="line"
+                width={width}
+                height={height}
+                step={+gridSize} />,
+            <GridLabel
+                key="lebel"
+                width={width}
+                height={height}
+                step={+gridSize} />,
+        ] || null;
+
+        return (
+            <Paper
+                ref="canvas"
+                style={{...Style, width, height}}
+                onMouseDown={(e) => this.onMouseDown(e)}
+                onMouseMove={(e) => this.onMouseMove(e)}
+                onMouseUp={(e) => this.onMouseUp(e)}
+                onMouseLeave={(e) => this.onMouseLeave(e)}>
+                <svg width={width} height={height}>
+                    {gridElements}
+                    {edit && <Shape {...edit} />}
+                    {shapes.map((shape, i) => <Shape key={i} {...shape} />)}
+                </svg>
+            </Paper>
+        );
+    }
+}

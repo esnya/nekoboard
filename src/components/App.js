@@ -2,6 +2,7 @@ import { AppBar, IconButton, Styles } from 'material-ui';
 import React from 'react';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
 import { Canvas } from '../containers/Canvas';
+import { Toolbar } from '../containers/Toolbar';
 
 const Style = {
     Container: {
@@ -15,6 +16,7 @@ const Style = {
         display: 'flex',
         justifyContent: 'center',
         overflow: 'auto',
+        WebkitOverflowScrolling: 'touch',
     },
 };
 
@@ -38,6 +40,7 @@ export const App = ({title, open}) => {
             <div style={Style.CanvasContainer} >
                 <Canvas />
             </div>
+            <Toolbar />
             <BoardConfigDialog />
         </div>
     );

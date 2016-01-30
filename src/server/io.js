@@ -13,10 +13,12 @@ io.on('connection', (socket) => {
 
     store.dispatch(connected(socket));
     socket.on('disconnect', () => store.dispatch(disconnected(socket)));
-    socket.on('action', (action) => store.dispatch({
-        ...action,
-        broadcast: false,
-        sync: false,
-        socket,
-    }));
+    socket.on('action', (action) => {
+        store.dispatch({
+            ...action,
+            broadcast: false,
+            sync: false,
+            socket,
+        });
+    });
 });

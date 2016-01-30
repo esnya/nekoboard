@@ -9,6 +9,7 @@
         "gridSize": 50
     },
     "browser": {
+        "debug": false
     },
     "server": {
         "host": "localhost",

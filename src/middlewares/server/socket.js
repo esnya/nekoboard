@@ -6,18 +6,20 @@ export const socket = () => (next) => (action) => {
         sync,
         ...nextAction,
     } = action;
+    const boardId = action.socket && action.socket.boardId;
 
     if (sync && nextAction.socket) {
         nextAction.socket.emit('action', {
             ...nextAction,
             socket: null,
         });
-    } else if (broadcast && nextAction.id) {
-        io.to(action.id).emit('action', {
+    }
+    if (broadcast && boardId) {
+        io.to(boardId).emit('action', {
             ...nextAction,
             socket: null,
         });
     }
 
-    return next(action);
+    return next(nextAction);
 };
