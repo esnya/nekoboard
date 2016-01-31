@@ -9,7 +9,11 @@ import { generate } from '../../utility/id';
 const setPos = (shape, x, y) => {
     switch(shape.shape) {
         case SHAPE.LINE:
-            return {...shape, x1: x, y1: y};
+            return {
+                ...shape,
+                x1: x, y1: y,
+                x2: x, y2: y,
+            };
         case SHAPE.RECT:
         case SHAPE.TEXT:
         case SHAPE.PIECE:
