@@ -1,6 +1,6 @@
 import IO from 'socket.io';
 import { getLogger } from 'log4js';
-import { connected, disconnected } from '../actions/socket';
+import { connected, disconnected } from '../actions/Socket';
 import { store } from '../stores/server';
 import { server } from './server';
 
