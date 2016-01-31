@@ -1,4 +1,4 @@
-import * as EDITOR from '../constants/actions/EDITOR';
+import * as EDITOR from '../constants/actions/Editor';
 
 export const setMode = (mode) => ({
     type: EDITOR.MODE,
