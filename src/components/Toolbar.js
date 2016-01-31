@@ -135,6 +135,10 @@ export const Toolbar = (props) => {
                     <div style={Style.Separator} />
                     <ShapeButton
                         {...shapeProps}
+                        name={SHAPE.PIECE}
+                        icon="place" />
+                    <ShapeButton
+                        {...shapeProps}
                         name={SHAPE.LINE}>
                         <Line x1={24} y1={0} x2={0} y2={24} />
                     </ShapeButton>
@@ -157,14 +161,14 @@ export const Toolbar = (props) => {
                         {...shapeProps}
                         name={SHAPE.TEXT}
                         icon="text_fields" />
-                <div style={Style.Separator} />
-                <IconButton
-                    iconClassName="material-icons"
-                    onTouchTap={() => open('editStyle')}>
-                    color_lens
-                </IconButton>
+                    <div style={Style.Separator} />
+                    <IconButton
+                        iconClassName="material-icons"
+                        onTouchTap={() => open('editStyle')}>
+                        color_lens
+                    </IconButton>
                 </div>
-        ) : null}
+            ) : null}
         </Paper>
     );
 };

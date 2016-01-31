@@ -2,6 +2,7 @@ import { Paper, Styles } from 'material-ui';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import * as MODE from '../constants/Mode';
+import * as SHAPE from '../constants/Shape';
 import { Shape } from './Shape';
 
 const GridLine = ({width, height, step}) => {
@@ -139,15 +140,34 @@ export class Canvas extends Component {
                 onTouchTap={(e) => this.onTouchTap(e)}>
                 <svg width={width} height={height}>
                     {gridElements}
-                    {shapes.map((shape, i) => (
-                        <Shape
-                            {...shape}
-                            key={i}
-                            style={{
-                                cursor: shapeCursor,
-                            }}
-                            onTouchTap={(e) => this.onTouchTap(e, shape.id)} />
-                    ))}
+                    {
+                        shapes.filter((shape) => shape.shape !== SHAPE.PIECE)
+                            .map((shape, i) => (
+                                <Shape
+                                    {...shape}
+                                    key={shape.id || i}
+                                    style={{
+                                        cursor: shapeCursor,
+                                    }}
+                                    onTouchTap={
+                                        (e) => this.onTouchTap(e, shape.id)
+                                    } />
+                            ))
+                    }
+                    {
+                        shapes.filter((shape) => shape.shape === SHAPE.PIECE)
+                            .map((shape, i) => (
+                                <Shape
+                                    {...shape}
+                                    key={shape.id || i}
+                                    style={{
+                                        cursor: shapeCursor,
+                                    }}
+                                    onTouchTap={
+                                        (e) => this.onTouchTap(e, shape.id)
+                                    } />
+                            ))
+                    }
                     {edit && <Shape {...edit} />}
                 </svg>
             </Paper>

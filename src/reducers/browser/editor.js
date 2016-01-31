@@ -36,6 +36,13 @@ export const editor = (state = InitialState, action) => {
                 snap: action.snap,
             };
         case EDITOR.EDIT_BEGIN:
+            if (state.mode === MODE.EDIT) {
+                switch(state.shape) {
+                    case SHAPE.TEXT:
+                    case SHAPE.PIECE:
+                        return state;
+                }
+            }
             return {
                 ...state,
                 edit: action.id,

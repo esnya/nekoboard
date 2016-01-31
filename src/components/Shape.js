@@ -50,6 +50,26 @@ export const Text = (props) => {
     );
 };
 
+export const Piece = (props) => {
+    const {
+        x, y,
+        style,
+        ...otherProps,
+    } = props;
+
+    return (
+        <circle
+            {...otherProps}
+            cx={x} cy={y}
+            r={20}
+            style={{
+                ...style,
+                zIndex: 1000,
+            }}
+        />
+    );
+};
+
 export const Shape = (props) => {
     const {
         shape,
@@ -67,6 +87,8 @@ export const Shape = (props) => {
             return <Ellipse {...otherProps} />;
         case SHAPE.TEXT:
             return <Text {...otherProps} />;
+        case SHAPE.PIECE:
+            return <Piece {...otherProps} />;
         default:
             return <Text {...otherProps} text="??" />;
     }

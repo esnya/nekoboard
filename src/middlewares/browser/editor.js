@@ -12,6 +12,7 @@ const setPos = (shape, x, y) => {
             return {...shape, x1: x, y1: y};
         case SHAPE.RECT:
         case SHAPE.TEXT:
+        case SHAPE.PIECE:
             return {...shape, x, y};
         case SHAPE.CIRCLE:
         case SHAPE.ELLIPSE:
@@ -49,6 +50,7 @@ const setSize = (shape, x, y) => {
                 ry: Math.abs(y - shape.cy),
             };
         case SHAPE.TEXT:
+        case SHAPE.PIECE:
             return shape;
     }
 };
