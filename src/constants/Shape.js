@@ -4,5 +4,6 @@ export const CIRCLE = 'SHAPE_CIRCLE';
 export const ELLIPSE = 'SHAPE_ELLIPSE';
 export const TEXT = 'SHAPE_TEXT';
 export const PIECE = 'SHAPE_PIECE';
+export const MEASURE = 'SHAPE_MEASURE';
 
 export const DEFAULT = RECT;

@@ -5,7 +5,7 @@ import {
     Styles,
 } from 'material-ui';
 import React from 'react';
-import { Line, Rect, Circle, Ellipse } from '../components/Shape';
+import { Line, Rect, Circle, Ellipse, Measure } from '../components/Shape';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 
@@ -161,6 +161,16 @@ export const Toolbar = (props) => {
                         {...shapeProps}
                         name={SHAPE.TEXT}
                         icon="text_fields" />
+                    <ShapeButton
+                        {...shapeProps}
+                        name={SHAPE.MEASURE}>
+                        <Measure
+                            x1={0} y1={24} x2={24} y2={0}
+                            stroke={stroke}
+                            fill={fill}
+                            fontSize={10}
+                            gridSize={24} />
+                    </ShapeButton>
                     <div style={Style.Separator} />
                     <IconButton
                         iconClassName="material-icons"

@@ -146,6 +146,7 @@ export class Canvas extends Component {
                                 <Shape
                                     {...shape}
                                     key={shape.id || i}
+                                    gridSize={gridSize}
                                     style={{
                                         cursor: shapeCursor,
                                     }}
@@ -160,6 +161,7 @@ export class Canvas extends Component {
                                 <Shape
                                     {...shape}
                                     key={shape.id || i}
+                                    gridSize={gridSize}
                                     style={{
                                         cursor: shapeCursor,
                                     }}

@@ -9,6 +9,7 @@ import { generate } from '../../utility/id';
 const setPos = (shape, x, y) => {
     switch(shape.shape) {
         case SHAPE.LINE:
+        case SHAPE.MEASURE:
             return {
                 ...shape,
                 x1: x, y1: y,
@@ -27,6 +28,7 @@ const setPos = (shape, x, y) => {
 const setSize = (shape, x, y) => {
     switch(shape.shape) {
         case SHAPE.LINE:
+        case SHAPE.MEASURE:
             return {
                 ...shape,
                 x2: x,
@@ -60,6 +62,7 @@ const setSize = (shape, x, y) => {
 const moveTo = (shape, x, y) => {
     switch(shape.shape) {
         case SHAPE.LINE:
+        case SHAPE.MEASURE:
             return {
                 ...shape,
                 x1: x,
