@@ -63,6 +63,8 @@ export const editor = (state = InitialState, action) => {
                     case SHAPE.PIECE:
                         return state;
                 }
+            } else if (state.mode === MODE.ERASE) {
+                return state;
             }
             return save({
                 ...state,

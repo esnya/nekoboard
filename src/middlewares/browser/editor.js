@@ -31,10 +31,8 @@ const setSize = (shape, x, y) => {
         case SHAPE.RECT:
             return {
                 ...shape,
-                x: Math.min(x, shape.x),
-                y: Math.min(y, shape.y),
-                width: Math.abs(x - shape.x),
-                height: Math.abs(y - shape.y),
+                width: Math.max(x - shape.x, 0),
+                height: Math.max(y - shape.y, 0),
             };
         case SHAPE.CIRCLE:
             return {
