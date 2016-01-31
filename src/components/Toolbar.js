@@ -166,8 +166,16 @@ export const Toolbar = (props) => {
                         name={SHAPE.MEASURE}>
                         <Measure
                             x1={0} y1={24} x2={24} y2={0}
-                            stroke={stroke}
-                            fill={fill}
+                            stroke={
+                                shape === SHAPE.MEASURE
+                                ? stroke
+                                : Styles.Colors.grey300
+                            }
+                            fill={
+                                shape === SHAPE.MEASURE
+                                ? fill
+                                : Styles.Colors.grey300
+                            }
                             fontSize={10}
                             gridSize={24} />
                     </ShapeButton>
