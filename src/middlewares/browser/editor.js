@@ -94,6 +94,8 @@ export const editor = ({dispatch, getState}) => (next) => (action) => {
                     shape: e.shape,
                     fill: e.fill,
                     stroke: e.stroke,
+                    strokeWidth: e.strokeWidth,
+                    fontSize: e.fontSize,
                 }, x, y);
 
                 dispatch(push(shape));

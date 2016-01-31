@@ -7,6 +7,8 @@ const InitialState = {
     shape: SHAPE.DEFAULT,
     fill: 'none',
     stroke: '#000000',
+    strokeWidth: 1,
+    fontSize: 16,
     edit: null,
     move: null,
     snap: null,
@@ -29,6 +31,8 @@ export const editor = (state = InitialState, action) => {
                 ...state,
                 stroke: action.stroke,
                 fill: action.fill,
+                fontSize: action.fontSize,
+                strokeWidth: action.strokeWidth,
             };
         case EDITOR.SNAP:
             return {

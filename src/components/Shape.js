@@ -23,9 +23,8 @@ export const Text = (props) => {
         cx, cy,
         x1, x2, y1, y2,
         style,
-        fill,
-        stroke,
         text,
+        fontSize,
         ...otherProps,
     } = props;
 
@@ -34,15 +33,14 @@ export const Text = (props) => {
             {...otherProps}
             x={x || cx || (x1 + x2)}
             y={y || cy || (y1 + y2)}
-            stye={{
+            style={{
                 ...style,
+                fontSize,
                 userSelect: 'none',
                 MozUserSelect: 'none',
                 WebkitUserSelect: 'none',
-                MSUserSelect: 'none',
+                MsUserSelect: 'none',
             }}
-            stroke={stroke}
-            fill={fill !== 'none' ? fill : stroke}
             textAnchor="middle"
             dominantBaseline="middle">
             {text}

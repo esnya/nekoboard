@@ -1,4 +1,4 @@
-import { Dialog, FlatButton, Toggle } from 'material-ui';
+import { Dialog, FlatButton, TextField, Toggle } from 'material-ui';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
@@ -41,10 +41,12 @@ export class EditStyleDialog extends Component {
             stroke,
         } = this.state;
 
-        setStyle(
-            stroke ? findDOMNode(this.refs.stroke).value : 'none',
-            fill ? findDOMNode(this.refs.fill).value : 'none'
-        );
+        setStyle({
+            stroke: stroke ? findDOMNode(this.refs.stroke).value : 'none',
+            fill: fill ? findDOMNode(this.refs.fill).value : 'none',
+            strokeWidth: this.refs.strokeWidth.getValue(),
+            fontSize: this.refs.fontSize.getValue(),
+        });
         close('editStyle');
     }
 
@@ -103,6 +105,18 @@ export class EditStyleDialog extends Component {
                         defaultValue={editor.fill}
                         disabled={!fill} />
                 </div>
+                <TextField
+                    ref="strokeWidth"
+                    floatingLabelText="Stroke Width"
+                    fullWidth={true}
+                    type="number"
+                    defaultValue={editor.strokeWidth} />
+                <TextField
+                    ref="fontSize"
+                    floatingLabelText="Font Size"
+                    fullWidth={true}
+                    type="number"
+                    defaultValue={editor.fontSize} />
             </Dialog>
         );
     }

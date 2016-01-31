@@ -17,6 +17,8 @@ export class EditTextDialog extends Component {
             text: this.refs.text.getValue(),
             fill: editor.fill,
             stroke: editor.stroke,
+            strokeWidth: editor.strokeWidth,
+            fontSize: editor.fontSize,
         });
         close('editText');
     }

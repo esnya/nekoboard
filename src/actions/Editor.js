@@ -8,10 +8,12 @@ export const setShape = (shape) => ({
     type: EDITOR.SHAPE,
     shape,
 });
-export const setStyle = (stroke, fill) => ({
+export const setStyle = ({stroke, fill, strokeWidth, fontSize}) => ({
     type: EDITOR.STYLE,
     stroke,
     fill,
+    strokeWidth,
+    fontSize,
 });
 export const setSnap = (snap) => ({
     type: EDITOR.SNAP,
