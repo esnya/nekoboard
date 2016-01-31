@@ -2,7 +2,21 @@ import * as EDITOR from '../../constants/actions/Editor';
 import * as MODE from '../../constants/Mode';
 import * as SHAPE from '../../constants/Shape';
 
-const InitialState = {
+const key = 'nekoboard/editor';
+const load = () => {
+    const data = localStorage.getItem(key);
+
+    return data && {
+        ...JSON.parse(data),
+        edit: null,
+    };
+};
+const save = (e) => {
+    localStorage.setItem(key, JSON.stringify(e));
+    return e;
+};
+
+const DefaultState = {
     mode: MODE.DEFAULT,
     shape: SHAPE.DEFAULT,
     fill: 'none',
@@ -10,35 +24,38 @@ const InitialState = {
     strokeWidth: 1,
     fontSize: 16,
     edit: null,
-    move: null,
     snap: null,
+};
+const InitialState = {
+    ...DefaultState,
+    ...load(),
 };
 
 export const editor = (state = InitialState, action) => {
     switch(action.type) {
         case EDITOR.MODE:
-            return {
+            return save({
                 ...state,
                 mode: action.mode,
-            };
+            });
         case EDITOR.SHAPE:
-            return {
+            return save({
                 ...state,
                 shape: action.shape,
-            };
+            });
         case EDITOR.STYLE:
-            return {
+            return save({
                 ...state,
                 stroke: action.stroke,
                 fill: action.fill,
                 fontSize: action.fontSize,
                 strokeWidth: action.strokeWidth,
-            };
+            });
         case EDITOR.SNAP:
-            return {
+            return save({
                 ...state,
                 snap: action.snap,
-            };
+            });
         case EDITOR.EDIT_BEGIN:
             if (state.mode === MODE.EDIT) {
                 switch(state.shape) {
@@ -47,16 +64,16 @@ export const editor = (state = InitialState, action) => {
                         return state;
                 }
             }
-            return {
+            return save({
                 ...state,
                 edit: action.id,
-            };
+            });
         case EDITOR.EDIT_END:
         case EDITOR.EDIT_CANCEL:
-            return {
+            return save({
                 ...state,
                 edit: null,
-            };
+            });
         default:
             return state;
     }
