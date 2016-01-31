@@ -1,52 +1,54 @@
 import React from 'react';
 import * as SHAPE from '../constants/Shape';
 
-export const Line = ({x1, y1, x2, y2, fill, stroke, onTouchTap}) => (
-    <line {...{x1, y1, x2, y2, fill, stroke, onTouchTap}} />
+export const Line = (props) => (
+    <line {...props} />
 );
 
-export const Rect = ({x, y, width, height, fill, stroke, onTouchTap}) => (
-    <rect
-        x={x} y={y}
-        width={width} height={height}
-        stroke={stroke} fill={fill}
-        onTouchTap={onTouchTap} />
+export const Rect = (props) => (
+    <rect {...props} />
 );
 
-export const Circle = ({cx, cy, r, fill, stroke, onTouchTap}) => (
-    <circle
-        cx={cx} cy={cy} r={r}
-        stroke={stroke} fill={fill}
-        onTouchTap={onTouchTap} />
+export const Circle = (props) => (
+    <circle {...props} />
 );
 
-export const Ellipse = ({cx, cy, rx, ry, fill, stroke, onTouchTap}) => (
-    <ellipse {...{cx, cy, rx, ry, fill, stroke, onTouchTap}} />
+export const Ellipse = (props) => (
+    <ellipse {...props} />
 );
 
-export const Text = ({
-    x, y,
-    width, height,
-    text,
-    fill, stroke,
-    onTouchTap,
-}) => (
-    <text
-        x={x} y={y}
-        width={width} height={height}
-        fill={fill !== 'none' ? fill : stroke}
-        style={{
-            userSelect: 'none',
-            MozUserSelect: 'none',
-            WebkitUserSelect: 'none',
-            MSUserSelect: 'none',
-        }}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        onTouchTap={onTouchTap}>
-        {text}
-    </text>
-);
+export const Text = (props) => {
+    const {
+        x, y,
+        cx, cy,
+        x1, x2, y1, y2,
+        style,
+        fill,
+        stroke,
+        text,
+        ...otherProps,
+    } = props;
+
+    return (
+        <text
+            {...otherProps}
+            x={x || cx || (x1 + x2)}
+            y={y || cy || (y1 + y2)}
+            stye={{
+                ...style,
+                userSelect: 'none',
+                MozUserSelect: 'none',
+                WebkitUserSelect: 'none',
+                MSUserSelect: 'none',
+            }}
+            stroke={stroke}
+            fill={fill !== 'none' ? fill : stroke}
+            textAnchor="middle"
+            dominantBaseline="middle">
+            {text}
+        </text>
+    );
+};
 
 export const Shape = (props) => {
     const {

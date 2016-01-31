@@ -120,7 +120,7 @@ export const Toolbar = (props) => {
             <ModeButton
                 {...menuProps}
                 name={MODE.ERASE}
-                icon="clear" />
+                icon="delete" />
             <div style={Style.Separator} />
             <IconButton
                 iconClassName="material-icons"

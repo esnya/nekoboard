@@ -1,6 +1,7 @@
 import { Paper, Styles } from 'material-ui';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import * as MODE from '../constants/Mode';
 import { Shape } from './Shape';
 
 const GridLine = ({width, height, step}) => {
@@ -19,6 +20,7 @@ const GridLine = ({width, height, step}) => {
 
     return <g stroke={Styles.Colors.grey300}>{lines}</g>;
 };
+
 const GridLabel = ({width, height, step}) => {
     const labels = [];
 
@@ -36,10 +38,11 @@ const GridLabel = ({width, height, step}) => {
                     x={x + step / 2} y={y + step - 4}
                     textAnchor="middle"
                     style={{
+                        cursor: 'default',
                         userSelect: 'none',
                         MozUserSelect: 'none',
                         WebkitUserSelect: 'none',
-                        MSUserSelect: 'none',
+                        MsUserSelect: 'none',
                     }}>
                     {`${xlabel}${ylabel}`}
                 </text>
@@ -87,11 +90,12 @@ export class Canvas extends Component {
 
     render() {
         const {
-            width,
-            height,
+            edit,
+            editor,
             grid,
             gridSize,
-            edit,
+            width,
+            height,
             shapes,
         } = this.props;
 
@@ -108,10 +112,29 @@ export class Canvas extends Component {
                 step={+gridSize} />,
         ] || null;
 
+        let cursor = 'auto';
+
+        if (editor.mode === MODE.EDIT) cursor = 'crosshair';
+        else if (editor.mode === MODE.MOVE && editor.edit) {
+            cursor = 'move';
+        }
+
+        let shapeCursor = 'auto';
+        if (editor.mode === MODE.EDIT) shapeCursor = 'crosshair';
+        else if (editor.mode === MODE.MOVE) shapeCursor = 'move';
+        else if (editor.mode === MODE.ERASE) {
+            shapeCursor = 'pointer';
+        }
+
         return (
             <Paper
                 ref="canvas"
-                style={{...Style, width, height}}
+                style={{
+                    ...Style,
+                    cursor,
+                    width,
+                    height,
+                }}
                 onMouseMove={(e) => this.onMouseMove(e)}
                 onTouchTap={(e) => this.onTouchTap(e)}>
                 <svg width={width} height={height}>
@@ -120,6 +143,9 @@ export class Canvas extends Component {
                         <Shape
                             {...shape}
                             key={i}
+                            style={{
+                                cursor: shapeCursor,
+                            }}
                             onTouchTap={(e) => this.onTouchTap(e, shape.id)} />
                     ))}
                     {edit && <Shape {...edit} />}

@@ -16,6 +16,7 @@ import { mapActionCreatorsToProps } from './Container';
 export const Canvas = connect(
     (state) => ({
         ...state.board,
+        editor: state.editor,
         edit: state.editor.edit,
         move: state.editor.move,
         shape: state.editor.shape,
