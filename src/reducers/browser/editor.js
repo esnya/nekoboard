@@ -24,7 +24,7 @@ const DefaultState = {
     strokeWidth: 1,
     fontSize: 16,
     edit: null,
-    snap: null,
+    snap: true,
 };
 const InitialState = {
     ...DefaultState,
