@@ -19,3 +19,7 @@ export const join = (id) => ({
     sync: true,
     id,
 });
+export const remove = (id) => ({
+    type: BOARD.REMOVE,
+    id,
+});

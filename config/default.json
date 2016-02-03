@@ -1,6 +1,10 @@
 {
     "app": {
-        "livereload": false 
+        "livereload": false
+    },
+    "gc": {
+        "expires": 1800,
+        "interval": 600
     },
     "board": {
         "title": "New Board",
