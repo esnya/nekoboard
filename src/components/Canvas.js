@@ -90,7 +90,7 @@ export class Canvas extends Component {
         }
     }
 
-    onMouseUp(e) {
+    onMouseUp() {
         this.props.endEdit();
     }
 

@@ -75,66 +75,85 @@ const moveTo = (shape, x, y) => {
     }
 };
 
-const snapToGrid = (snap, value, size) => snap
-    ? Math.round(value / size * 2) * size / 2
-    : value;
+const snapToGrid = (snap, pos, size) => snap
+    ? pos.map((value) => Math.round(value / size * 2) * size / 2)
+    : pos;
+
+const onBegin = ({dispatch, getState}, next, action) => {
+    const e = getState().editor;
+
+    if (e.edit) {
+        return next(endEdit());
+    } else if (e.mode === MODE.EDIT && !action.id) {
+        if (e.shape === SHAPE.TEXT) {
+            return next(open('editText', action));
+        }
+
+        const shape = setPos({
+            id: generate(),
+            shape: e.shape,
+            fill: e.fill,
+            stroke: e.stroke,
+            strokeWidth: e.strokeWidth,
+            fontSize: e.fontSize,
+        },  ...snapToGrid(
+            e.snap,
+            [action.x, action.y],
+            getState().board.gridSize
+        ));
+
+        dispatch(push(shape));
+
+        return next({
+            ...action,
+            id: shape.id,
+        });
+    } else if (e.mode === MODE.ERASE && action.id) {
+        dispatch(remove(action.id));
+    }
+
+    return next(action);
+};
+
+const onUpdate = ({dispatch, getState}, next, action) => {
+    const e = getState().editor;
+
+    if (e.edit) {
+        const shape = getState().shapes.find(({id}) => id === e.edit);
+
+        if (!shape) return next(action);
+
+        const pos = snapToGrid(
+            e.snap,
+            [action.x, action.y],
+            getState().board.gridSize
+        );
+
+        switch(e.mode) {
+            case MODE.EDIT:
+                dispatch(update(setSize(
+                    shape,
+                    ...pos
+                )));
+                break;
+            case MODE.MOVE:
+                dispatch(update(moveTo(
+                    shape,
+                    ...pos
+                )));
+                break;
+        }
+    }
+
+    return next(action);
+};
 
 export const editor = ({dispatch, getState}) => (next) => (action) => {
-    const e = getState().editor;
-    const b = getState().board;
-    const x = action.x && snapToGrid(e.snap, action.x, b.gridSize);
-    const y = action.y && snapToGrid(e.snap, action.y, b.gridSize);
-
     switch(action.type) {
         case EDITOR.EDIT_BEGIN:
-            if (e.edit) {
-                return next(endEdit());
-            } else if (e.mode === MODE.EDIT && !action.id) {
-                if (e.shape === SHAPE.TEXT) {
-                    return next(open('editText', action));
-                }
-
-                const shape = setPos({
-                    id: generate(),
-                    shape: e.shape,
-                    fill: e.fill,
-                    stroke: e.stroke,
-                    strokeWidth: e.strokeWidth,
-                    fontSize: e.fontSize,
-                }, x, y);
-
-                dispatch(push(shape));
-
-                return next({
-                    ...action,
-                    id: shape.id,
-                });
-            } else if (e.mode === MODE.ERASE && action.id) {
-                dispatch(remove(action.id));
-            }
-            break;
+            return onBegin({dispatch, getState}, next, action);
         case EDITOR.EDIT_UPDATE:
-            if (e.edit) {
-                const shape = getState().shapes.find(({id}) => id === e.edit);
-
-                if (!shape) return next(action);
-
-                switch(e.mode) {
-                    case MODE.EDIT:
-                        dispatch(update(setSize(
-                            shape,
-                            x, y
-                        )));
-                        break;
-                    case MODE.MOVE:
-                        dispatch(update(moveTo(
-                            shape,
-                            x, y
-                        )));
-                        break;
-                }
-            }
-            break;
+            return onUpdate({dispatch, getState}, next, action);
     }
 
     return next(action);
