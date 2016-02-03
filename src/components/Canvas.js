@@ -125,7 +125,7 @@ export class Canvas extends Component {
         }
 
         let shapeCursor = 'auto';
-        if (editor.mode === MODE.EDIT) shapeCursor = 'crosshair';
+        if (editor.mode === MODE.EDIT) shapeCursor = 'pointer';
         else if (editor.mode === MODE.MOVE) shapeCursor = 'move';
         else if (editor.mode === MODE.ERASE) {
             shapeCursor = 'pointer';
