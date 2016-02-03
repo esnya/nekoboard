@@ -51,13 +51,14 @@ const onJoin = ({dispatch, getState}, next, action) => {
 
 export const board = ({dispatch, getState}) => (next) => (action) => {
     switch(action.type) {
-        case BOARD.JOIN: {
+        case BOARD.JOIN:
             return onJoin({dispatch, getState}, next, action);
-        } case BOARD.UPDATE:
-            if (action.socket) {
-                dispatch(update(action.data));
-            }
-            break;
+        case BOARD.UPDATE:
+            return next({
+                ...update(action.data),
+                sync: false,
+                socket: action.socket,
+            });
     }
 
     return next(action);
