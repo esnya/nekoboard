@@ -70,6 +70,14 @@ export class Canvas extends Component {
         return {x, y};
     }
 
+    onMouseDown(e, id) {
+        e.stopPropagation();
+        this.props.beginEdit({
+            ...this.toLocalPos(e.nativeEvent),
+            id,
+        });
+    }
+
     onMouseMove(e) {
         const {
             edit,
@@ -81,12 +89,8 @@ export class Canvas extends Component {
         }
     }
 
-    onTouchTap(e, id) {
-        e.stopPropagation();
-        this.props.beginEdit({
-            ...this.toLocalPos(e.nativeEvent),
-            id,
-        });
+    onMouseUp(e) {
+        this.props.endEdit();
     }
 
     render() {
@@ -136,8 +140,12 @@ export class Canvas extends Component {
                     width,
                     height,
                 }}
+                onMouseDown={(e) => this.onMouseDown(e)}
                 onMouseMove={(e) => this.onMouseMove(e)}
-                onTouchTap={(e) => this.onTouchTap(e)}>
+                onMouseUp={(e) => this.onMouseUp(e)}
+                onTouchStart={(e) => this.onMouseDown(e)}
+                onTouchMove={(e) => this.onMouseMove(e)}
+                onTouchEnd={(e) => this.onMouseUp(e)}>
                 <svg width={width} height={height}>
                     {gridElements}
                     {
@@ -150,8 +158,11 @@ export class Canvas extends Component {
                                     style={{
                                         cursor: shapeCursor,
                                     }}
-                                    onTouchTap={
-                                        (e) => this.onTouchTap(e, shape.id)
+                                    onMouseDown={
+                                        (e) => this.onMouseDown(e, shape.id)
+                                    }
+                                    onTouchStart={
+                                        (e) => this.onMouseDown(e, shape.id)
                                     } />
                             ))
                     }
@@ -165,8 +176,11 @@ export class Canvas extends Component {
                                     style={{
                                         cursor: shapeCursor,
                                     }}
-                                    onTouchTap={
-                                        (e) => this.onTouchTap(e, shape.id)
+                                    onMouseDown={
+                                        (e) => this.onMouseDown(e, shape.id)
+                                    }
+                                    onTouchStart={
+                                        (e) => this.onMouseDown(e, shape.id)
                                     } />
                             ))
                     }
