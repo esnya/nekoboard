@@ -1,6 +1,13 @@
 import React from 'react';
 import * as SHAPE from '../constants/Shape';
 
+const UnselectableText = {
+    userSelect: 'none',
+    MozUserSelect: 'none',
+    WebkitUserSelect: 'none',
+    MsUserSelect: 'none',
+};
+
 export const Line = (props) => (
     <line {...props} />
 );
@@ -36,10 +43,7 @@ export const Text = (props) => {
             style={{
                 ...style,
                 fontSize,
-                userSelect: 'none',
-                MozUserSelect: 'none',
-                WebkitUserSelect: 'none',
-                MsUserSelect: 'none',
+                ...UnselectableText,
             }}
             textAnchor="middle"
             dominantBaseline="middle">
@@ -107,6 +111,7 @@ export const Measure = (props) => {
                 stroke="none"
                 style={{
                     fontSize: fontSize || 12,
+                    ...UnselectableText,
                 }}
                 textAnchor="middle">
                 {label}
