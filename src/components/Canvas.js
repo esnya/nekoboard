@@ -72,6 +72,7 @@ export class Canvas extends Component {
 
     onMouseDown(e, id) {
         e.stopPropagation();
+        e.preventDefault();
         this.props.beginEdit({
             ...this.toLocalPos(e.nativeEvent),
             id,
