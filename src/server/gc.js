@@ -1,6 +1,6 @@
 import config from 'config';
 import { getLogger } from 'log4js';
-import * as Board from '../actions/board';
+import * as Board from '../actions/Board';
 import { store } from '../stores/server';
 
 const logger = getLogger('[GC]');
