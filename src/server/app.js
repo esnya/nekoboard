@@ -24,7 +24,7 @@ app.use('/css', express.static(
 
 app.get('/', (req, res) => res.redirect(generate(16)));
 
-app.get('/:boardId', (req, res) => {
+app.get('/:boardId([a-f0-9]{16})', (req, res) => {
     res.render('index', {
         ...req.params,
         config: config.get('browser'),
