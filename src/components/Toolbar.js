@@ -14,6 +14,14 @@ const Style = {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
+        overflow: 'hidden',
+        overflowX: 'auto',
+        WebkitOverflowScrolling: 'touch',
+    },
+    Group: {
+        flex: '0 1 auto',
+        display: 'flex',
+        alignItems: 'center',
     },
     Separator: {
         flex: '0 0 1px',
@@ -22,6 +30,10 @@ const Style = {
         margin: '0 2px',
     },
     SelectedColor: Styles.Colors.pink500,
+    Button: {
+        flex: '0 0 48px',
+        width: 48,
+    },
 };
 
 const ModeButton = ({name, mode, icon, setMode}) => (
@@ -32,6 +44,7 @@ const ModeButton = ({name, mode, icon, setMode}) => (
                 ? Style.SelectedColor
                 : null,
         }}
+        style={Style.Button}
         onTouchTap={() => setMode(name)}>
         {icon}
     </IconButton>
@@ -58,6 +71,7 @@ const ShapeButton = ({
             <IconButton
                 iconClassName="material-icons"
                 iconStyle={style}
+                style={Style.Button}
                 onTouchTap={() => setShape(name)}>
                 {icon}
             </IconButton>
@@ -74,7 +88,7 @@ const ShapeButton = ({
         };
 
     return (
-        <IconButton onTouchTap={() => setShape(name)}>
+        <IconButton style={Style.Button} onTouchTap={() => setShape(name)}>
             <SvgIcon>
                 <g style={svgStyle}>
                     {children}
@@ -127,11 +141,12 @@ export const Toolbar = (props) => {
                 iconStyle={{
                     color: snap ? null : Styles.Colors.grey300,
                 }}
+                style={Style.Button}
                 onTouchTap={() => setSnap(!snap)}>
                 grid_on
             </IconButton>
             {mode === MODE.EDIT ? (
-                <div style={Style.Toolbar}>
+                <div style={Style.Group}>
                     <div style={Style.Separator} />
                     <ShapeButton
                         {...shapeProps}
