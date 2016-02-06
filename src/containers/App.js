@@ -6,6 +6,7 @@ import { mapActionCreatorsToProps } from './Container';
 export const App = connect(
     (state) => ({
         ...state.board,
+        edit: state.editor.edit,
     }),
     mapActionCreatorsToProps({
         open,

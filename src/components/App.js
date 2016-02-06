@@ -21,7 +21,7 @@ const Style = {
     },
 };
 
-export const App = ({title, open}) => {
+export const App = ({title, open, edit}) => {
     document.title = title
         ? `${title} - Nekoboard`
         : 'Nekoboard';
@@ -39,7 +39,7 @@ export const App = ({title, open}) => {
                     </IconButton>
                 }
                 showMenuIconButton={false} />
-            <div style={Style.CanvasContainer} >
+            <div style={Style.CanvasContainer}>
                 <Canvas />
             </div>
             <Toolbar />

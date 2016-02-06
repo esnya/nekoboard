@@ -64,16 +64,20 @@ export class Canvas extends Component {
         const canvas = findDOMNode(this.refs.canvas);
         const parent = canvas.parentElement;
 
-        const x = e.pageX - canvas.offsetLeft + parent.scrollLeft;
-        const y = e.pageY - canvas.offsetTop + parent.scrollTop;
+        const pos = e.touches && e.touches[0] || e;
+
+        const x = pos.pageX - canvas.offsetLeft + parent.scrollLeft;
+        const y = pos.pageY - canvas.offsetTop + parent.scrollTop;
 
         return {x, y};
     }
 
     onMouseDown(e, id) {
-        e.stopPropagation();
-        e.preventDefault();
-        this.props.beginEdit({
+        const {
+            beginEdit,
+        } = this.props;
+
+        beginEdit({
             ...this.toLocalPos(e.nativeEvent),
             id,
         });
@@ -86,6 +90,8 @@ export class Canvas extends Component {
         } = this.props;
 
         if (edit) {
+            e.preventDefault();
+            e.stopPropagation();
             updateEdit(this.toLocalPos(e));
         }
     }
