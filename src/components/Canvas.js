@@ -72,14 +72,18 @@ export class Canvas extends Component {
         return {x, y};
     }
 
+    onMouseDownOnShape(id) {
+        this.props.beginEdit({id});
+    }
+
     onMouseDown(e, id) {
         const {
             beginEdit,
         } = this.props;
 
+        e.preventDefault();
         beginEdit({
             ...this.toLocalPos(e.nativeEvent),
-            id,
         });
     }
 
@@ -166,10 +170,10 @@ export class Canvas extends Component {
                                         cursor: shapeCursor,
                                     }}
                                     onMouseDown={
-                                        (e) => this.onMouseDown(e, shape.id)
+                                        () => this.onMouseDownOnShape(shape.id)
                                     }
                                     onTouchStart={
-                                        (e) => this.onMouseDown(e, shape.id)
+                                        () => this.onMouseDownOnShape(shape.id)
                                     } />
                             ))
                     }
@@ -184,10 +188,10 @@ export class Canvas extends Component {
                                         cursor: shapeCursor,
                                     }}
                                     onMouseDown={
-                                        (e) => this.onMouseDown(e, shape.id)
+                                        () => this.onMouseDownOnShape(shape.id)
                                     }
                                     onTouchStart={
-                                        (e) => this.onMouseDown(e, shape.id)
+                                        () => this.onMouseDownOnShape(shape.id)
                                     } />
                             ))
                     }

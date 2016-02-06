@@ -82,7 +82,7 @@ const snapToGrid = (snap, pos, size) => snap
 const onBegin = ({dispatch, getState}, next, action) => {
     const e = getState().editor;
 
-    if (e.edit) {
+    if (e.edit && e.mode !== MODE.MOVE) {
         return next(endEdit());
     } else if (e.mode === MODE.EDIT && !action.id) {
         if (e.shape === SHAPE.TEXT) {
