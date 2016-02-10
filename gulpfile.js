@@ -1,2 +1,2 @@
-require('./beniimo-dev/gulp.js')({
+require('nekodev').gulp({
 });

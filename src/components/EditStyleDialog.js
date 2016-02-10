@@ -21,8 +21,8 @@ export class EditStyleDialog extends Component {
         const nextEditor = nextProps.editor;
 
         if (!editor && nextEditor && (
-            editor.stroke !== nextEditor.stroke
-            || editor.fill !== nextEditor.fill
+            editor.stroke !== nextEditor.stroke ||
+                editor.fill !== nextEditor.fill
         )) {
             this.setState({
                 stroke: nextEditor.stroke !== 'none',
