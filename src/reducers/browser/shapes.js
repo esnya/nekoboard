@@ -2,6 +2,17 @@ import * as SHAPE from '../../constants/actions/Shape';
 
 export const shapes = (state = [], action) => {
     switch(action.type) {
+        case SHAPE.ADD:
+            return [
+                ...state.filter(({id}) => id !== action.data.id),
+                {
+                    ...action.data,
+                },
+            ];
+        case SHAPE.LIST:
+            return (action.items || [])
+                .filter((a) => a)
+                .map((item) => ({...item}));
         case SHAPE.PUSH:
             return [
                 ...state.filter(

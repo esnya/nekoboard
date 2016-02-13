@@ -3,6 +3,6 @@
         "livereload": true
     },
     "browser": {
-        "debug": true
+        "debug": false
     }
 }

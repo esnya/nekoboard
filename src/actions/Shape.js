@@ -1,6 +1,18 @@
 import * as SHAPE from '../constants/actions/Shape';
 import { generate } from '../utility/id';
 
+export const add = (data) => ({
+    type: SHAPE.ADD,
+    sync: true,
+    data: data.id ? data : {
+        ...data,
+        id: generate(),
+    },
+});
+export const list = (items) => ({
+    type: SHAPE.LIST,
+    items,
+});
 export const push = (items) => ({
     type: SHAPE.PUSH,
     items: (
