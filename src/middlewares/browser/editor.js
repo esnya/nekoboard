@@ -1,6 +1,6 @@
 import { open } from '../../actions/Dialog';
 import { endEdit } from '../../actions/Editor';
-import { push, update, remove } from '../../actions/Shape';
+import { add, push, update, remove } from '../../actions/Shape';
 import * as EDITOR from '../../constants/actions/Editor';
 import * as MODE from '../../constants/Mode';
 import * as SHAPE from '../../constants/Shape';
@@ -102,7 +102,7 @@ const onBegin = ({dispatch, getState}, next, action) => {
             getState().board.gridSize
         ));
 
-        dispatch(push(shape));
+        dispatch(add(shape));
 
         return next({
             ...action,

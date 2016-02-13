@@ -1,28 +1,50 @@
 import config from 'config';
+import _, { concat, union } from 'lodash';
 import { getLogger } from 'log4js';
-import * as Board from '../actions/Board';
-import { store } from '../stores/server';
+import { createClient } from './redis';
 
+const Expires = config.get('gc.expires') * 1000;
 const logger = getLogger('[GC]');
+const redis = createClient();
 
 export const runGC = () => {
-    logger.info('started');
+    logger.info('Started');
 
-    const boards = store.getState().boards;
-    const boardIds = Object.keys(boards);
     const now = Date.now();
-    const expires = config.get('gc.expires') * 1000;
-    const remove =
-        boardIds.filter((id) => now - boards[id].timestamp > expires);
 
-    remove.forEach((id) => store.dispatch(Board.remove(id)));
-
-    logger.info(
-        'done',
-        `found:${boardIds.length}`,
-        `removed:${remove.length}`,
-        `rooms:${boardIds.length - remove.length}`
-    );
+    redis.keysAsync('nekoboard:*')
+        .then((keys) =>
+            _(keys)
+                .map((key) => key.match(/^nekoboard:(.*?):/))
+                .filter((m) => m)
+                .map((m) => m[1])
+                .union()
+                .value()
+        )
+        .then((ids) => {
+            logger.info(`Found: ${ids.length} boards.`);
+            return ids;
+        })
+        .then((ids) => Promise.all(ids.map((id) =>
+                redis.getAsync(`nekoboard:${id}:timestamp`)
+                    .then((timestamp) => parseInt(timestamp, 10))
+                    .then((timestamp) => ({id, timestamp}))
+        )))
+        .then((list) =>
+            list.filter(({timestamp}) => !(timestamp + Expires > now))
+                .map(({id}) => id)
+        )
+        .then((ids) => {
+            logger.info(`Delete: ${ids.length} boards.`);
+            return ids;
+        })
+        .then((ids) => Promise.all(
+            ids.map((id) => redis.keysAsync(`nekoboard:${id}*`))
+        ))
+        .then((a) => concat(...a))
+        .then((keys) => Promise.all(keys.map((key) => redis.delAsync(key))))
+        .then(() => logger.info('Done'))
+        .catch((e) => logger.error(e));
 };
 
 setInterval(runGC, config.get('gc.interval') * 1000);

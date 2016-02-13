@@ -7,10 +7,10 @@ export class EditTextDialog extends Component {
             editor,
             dialog,
             close,
-            push,
+            add,
         } = this.props;
 
-        push({
+        add({
             shape: editor.shape,
             x: dialog.editText.x,
             y: dialog.editText.y,

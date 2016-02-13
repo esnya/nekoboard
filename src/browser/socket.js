@@ -6,7 +6,9 @@ import { getLogger } from './log';
 
 const logger = getLogger('[SOCKET]');
 
-export const socket = io();
+export const socket = io(`http://${location.host}`, {
+    query: { boardId: document.body.getAttribute('data-boardId') },
+});
 
 socket.on('connect', () => {
     logger.info('Connected', socket.id);
@@ -26,6 +28,10 @@ socket.on('disconnect', () => {
 });
 socket.on('action', (action) => {
     if (action.type) {
-        store.dispatch(action);
+        store.dispatch({
+            ...action,
+            sync: false,
+            broadcast: false,
+        });
     }
 });
