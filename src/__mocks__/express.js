@@ -8,6 +8,5 @@ export default Object.assign(
     jest.genMockFn().mockReturnValue(mock),
     {
         static: jest.genMockFn(),
-        
     }
 );
