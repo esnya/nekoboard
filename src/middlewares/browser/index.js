@@ -5,8 +5,8 @@ import { editor } from './editor';
 import { socket } from './socket';
 
 export const middleware = [
-    pre(config.debug, getLogger, true),
+    pre(config && config.debug, getLogger, true),
     editor,
     socket,
-    post(config.debug, getLogger, true),
+    post(config && config.debug, getLogger, true),
 ];

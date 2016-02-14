@@ -4,6 +4,8 @@ import * as SHAPE from '../../constants/Shape';
 
 const key = 'nekoboard/editor';
 const load = () => {
+    if (!window.localStorage) return {};
+
     const data = localStorage.getItem(key);
 
     return data && {
@@ -12,7 +14,10 @@ const load = () => {
     };
 };
 const save = (e) => {
-    localStorage.setItem(key, JSON.stringify(e));
+    if (window.localStorage) {
+        localStorage.setItem(key, JSON.stringify(e));
+    }
+
     return e;
 };
 
