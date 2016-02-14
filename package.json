@@ -7,7 +7,7 @@
     "build": "gulp build",
     "start": "node .",
     "test": "gulp test",
-    "publish": "gulp build test",
+    "test-build": "gulp build test",
     "watch": "gulp watch"
   },
   "repository": {
