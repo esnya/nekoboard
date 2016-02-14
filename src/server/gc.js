@@ -12,7 +12,8 @@ export const runGC = () => {
 
     const now = Date.now();
 
-    redis.keysAsync('nekoboard:*')
+    redis
+        .keysAsync('nekoboard:*')
         .then((keys) =>
             _(keys)
                 .map((key) => key.match(/^nekoboard:(.*?):/))

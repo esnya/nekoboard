@@ -37,7 +37,7 @@ const InitialState = {
 };
 
 export const editor = (state = InitialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case EDITOR.MODE:
             return save({
                 ...state,
@@ -63,7 +63,7 @@ export const editor = (state = InitialState, action) => {
             });
         case EDITOR.EDIT_BEGIN:
             if (state.mode === MODE.EDIT) {
-                switch(state.shape) {
+                switch (state.shape) {
                     case SHAPE.TEXT:
                     case SHAPE.PIECE:
                         return state;

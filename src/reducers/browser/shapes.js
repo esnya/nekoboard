@@ -1,7 +1,7 @@
 import * as SHAPE from '../../constants/actions/Shape';
 
 export const shapes = (state = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
         case SHAPE.ADD:
             return [
                 ...state.filter(({id}) => id !== action.data.id),

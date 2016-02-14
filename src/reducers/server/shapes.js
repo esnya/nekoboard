@@ -6,7 +6,7 @@ export const shapes = (state = {}, action) => {
     const socket = action.socket;
     const boardId = socket && socket.boardId;
 
-    switch(action.type) {
+    switch (action.type) {
         case SHAPE.PUSH:
             if (!boardId) return state;
             return {

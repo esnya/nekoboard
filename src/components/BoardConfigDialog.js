@@ -34,7 +34,7 @@ export class BoardConfigDialog extends Component {
             .reduce((result, key) => {
                 let value;
 
-                switch(key) {
+                switch (key) {
                     case 'grid':
                         value = this.state[key];
                         break;

@@ -126,7 +126,7 @@ export const Shape = (props) => {
         ...otherProps,
     } = props;
 
-    switch(shape) {
+    switch (shape) {
         case SHAPE.LINE:
             return <Line {...otherProps} />;
         case SHAPE.RECT:

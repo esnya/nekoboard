@@ -1,7 +1,7 @@
 import config from 'config';
 import { getLogger } from 'log4js';
-import { create, update }from '../../actions/Board';
-import { push }from '../../actions/Shape';
+import { create, update } from '../../actions/Board';
+import { push } from '../../actions/Shape';
 import * as BOARD from '../../constants/actions/Board';
 
 const logger = getLogger('[BOARD]');
@@ -50,7 +50,7 @@ const onJoin = ({dispatch, getState}, next, action) => {
 };
 
 export const board = ({dispatch, getState}) => (next) => (action) => {
-    switch(action.type) {
+    switch (action.type) {
         case BOARD.JOIN:
             return onJoin({dispatch, getState}, next, action);
         case BOARD.UPDATE:

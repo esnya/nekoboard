@@ -7,7 +7,7 @@ import * as SHAPE from '../../constants/Shape';
 import { generate } from '../../utility/id';
 
 const setPos = (shape, x, y) => {
-    switch(shape.shape) {
+    switch (shape.shape) {
         case SHAPE.LINE:
         case SHAPE.MEASURE:
             return {
@@ -26,7 +26,7 @@ const setPos = (shape, x, y) => {
 };
 
 const setSize = (shape, x, y) => {
-    switch(shape.shape) {
+    switch (shape.shape) {
         case SHAPE.LINE:
         case SHAPE.MEASURE:
             return {
@@ -60,7 +60,7 @@ const setSize = (shape, x, y) => {
 };
 
 const moveTo = (shape, x, y) => {
-    switch(shape.shape) {
+    switch (shape.shape) {
         case SHAPE.LINE:
         case SHAPE.MEASURE:
             return {
@@ -129,7 +129,7 @@ const onUpdate = ({dispatch, getState}, next, action) => {
             getState().board.gridSize
         );
 
-        switch(e.mode) {
+        switch (e.mode) {
             case MODE.EDIT:
                 dispatch(update(setSize(
                     shape,
@@ -149,7 +149,7 @@ const onUpdate = ({dispatch, getState}, next, action) => {
 };
 
 export const editor = ({dispatch, getState}) => (next) => (action) => {
-    switch(action.type) {
+    switch (action.type) {
         case EDITOR.EDIT_BEGIN:
             return onBegin({dispatch, getState}, next, action);
         case EDITOR.EDIT_UPDATE:

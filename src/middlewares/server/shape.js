@@ -2,7 +2,7 @@ import { push, update, remove } from '../../actions/Shape';
 import * as SHAPE from '../../constants/actions/Shape';
 
 export const shape = () => (next) => (action) => {
-    switch(action.type) {
+    switch (action.type) {
         case SHAPE.PUSH:
             return next({
                 ...push(action.items),

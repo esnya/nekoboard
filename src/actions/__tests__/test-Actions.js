@@ -12,7 +12,8 @@ describe('Actions', () => {
 
             describe(path, () => {
                 it('should be camelCase', () => {
-                    Object.keys(actions)
+                    Object
+                        .keys(actions)
                         .filter((key) => typeof(actions[key]) === 'function')
                         .forEach((key) => {
                             expect(key.match(/^[a-z][A-Z]+$/)).not.toBe(false);
@@ -20,7 +21,8 @@ describe('Actions', () => {
                 });
 
                 it('should return action', () => {
-                    Object.keys(actions)
+                    Object
+                        .keys(actions)
                         .filter((key) => typeof(actions[key]) === 'function')
                         .map((key) => actions[key]({}, {}, {}))
                         .forEach((action) => {

@@ -1,7 +1,7 @@
 import * as BOARD from '../../constants/actions/Board';
 
 export const board = (state = null, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case BOARD.CREATE:
         case BOARD.UPDATE:
             return {

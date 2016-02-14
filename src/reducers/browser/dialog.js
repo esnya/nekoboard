@@ -1,7 +1,7 @@
 import * as DIALOG from '../../constants/actions/Dialog';
 
 export const dialog = (state = {}, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case DIALOG.OPEN:
             return {
                 ...state,
