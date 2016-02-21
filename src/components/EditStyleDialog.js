@@ -1,8 +1,17 @@
 import { Dialog, FlatButton, TextField, Toggle } from 'material-ui';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 
 export class EditStyleDialog extends Component {
+    static get propTypes() {
+        return {
+            close: PropTypes.func.isRequired,
+            editor: PropTypes.object.isRequired,
+            dialog: PropTypes.object.isRequired,
+            setStyle: PropTypes.func.isRequired,
+        };
+    }
+
     constructor(props) {
         super(props);
 
@@ -42,10 +51,10 @@ export class EditStyleDialog extends Component {
         } = this.state;
 
         setStyle({
-            stroke: stroke ? findDOMNode(this.refs.stroke).value : 'none',
-            fill: fill ? findDOMNode(this.refs.fill).value : 'none',
-            strokeWidth: this.refs.strokeWidth.getValue(),
-            fontSize: this.refs.fontSize.getValue(),
+            stroke: stroke ? findDOMNode(this.stroke).value : 'none',
+            fill: fill ? findDOMNode(this.fill).value : 'none',
+            strokeWidth: this.strokeWidth.getValue(),
+            fontSize: this.fontSize.getValue(),
         });
         close('editStyle');
     }
@@ -62,61 +71,64 @@ export class EditStyleDialog extends Component {
         } = this.state;
 
         const actions = [
-            (
-                <FlatButton
-                    label="OK"
-                    primary={true}
-                    onTouchTap={() => this.onOK()} />
-            ),
-            (
-                <FlatButton
-                    label="CANCEL"
-                    secondary={true}
-                    onTouchTap={() => close('editStyle')} />
-            ),
+            <FlatButton primary
+                key="ok"
+                label="OK"
+                onTouchTap={() => this.onOK()}
+            />,
+            <FlatButton secondary
+                key="cancel"
+                label="CANCEL"
+                onTouchTap={() => close('editStyle')}
+            />,
         ];
 
         return (
             <Dialog
                 actions={actions}
+                open={!!dialog.editStyle}
                 title="Edit Style"
-                open={!!dialog.editStyle}>
+            >
                 <div>
                     <Toggle
                         label="Stroke"
                         labelPosition="right"
                         toggled={stroke}
-                        onToggle={() => this.setState({stroke: !stroke})} />
+                        onToggle={() => this.setState({stroke: !stroke})}
+                    />
                     <input
-                        ref="stroke"
-                        type="color"
                         defaultValue={editor.stroke}
-                        disabled={!stroke} />
+                        disabled={!stroke}
+                        ref={(c) => c && (this.stroke = c)}
+                        type="color"
+                    />
                 </div>
                 <div>
                     <Toggle
                         label="Fill"
                         labelPosition="right"
                         toggled={fill}
-                        onToggle={() => this.setState({fill: !fill})} />
+                        onToggle={() => this.setState({fill: !fill})}
+                    />
                     <input
-                        ref="fill"
-                        type="color"
                         defaultValue={editor.fill}
-                        disabled={!fill} />
+                        disabled={!fill}
+                        ref={(c) => c && (this.fill = c)}
+                        type="color"
+                    />
                 </div>
-                <TextField
-                    ref="strokeWidth"
+                <TextField fullWidth
+                    defaultValue={editor.strokeWidth}
                     floatingLabelText="Stroke Width"
-                    fullWidth={true}
+                    ref={(c) => c && (this.strokeWidth = c)}
                     type="number"
-                    defaultValue={editor.strokeWidth} />
-                <TextField
-                    ref="fontSize"
+                />
+                <TextField fullWidth
+                    defaultValue={editor.fontSize}
                     floatingLabelText="Font Size"
-                    fullWidth={true}
+                    ref={(c) => c && (this.fontSize = c)}
                     type="number"
-                    defaultValue={editor.fontSize} />
+                />
             </Dialog>
         );
     }

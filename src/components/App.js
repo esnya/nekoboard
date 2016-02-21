@@ -1,5 +1,5 @@
 import { AppBar, IconButton, Styles } from 'material-ui';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Canvas } from '../containers/Canvas';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
 import { EditStyleDialog } from '../containers/EditStyleDialog';
@@ -21,7 +21,7 @@ const Style = {
     },
 };
 
-export const App = ({title, open, edit}) => {
+export const App = ({title, open}) => {
     document.title = title
         ? `${title} - Nekoboard`
         : 'Nekoboard';
@@ -29,16 +29,18 @@ export const App = ({title, open, edit}) => {
     return (
         <div style={Style.Container}>
             <AppBar
-                title={title || 'Nekoboard'}
-                iconElementRight = {
+                showMenuIconButton
+                iconElementRight={
                     <IconButton
                         iconClassName="material-icons"
                         iconStyle={{color: 'white'}}
-                        onTouchTap={() => open('config')} >
+                        onTouchTap={() => open('config')}
+                    >
                         settings
                     </IconButton>
                 }
-                showMenuIconButton={false} />
+                title={title || 'Nekoboard'}
+            />
             <div style={Style.CanvasContainer}>
                 <Canvas />
             </div>
@@ -48,4 +50,8 @@ export const App = ({title, open, edit}) => {
             <EditTextDialog />
         </div>
     );
+};
+App.propTypes = {
+    open: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
 };
