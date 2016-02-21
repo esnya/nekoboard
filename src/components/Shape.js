@@ -154,30 +154,38 @@ Measure.propTypes = {
     style: PropTypes.object,
 };
 
+export const Shapes = {
+    [SHAPE.RECT]: Rect,
+    [SHAPE.CIRCLE]: Circle,
+    [SHAPE.ELLIPSE]: Ellipse,
+    [SHAPE.TEXT]: Text,
+    [SHAPE.PIECE]: Piece,
+    [SHAPE.MEASURE]: Measure,
+}
+
 export const Shape = (props) => {
     const {
         shape,
         ...otherProps,
     } = props;
 
-    switch (shape) {
-        case SHAPE.LINE:
-            return <Line {...otherProps} />;
-        case SHAPE.RECT:
-            return <Rect {...otherProps} />;
-        case SHAPE.CIRCLE:
-            return <Circle {...otherProps} />;
-        case SHAPE.ELLIPSE:
-            return <Ellipse {...otherProps} />;
-        case SHAPE.TEXT:
-            return <Text {...otherProps} />;
-        case SHAPE.PIECE:
-            return <Piece {...otherProps} />;
-        case SHAPE.MEASURE:
-            return <Measure {...otherProps} />;
-        default:
-            return <Text {...otherProps} text="??" />;
+    if (!(shape in Shapes)) {
+        return <Text {...otherProps} text="??" />;
     }
+
+    const ShapeComponent = Shapes[shape];
+
+    return (
+        <g>
+            <ShapeComponent
+                {...otherProps}
+                fill="none"
+                stroke="transparent"
+                strokeWidth={16}
+            />
+            <ShapeComponent {...otherProps} />
+        </g>
+    )
 };
 Shape.propTypes = {
     shape: PropTypes.string.isRequired,
