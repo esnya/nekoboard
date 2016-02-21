@@ -1,12 +1,14 @@
 /* eslint react/jsx-sort-props: 0 */
 
 import {
+    FontIcon,
     IconButton,
     Paper,
     SvgIcon,
     Styles,
 } from 'material-ui';
-import React, { PropTypes } from 'react';
+import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
+import React, { Component, PropTypes, cloneElement } from 'react';
 import { Line, Rect, Circle, Ellipse, Measure } from '../components/Shape';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
@@ -38,13 +40,14 @@ const Style = {
     },
 };
 
-const ModeButton = ({name, mode, icon, setMode}) => (
+const getIconColor = (theme, state) =>
+    state ? theme.palette.accent1Color : theme.palette.textColor;
+
+const ModeButton = ({name, mode, icon, setMode, theme}) => (
     <IconButton
         iconClassName="material-icons"
         iconStyle={{
-            color: name === mode
-                ? Style.SelectedColor
-                : null,
+            color: getIconColor(theme, name === mode),
         }}
         style={Style.Button}
         onTouchTap={() => setMode(name)}
@@ -57,29 +60,26 @@ ModeButton.propTypes = {
     mode: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     setMode: PropTypes.func.isRequired,
+    theme: PropTypes.shape({
+        palette: PropTypes.object.isRequired,
+    }).isRequired,
 };
 
 const ShapeButton = ({
     name,
     shape,
-    fill,
-    stroke,
+    theme,
     icon,
     children,
     setShape,
 }) => {
-    if (icon) {
-        const style = name === shape
-            ? {
-                color: fill === 'none' ? stroke : fill,
-            } : {
-                color: Styles.Colors.grey300,
-            };
+    const color = getIconColor(theme, name === shape);
 
+    if (icon) {
         return (
             <IconButton
                 iconClassName="material-icons"
-                iconStyle={style}
+                iconStyle={{ color }}
                 style={Style.Button}
                 onTouchTap={() => setShape(name)}
             >
@@ -88,21 +88,14 @@ const ShapeButton = ({
         );
     }
 
-    const svgStyle = name === shape
-        ? {
-            stroke,
-            fill,
-        } : {
-            stroke: Styles.Colors.grey300,
-            fill: 'none',
-        };
-
     return (
         <IconButton style={Style.Button} onTouchTap={() => setShape(name)}>
             <SvgIcon>
-                <g style={svgStyle}>
-                    {children}
-                </g>
+                {cloneElement(children, {
+                    fill: 'none',
+                    stroke: color,
+                    strokeWidth: 1,
+                })}
             </SvgIcon>
         </IconButton>
     );
@@ -113,150 +106,172 @@ ShapeButton.propTypes = {
     setMode: PropTypes.func.isRequired,
     setShape: PropTypes.func.isRequired,
     shape: PropTypes.string.isRequired,
+    theme: PropTypes.shape({
+        palette: PropTypes.object.isRequired,
+    }).isRequired,
     children: PropTypes.element,
-    fill: PropTypes.string,
     icon: PropTypes.string,
-    stroke: PropTypes.string,
 };
 
-export const Toolbar = (props) => {
-    const {
-        mode,
-        shape,
-        fill,
-        stroke,
-        snap,
-        open,
-        setMode,
-        setShape,
-        setSnap,
-    } = props;
-    const menuProps = {
-        mode,
-        setMode,
-    };
-    const shapeProps = {
-        shape,
-        fill,
-        stroke,
-        setShape,
-    };
+export class Toolbar extends Component {
+    static get contextTypes() {
+        return {
+            muiTheme: PropTypes.object,
+        };
+    }
 
-    return (
-        <Paper style={Style.Toolbar}>
-            <ModeButton
-                {...menuProps}
-                name={MODE.MOVE}
-                icon="open_with"
-            />
-            <ModeButton
-                {...menuProps}
-                name={MODE.EDIT}
-                icon="editor"
-            />
-            <ModeButton
-                {...menuProps}
-                name={MODE.ERASE}
-                icon="delete"
-            />
-            <div style={Style.Separator} />
-            <IconButton
-                iconClassName="material-icons"
-                iconStyle={{
-                    color: snap ? null : Styles.Colors.grey300,
-                }}
-                style={Style.Button}
-                onTouchTap={() => setSnap(!snap)}
-            >
-                grid_on
-            </IconButton>
-            {mode === MODE.EDIT ? (
-                <div style={Style.Group}>
-                    <div style={Style.Separator} />
-                    <ShapeButton
-                        {...shapeProps}
-                        name={SHAPE.PIECE}
-                        icon="place"
-                    />
-                    <ShapeButton
-                        {...shapeProps}
-                        name={SHAPE.LINE}
-                    >
-                        <Line
-                            x1={24} x2={0}
-                            y1={0} y2={24}
+    static get propTypes() {
+        return {
+            open: PropTypes.func.isRequired,
+            setMode: PropTypes.func.isRequired,
+            setShape: PropTypes.func.isRequired,
+            setSnap: PropTypes.func.isRequired,
+            fill: PropTypes.string,
+            mode: PropTypes.string,
+            shape: PropTypes.string,
+            snap: PropTypes.bool,
+            stroke: PropTypes.string,
+            strokeWidth: PropTypes.number,
+        };
+    }
+
+    render() {
+        const {
+            fill,
+            stroke,
+            strokeWidth,
+            mode,
+            shape,
+            snap,
+            open,
+            setMode,
+            setShape,
+            setSnap,
+        } = this.props;
+        const menuProps = {
+            mode,
+            setMode,
+        };
+        const shapeProps = {
+            shape,
+            setShape,
+        };
+
+        const theme = getMuiTheme(this.context.muiTheme).rawTheme;
+
+        return (
+            <Paper style={Style.Toolbar}>
+                <ModeButton
+                    {...menuProps}
+                    name={MODE.MOVE}
+                    icon="open_with"
+                    theme={theme}
+                />
+                <ModeButton
+                    {...menuProps}
+                    name={MODE.EDIT}
+                    icon="editor"
+                    theme={theme}
+                />
+                <ModeButton
+                    {...menuProps}
+                    name={MODE.ERASE}
+                    icon="delete"
+                    theme={theme}
+                />
+                <div style={Style.Separator} />
+                <IconButton
+                    iconClassName="material-icons"
+                    iconStyle={{
+                        color: getIconColor(theme, snap),
+                    }}
+                    style={Style.Button}
+                    onTouchTap={() => setSnap(!snap)}
+                >
+                    grid_on
+                </IconButton>
+                {mode === MODE.EDIT ? (
+                    <div style={Style.Group}>
+                        <div style={Style.Separator} />
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.PIECE}
+                            icon="place"
+                            theme={theme}
                         />
-                    </ShapeButton>
-                    <ShapeButton
-                        {...shapeProps}
-                        name={SHAPE.RECT}
-                    >
-                        <Rect
-                            x={0} y={0}
-                            width={24} height={24}
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.LINE}
+                            theme={theme}
+                        >
+                            <Line
+                                x1={24} x2={0}
+                                y1={0} y2={24}
+                            />
+                        </ShapeButton>
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.RECT}
+                            theme={theme}
+                        >
+                            <Rect
+                                x={1} y={1}
+                                width={22} height={22}
+                            />
+                        </ShapeButton>
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.CIRCLE}
+                            theme={theme}
+                        >
+                            <Circle cx={12} cy={12} r={11} />
+                        </ShapeButton>
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.ELLIPSE}
+                            theme={theme}
+                        >
+                            <Ellipse
+                                cx={12} cy={12}
+                                rx={11} ry={6}
+                            />
+                        </ShapeButton>
+                        <ShapeButton
+                            {...shapeProps}
+                            icon="text_fields"
+                            name={SHAPE.TEXT}
+                            theme={theme}
                         />
-                    </ShapeButton>
-                    <ShapeButton
-                        {...shapeProps}
-                        name={SHAPE.CIRCLE}
-                    >
-                        <Circle cx={12} cy={12} r={11} />
-                    </ShapeButton>
-                    <ShapeButton
-                        {...shapeProps}
-                        name={SHAPE.ELLIPSE}
-                    >
-                        <Ellipse
-                            cx={12} cy={12}
-                            rx={11} ry={6}
-                        />
-                    </ShapeButton>
-                    <ShapeButton
-                        {...shapeProps}
-                        icon="text_fields"
-                        name={SHAPE.TEXT}
-                    />
-                    <ShapeButton
-                        {...shapeProps}
-                        name={SHAPE.MEASURE}
-                    >
-                        <Measure
-                            fill={
-                                shape === SHAPE.MEASURE
-                                ? fill
-                                : Styles.Colors.grey300
-                            }
-                            fontSize={10}
-                            gridSize={24}
-                            stroke={
-                                shape === SHAPE.MEASURE
-                                ? stroke
-                                : Styles.Colors.grey300
-                            }
-                            x1={0} x2={24}
-                            y1={24} y2={0}
-                        />
-                    </ShapeButton>
-                    <div style={Style.Separator} />
-                    <IconButton
-                        iconClassName="material-icons"
-                        onTouchTap={() => open('editStyle')}
-                    >
-                        color_lens
-                    </IconButton>
-                </div>
-            ) : null}
-        </Paper>
-    );
-};
-Toolbar.propTypes = {
-    open: PropTypes.func.isRequired,
-    setMode: PropTypes.func.isRequired,
-    setShape: PropTypes.func.isRequired,
-    setSnap: PropTypes.func.isRequired,
-    fill: PropTypes.string,
-    mode: PropTypes.string,
-    shape: PropTypes.string,
-    snap: PropTypes.bool,
-    stroke: PropTypes.string,
-};
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.MEASURE}
+                            theme={theme}
+                        >
+                            <Measure
+                                fontSize={10}
+                                gridSize={24}
+                                x1={0} x2={24}
+                                y1={24} y2={0}
+                            />
+                        </ShapeButton>
+                        <div style={Style.Separator} />
+                        <IconButton onTouchTap={() => open('editStyle')}>
+                            <FontIcon className="material-icons">
+                                color_lens
+                            </FontIcon>
+                            <SvgIcon style={{ marginTop: -24 }}>
+                                <Rect
+                                    x={8} y={8}
+                                    width={14} height={14}
+                                    fill={fill}
+                                    stroke={stroke}
+                                    strokeWidth={strokeWidth}
+                                />
+                            </SvgIcon>
+                        </IconButton>
+                    </div>
+                ) : null}
+            </Paper>
+        );
+    }
+}

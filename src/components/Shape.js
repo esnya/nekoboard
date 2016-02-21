@@ -129,7 +129,7 @@ export const Measure = (props) => {
             <line x1={0} y1={0} x2={length} y2={0} />
             <text
                 x={length / 2} y={-(fontSize || 12) / 8}
-                fill={stroke === 'none' ? fill : stroke}
+                fill={stroke}
                 stroke="none"
                 style={{
                     fontSize: fontSize || 12,
