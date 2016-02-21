@@ -79,16 +79,16 @@ const Style = {
 export class Canvas extends Component {
     static get propTypes() {
         return {
-            edit: PropTypes.object.isRequired,
             editor: PropTypes.object.isRequired,
             beginEdit: PropTypes.func.isRequired,
             endEdit: PropTypes.func.isRequired,
-            grid: PropTypes.bool.isRequired,
-            gridSize: PropTypes.number.isRequired,
-            height: PropTypes.number.isRequired,
             shapes: PropTypes.array.isRequired,
             updateEdit: PropTypes.func.isRequired,
-            width: PropTypes.number.isRequired,
+            edit: PropTypes.object,
+            grid: PropTypes.bool,
+            gridSize: PropTypes.number,
+            height: PropTypes.number,
+            width: PropTypes.number,
         };
     }
 

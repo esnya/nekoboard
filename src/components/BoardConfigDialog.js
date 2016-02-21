@@ -4,10 +4,10 @@ import React, { Component, PropTypes } from 'react';
 export class BoardConfigDialog extends Component {
     static get propTypes() {
         return {
-            board: PropTypes.object.isRequired,
             close: PropTypes.func.isRequired,
-            dialog: PropTypes.func.isRequired,
+            dialog: PropTypes.object.isRequired,
             update: PropTypes.func.isRequired,
+            board: PropTypes.object,
         };
     }
 

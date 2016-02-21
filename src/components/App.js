@@ -53,5 +53,5 @@ export const App = ({title, open}) => {
 };
 App.propTypes = {
     open: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
 };
