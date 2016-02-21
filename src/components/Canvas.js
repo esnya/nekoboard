@@ -108,7 +108,7 @@ export class Canvas extends Component {
         this.props.beginEdit({id});
     }
 
-    onMouseDown(e, id) {
+    onMouseDown(e) {
         const {
             beginEdit,
         } = this.props;

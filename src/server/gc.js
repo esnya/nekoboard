@@ -1,5 +1,5 @@
 import config from 'config';
-import _, { concat, union } from 'lodash';
+import _, { concat } from 'lodash';
 import { getLogger } from 'log4js';
 import { createClient } from './redis';
 

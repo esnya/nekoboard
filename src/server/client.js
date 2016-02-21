@@ -1,14 +1,10 @@
-import { promisifyAll } from 'bluebird';
 import Config from 'config';
 import EventEmitter from 'events';
 import { pick } from 'lodash';
-import { getLogger } from 'log4js';
 import { createClient } from './redis';
 import * as Board from '../actions/Board';
 import * as Shape from '../actions/Shape';
 import { generate as genId } from '../utility/id';
-
-const logger = getLogger('[client]');
 
 const DefaultBoard = Config.get('board');
 const BoardKeys = ['id', ...Object.keys(DefaultBoard)];
@@ -24,8 +20,6 @@ const ShapeKeys = [
     'r', 'rx', 'ry',
     'text',
 ];
-
-const RedisConfig = Config.get('redis');
 
 export class Client extends EventEmitter {
     constructor(boardId) {

@@ -1,10 +1,7 @@
 import IO from 'socket.io';
-import config from 'config';
 import { getLogger } from 'log4js';
-import { create, update } from '../actions/Board';
 import * as BOARD from '../constants/actions/Board';
 import * as SHAPE from '../constants/actions/Shape';
-import { connected, disconnected } from '../actions/Socket';
 import { Client } from './client';
 import { server } from './server';
 
