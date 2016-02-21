@@ -33,7 +33,7 @@ const Style = {
     },
     SelectedColor: Styles.Colors.pink500,
     Button: {
-        flex: '0 0 48px',
+        flex: '0 0 auto',
         width: 48,
     },
 };
