@@ -161,7 +161,7 @@ export const Shapes = {
     [SHAPE.TEXT]: Text,
     [SHAPE.PIECE]: Piece,
     [SHAPE.MEASURE]: Measure,
-}
+};
 
 export const Shape = (props) => {
     const {
@@ -185,7 +185,7 @@ export const Shape = (props) => {
             />
             <ShapeComponent {...otherProps} />
         </g>
-    )
+    );
 };
 Shape.propTypes = {
     shape: PropTypes.string.isRequired,
