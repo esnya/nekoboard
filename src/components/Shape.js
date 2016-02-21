@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint react/jsx-sort-props: 0 */
+
+import React, { PropTypes } from 'react';
 import * as SHAPE from '../constants/Shape';
 
 const UnselectableText = {
@@ -46,10 +48,24 @@ export const Text = (props) => {
                 ...UnselectableText,
             }}
             textAnchor="middle"
-            dominantBaseline="middle">
+            dominantBaseline="middle"
+        >
             {text}
         </text>
     );
+};
+Text.propTypes = {
+    text: PropTypes.string.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    cx: PropTypes.number,
+    cy: PropTypes.number,
+    fontSize: PropTypes.number,
+    style: PropTypes.object,
+    x1: PropTypes.number,
+    x2: PropTypes.number,
+    y1: PropTypes.number,
+    y2: PropTypes.number,
 };
 
 export const Piece = (props) => {
@@ -70,6 +86,11 @@ export const Piece = (props) => {
             }}
         />
     );
+};
+Piece.propTypes = {
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    style: PropTypes.object,
 };
 
 export const Measure = (props) => {
@@ -99,7 +120,8 @@ export const Measure = (props) => {
             fill={fill}
             stroke={stroke}
             style={style}
-            transform={`${translate} ${rotate}`}>
+            transform={`${translate} ${rotate}`}
+        >
             <line x1={0} y1={0} x2={5} y2={5} />
             <line x1={0} y1={0} x2={5} y2={-5} />
             <line x1={length} y1={0} x2={length - 5} y2={5} />
@@ -113,11 +135,23 @@ export const Measure = (props) => {
                     fontSize: fontSize || 12,
                     ...UnselectableText,
                 }}
-                textAnchor="middle">
+                textAnchor="middle"
+            >
                 {label}
             </text>
         </g>
     );
+};
+Measure.propTypes = {
+    fontSize: PropTypes.number.isRequired,
+    gridSize: PropTypes.number.isRequired,
+    x1: PropTypes.number.isRequired,
+    x2: PropTypes.number.isRequired,
+    y1: PropTypes.number.isRequired,
+    y2: PropTypes.number.isRequired,
+    fill: PropTypes.string,
+    stroke: PropTypes.string,
+    style: PropTypes.object,
 };
 
 export const Shape = (props) => {
@@ -144,4 +178,7 @@ export const Shape = (props) => {
         default:
             return <Text {...otherProps} text="??" />;
     }
+};
+Shape.propTypes = {
+    shape: PropTypes.string.isRequired,
 };

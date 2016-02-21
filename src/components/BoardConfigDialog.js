@@ -1,7 +1,16 @@
 import { FlatButton, Dialog, TextField, Toggle } from 'material-ui';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export class BoardConfigDialog extends Component {
+    static get propTypes() {
+        return {
+            board: PropTypes.object.isRequired,
+            close: PropTypes.func.isRequired,
+            dialog: PropTypes.func.isRequired,
+            update: PropTypes.func.isRequired,
+        };
+    }
+
     constructor(props) {
         super(props);
 
@@ -39,7 +48,7 @@ export class BoardConfigDialog extends Component {
                         value = this.state[key];
                         break;
                     default:
-                        value = this.refs[key].getValue();
+                        value = this[key].getValue();
                 }
 
                 result[key] = value;
@@ -69,65 +78,61 @@ export class BoardConfigDialog extends Component {
         const board = this.props.board || {};
 
         const actions = [
-            <FlatButton
+            <FlatButton primary
+                key="update"
                 label="Update"
-                primary={true}
-                keyboardFocused={true}
                 onTouchTap={(e) => this.onSubmit(e)}
             />,
-            <FlatButton
+            <FlatButton secondary
+                key="cancel"
                 label="Cancel"
-                secondary={true}
                 onTouchTap={() => close('config')}
             />,
         ];
 
         return (
-            <Dialog
+            <Dialog autoScrollBodyContent
                 {...otherProps}
                 actions={actions}
-                autoScrollBodyContent={true}
+                open={!!dialog.config}
                 title="Board Config"
-                open={!!dialog.config} >
+            >
                 <form onSubmit={(e) => this.onSubmit(e)} >
-                    <TextField
-                        ref="title"
-                        name="title"
-                        floatingLabelText="Title"
-                        fullWidth={true}
+                    <TextField fullWidth isRequired
                         defaultValue={board.title}
-                        isRequired={true} />
-                    <TextField
-                        ref="width"
-                        name="width"
-                        floatingLabelText="Width"
-                        fullWidth={true}
-                        type="number"
+                        floatingLabelText="Title"
+                        name="title"
+                        ref={(c) => c && (this.title = c)}
+                    />
+                    <TextField fullWidth isRequired
                         defaultValue={board.width}
-                        isRequired={true} />
-                    <TextField
-                        ref="height"
-                        name="height"
-                        floatingLabelText="Height"
-                        fullWidth={true}
+                        floatingLabelText="Width"
+                        name="width"
+                        ref={(c) => c && (this.width = c)}
                         type="number"
+                    />
+                    <TextField fullWidth isRequired
                         defaultValue={board.height}
-                        isRequired={true} />
+                        floatingLabelText="Height"
+                        name="height"
+                        ref={(c) => c && (this.height = c)}
+                        type="number"
+                    />
                     <div style={{height: 16}} />
                     <Toggle
-                        ref="grid"
-                        name="grid"
                         label="Grid"
+                        name="grid"
+                        ref={(c) => c && (this.grid = c)}
                         toggled={this.state.grid}
-                        onToggle={() => this.onToggle('grid')} />
-                    <TextField
-                        ref="gridSize"
-                        name="gridSize"
-                        floatingLabelText="Grid Size"
-                        fullWidth={true}
-                        type="number"
+                        onToggle={() => this.onToggle('grid')}
+                    />
+                    <TextField fullWidth isRequired
                         defaultValue={board.gridSize}
-                        isRequired={true} />
+                        floatingLabelText="Grid Size"
+                        name="gridSize"
+                        ref={(c) => c && (this.gridSize = c)}
+                        type="number"
+                    />
                 </form>
             </Dialog>
         );

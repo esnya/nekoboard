@@ -1,7 +1,16 @@
 import { Dialog, TextField, FlatButton } from 'material-ui';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export class EditTextDialog extends Component {
+    static get propTypes() {
+        return {
+            add: PropTypes.func.isRequired,
+            close: PropTypes.func.isRequired,
+            dialog: PropTypes.object.isRequired,
+            editor: PropTypes.object.isRequired,
+        };
+    }
+
     onOK() {
         const {
             editor,
@@ -14,7 +23,7 @@ export class EditTextDialog extends Component {
             shape: editor.shape,
             x: dialog.editText.x,
             y: dialog.editText.y,
-            text: this.refs.text.getValue(),
+            text: this.text.getValue(),
             fill: editor.fill,
             stroke: editor.stroke,
             strokeWidth: editor.strokeWidth,
@@ -30,22 +39,25 @@ export class EditTextDialog extends Component {
         } = this.props;
 
         const actions = [
-            <FlatButton
+            <FlatButton primary
+                key="ok"
                 label="OK"
-                primary={true}
-                onTouchTap={() => this.onOK()} />,
-            <FlatButton
+                onTouchTap={() => this.onOK()}
+            />,
+            <FlatButton secondary
+                key="cancel"
                 label="CANCEL"
-                secondary={true}
-                onTouchTap={() => close('editText')} />,
+                onTouchTap={() => close('editText')}
+            />,
         ];
 
         return (
             <Dialog
                 actions={actions}
                 open={!!dialog.editText}
-                title="Text">
-                <TextField ref="text" fullWidth={true} />
+                title="Text"
+            >
+                <TextField fullWidth ref={(c) => c && (this.text = c)} />
             </Dialog>
         );
     }
