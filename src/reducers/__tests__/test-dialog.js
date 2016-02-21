@@ -1,4 +1,4 @@
-describe('reducers/browser/dialog', () => {
+describe('reducers/dialog', () => {
     jest.dontMock('../dialog');
     require('../dialog');
 });

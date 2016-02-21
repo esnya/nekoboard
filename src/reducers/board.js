@@ -1,4 +1,4 @@
-import * as BOARD from '../../constants/actions/Board';
+import * as BOARD from '../constants/actions/Board';
 
 export const board = (state = null, action) => {
     switch (action.type) {

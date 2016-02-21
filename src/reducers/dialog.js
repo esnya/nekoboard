@@ -1,4 +1,4 @@
-import * as DIALOG from '../../constants/actions/Dialog';
+import * as DIALOG from '../constants/actions/Dialog';
 
 export const dialog = (state = {}, action) => {
     switch (action.type) {

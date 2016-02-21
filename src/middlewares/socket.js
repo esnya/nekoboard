@@ -1,4 +1,4 @@
-import { socket as soc } from '../../browser/socket';
+import { socket as soc } from '../browser/socket';
 
 export const socket = () => (next) => (action) => {
     const {

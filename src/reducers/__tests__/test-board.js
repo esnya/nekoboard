@@ -1,4 +1,4 @@
-describe('reducers/browser/board', () => {
+describe('reducers/board', () => {
     jest.dontMock('../board');
     require('../board');
 });

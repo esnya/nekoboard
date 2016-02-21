@@ -1,4 +1,4 @@
-describe('reducers/browser/shapes', () => {
+describe('reducers/shapes', () => {
     jest.dontMock('../shapes');
     require('../shapes');
 });

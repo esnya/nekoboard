@@ -1,10 +1,10 @@
-import { open } from '../../actions/Dialog';
-import { endEdit } from '../../actions/Editor';
-import { add, update, remove } from '../../actions/Shape';
-import * as EDITOR from '../../constants/actions/Editor';
-import * as MODE from '../../constants/Mode';
-import * as SHAPE from '../../constants/Shape';
-import { generate } from '../../utility/id';
+import { open } from '../actions/Dialog';
+import { endEdit } from '../actions/Editor';
+import { add, update, remove } from '../actions/Shape';
+import * as EDITOR from '../constants/actions/Editor';
+import * as MODE from '../constants/Mode';
+import * as SHAPE from '../constants/Shape';
+import { generate } from '../utility/id';
 
 const setPos = (shape, x, y) => {
     switch (shape.shape) {

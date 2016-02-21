@@ -1,4 +1,4 @@
-import * as SHAPE from '../../constants/actions/Shape';
+import * as SHAPE from '../constants/actions/Shape';
 
 export const shapes = (state = [], action) => {
     switch (action.type) {

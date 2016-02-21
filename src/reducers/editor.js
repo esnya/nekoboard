@@ -1,6 +1,6 @@
-import * as EDITOR from '../../constants/actions/Editor';
-import * as MODE from '../../constants/Mode';
-import * as SHAPE from '../../constants/Shape';
+import * as EDITOR from '../constants/actions/Editor';
+import * as MODE from '../constants/Mode';
+import * as SHAPE from '../constants/Shape';
 
 const key = 'nekoboard/editor';
 const load = () => {
