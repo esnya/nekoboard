@@ -161,6 +161,7 @@ export const Shapes = {
     [SHAPE.TEXT]: Text,
     [SHAPE.PIECE]: Piece,
     [SHAPE.MEASURE]: Measure,
+    [SHAPE.LINE]: Line,
 };
 
 export const Shape = (props) => {
