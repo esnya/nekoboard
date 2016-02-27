@@ -28,5 +28,7 @@ app.get('/:boardId([a-f0-9]{16})', (req, res) => {
     res.render('index', {
         ...req.params,
         config: config.get('browser'),
+        ga: config.has('ga') &&
+            `GA_CONFIG = ${JSON.stringify(config.get('ga'))};`,
     });
 });
