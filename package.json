@@ -8,7 +8,8 @@
     "start": "node .",
     "test": "gulp test",
     "test-build": "gulp build test",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "version": "update-changelog && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   },
   "homepage": "https://github.com/ukatama/nekoboard#readme",
   "devDependencies": {
-    "nekodev": "file:nekodev"
+    "nekodev": "file:nekodev",
+    "update-changelog": "^1.0.1"
   },
   "dependencies": {
     "bluebird": "^3.3.0",
