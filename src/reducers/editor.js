@@ -30,6 +30,7 @@ const DefaultState = {
     fontSize: 16,
     edit: null,
     snap: true,
+    styleHistory: [],
 };
 const InitialState = {
     ...DefaultState,
@@ -48,15 +49,22 @@ export const editor = (state = InitialState, action) => {
                 ...state,
                 shape: action.shape,
             });
-        case EDITOR.STYLE:
-            return save({
-                ...state,
+        case EDITOR.STYLE: {
+            const style = {
                 stroke: action.stroke,
                 fill: action.fill,
                 fontSize: action.fontSize,
                 strokeWidth: action.strokeWidth,
+            };
+            return save({
+                ...state,
+                ...style,
+                styleHistory: [
+                    style,
+                    ...state.styleHistory,
+                ].slice(0, 10),
             });
-        case EDITOR.SNAP:
+        } case EDITOR.SNAP:
             return save({
                 ...state,
                 snap: action.snap,

@@ -1,6 +1,14 @@
-import { Dialog, FlatButton, TextField, Toggle } from 'material-ui';
+import {
+    Dialog,
+    FlatButton,
+    IconButton,
+    SvgIcon,
+    TextField,
+    Toggle,
+} from 'material-ui';
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
+import { Rect } from './Shape';
 
 export class EditStyleDialog extends Component {
     static get propTypes() {
@@ -59,6 +67,15 @@ export class EditStyleDialog extends Component {
         close('editStyle');
     }
 
+    onHistory(style) {
+        const {
+            close,
+            setStyle,
+        } = this.props;
+        setStyle(style);
+        close('editStyle');
+    }
+
     render() {
         const {
             editor,
@@ -89,6 +106,25 @@ export class EditStyleDialog extends Component {
                 open={!!dialog.editStyle}
                 title="Edit Style"
             >
+                <div>
+                    {
+                        editor.styleHistory.map((style, i) => (
+                            <IconButton
+                                key={i}
+                                onTouchTap={() => this.onHistory(style)}
+                            >
+                                <SvgIcon>
+                                    <Rect
+                                        {...style}
+                                        height={22}
+                                        width={22}
+                                        x={1} y={1}
+                                    />
+                                </SvgIcon>
+                            </IconButton>
+                        ))
+                    }
+                </div>
                 <div>
                     <Toggle
                         label="Stroke"
