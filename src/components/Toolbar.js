@@ -9,7 +9,15 @@ import {
 } from 'material-ui';
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import React, { Component, PropTypes, cloneElement } from 'react';
-import { Line, Rect, Circle, Ellipse, Measure } from '../components/Shape';
+import {
+    Circle,
+    Ellipse,
+    Line,
+    Measure,
+    Polygon,
+    Polyline,
+    Rect,
+} from '../components/Shape';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 
@@ -234,6 +242,36 @@ export class Toolbar extends Component {
                             <Ellipse
                                 cx={12} cy={12}
                                 rx={11} ry={6}
+                            />
+                        </ShapeButton>
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.POLYLINE}
+                            theme={theme}
+                        >
+                            <Polyline
+                                points={[
+                                    {x: 22, y: 2},
+                                    {x: 16, y: 12},
+                                    {x: 22, y: 22},
+                                    {x: 2, y: 22},
+                                    {x: 2, y: 2},
+                                ]}
+                            />
+                        </ShapeButton>
+                        <ShapeButton
+                            {...shapeProps}
+                            name={SHAPE.POLYGON}
+                            theme={theme}
+                        >
+                            <Polygon
+                                points={[
+                                    {x: 22, y: 2},
+                                    {x: 16, y: 12},
+                                    {x: 22, y: 22},
+                                    {x: 2, y: 22},
+                                    {x: 2, y: 2},
+                                ]}
                             />
                         </ShapeButton>
                         <ShapeButton

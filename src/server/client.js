@@ -19,6 +19,7 @@ const ShapeKeys = [
     'width', 'height',
     'r', 'rx', 'ry',
     'text',
+    'points',
 ];
 
 export class Client extends EventEmitter {

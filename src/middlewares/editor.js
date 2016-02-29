@@ -22,6 +22,12 @@ const setPos = (shape, x, y) => {
         case SHAPE.CIRCLE:
         case SHAPE.ELLIPSE:
             return {...shape, cx: x, cy: y};
+        case SHAPE.POLYGON:
+        case SHAPE.POLYLINE:
+            return {
+                ...shape,
+                points: [{ x, y }],
+            };
     }
 };
 
@@ -56,6 +62,15 @@ const setSize = (shape, x, y) => {
         case SHAPE.TEXT:
         case SHAPE.PIECE:
             return shape;
+        case SHAPE.POLYGON:
+        case SHAPE.POLYLINE:
+            return {
+                ...shape,
+                points: [
+                    ...shape.points,
+                    { x, y },
+                ],
+            };
     }
 };
 
@@ -70,6 +85,9 @@ const moveTo = (shape, x, y) => {
                 x2: shape.x2 + x - shape.x1,
                 y2: shape.y2 + y - shape.y1,
             };
+        case SHAPE.POLYGON:
+        case SHAPE.POLYLINE:
+            return shape;
         default:
             return setPos(shape, x, y);
     }

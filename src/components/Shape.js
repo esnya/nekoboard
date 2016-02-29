@@ -154,6 +154,54 @@ Measure.propTypes = {
     style: PropTypes.object,
 };
 
+export const Polyline = (props) => {
+    const {
+        points,
+        ...othreProps,
+    } = props;
+
+    return (
+        <polyline
+            {...othreProps}
+            points={
+                points && points.map((point) =>
+                    `${point.x},${point.y}`
+                ).join(',')
+            }
+        />
+    );
+};
+Polyline.propTypes = {
+    points: PropTypes.arrayOf(PropTypes.shape({
+        x: PropTypes.number,
+        y: PropTypes.number,
+    })),
+};
+
+export const Polygon = (props) => {
+    const {
+        points,
+        ...othreProps,
+    } = props;
+
+    return (
+        <polygon
+            {...othreProps}
+            points={
+                points && points.map((point) =>
+                    `${point.x},${point.y}`
+                ).join(',')
+            }
+        />
+    );
+};
+Polygon.propTypes = {
+    points: PropTypes.arrayOf(PropTypes.shape({
+        x: PropTypes.number,
+        y: PropTypes.number,
+    })),
+};
+
 export const Shapes = {
     [SHAPE.RECT]: Rect,
     [SHAPE.CIRCLE]: Circle,
@@ -162,6 +210,8 @@ export const Shapes = {
     [SHAPE.PIECE]: Piece,
     [SHAPE.MEASURE]: Measure,
     [SHAPE.LINE]: Line,
+    [SHAPE.POLYLINE]: Polyline,
+    [SHAPE.POLYGON]: Polygon,
 };
 
 export const Shape = (props) => {
