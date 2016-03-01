@@ -216,6 +216,7 @@ export const Shapes = {
 
 export const Shape = (props) => {
     const {
+        expand,
         shape,
         ...otherProps,
     } = props;
@@ -228,16 +229,21 @@ export const Shape = (props) => {
 
     return (
         <g>
-            <ShapeComponent
-                {...otherProps}
-                fill="none"
-                stroke="transparent"
-                strokeWidth={16}
-            />
+            {
+                expand ? (
+                    <ShapeComponent
+                        {...otherProps}
+                        fill="none"
+                        stroke="transparent"
+                        strokeWidth={16}
+                    />
+                ) : null
+            }
             <ShapeComponent {...otherProps} />
         </g>
     );
 };
 Shape.propTypes = {
     shape: PropTypes.string.isRequired,
+    expand: PropTypes.bool,
 };

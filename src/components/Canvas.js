@@ -174,6 +174,9 @@ export class Canvas extends Component {
             shapeCursor = 'pointer';
         }
 
+        const expandShape = editor.mode === MODE.MOVE ||
+            editor.mode === MODE.ERASE;
+
         return (
             <Paper
                 ref={(c) => c && (this.canvas = c)}
@@ -197,6 +200,7 @@ export class Canvas extends Component {
                             .map((shape, i) => (
                                 <Shape
                                     {...shape}
+                                    expand={expandShape}
                                     gridSize={gridSize}
                                     key={shape.id || i}
                                     style={{
