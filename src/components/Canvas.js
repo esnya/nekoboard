@@ -93,19 +93,46 @@ export class Canvas extends Component {
     }
 
     toLocalPos(e) {
-        const canvas = findDOMNode(this.canvas);
-        const parent = canvas.parentElement;
-
+        const offset = findDOMNode(this.canvas).getBoundingClientRect();
         const pos = e.touches && e.touches[0] || e;
 
-        const x = pos.pageX - canvas.offsetLeft + parent.scrollLeft;
-        const y = pos.pageY - canvas.offsetTop + parent.scrollTop;
+        /*
+        console.log(e.type);
+        console.log('local', {
+            x: pos.clientX - offset.x,
+            y: pos.clientY - offset.y,
+        });
+        console.log('client', {
+            x: pos.clientX,
+            y: pos.clientY,
+        });
+        console.log('layer', {
+            x: pos.layerX,
+            y: pos.layerY,
+        });
+        console.log('page', {
+            x: pos.pageX,
+            y: pos.pageY,
+        });
+        console.log('offset', {
+            x: offset.x,
+            y: offset.y,
+        });
+        */
 
-        return {x, y};
+        return {
+            x: pos.clientX - offset.x,
+            y: pos.clientY - offset.y,
+        };
     }
 
-    onMouseDownOnShape(id) {
-        this.props.beginEdit({id});
+    onMouseDownOnShape(e, id) {
+        e.preventDefault();
+
+        this.props.beginEdit({
+            ...this.toLocalPos(e.nativeEvent),
+            id,
+        });
     }
 
     onMouseDown(e) {
@@ -114,9 +141,8 @@ export class Canvas extends Component {
         } = this.props;
 
         e.preventDefault();
-        beginEdit({
-            ...this.toLocalPos(e.nativeEvent),
-        });
+
+        beginEdit(this.toLocalPos(e.nativeEvent));
     }
 
     onMouseMove(e) {
@@ -207,10 +233,12 @@ export class Canvas extends Component {
                                         cursor: shapeCursor,
                                     }}
                                     onMouseDown={
-                                        () => this.onMouseDownOnShape(shape.id)
+                                        (e) => this
+                                            .onMouseDownOnShape(e, shape.id)
                                     }
                                     onTouchStart={
-                                        () => this.onMouseDownOnShape(shape.id)
+                                        (e) => this
+                                            .onMouseDownOnShape(e, shape.id)
                                     }
                                 />
                             ))
@@ -226,10 +254,12 @@ export class Canvas extends Component {
                                         cursor: shapeCursor,
                                     }}
                                     onMouseDown={
-                                        () => this.onMouseDownOnShape(shape.id)
+                                        (e) => this
+                                            .onMouseDownOnShape(e, shape.id)
                                     }
                                     onTouchStart={
-                                        () => this.onMouseDownOnShape(shape.id)
+                                        (e) => this
+                                            .onMouseDownOnShape(e, shape.id)
                                     }
                                 />
                             ))

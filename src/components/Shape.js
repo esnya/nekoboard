@@ -157,49 +157,59 @@ Measure.propTypes = {
 export const Polyline = (props) => {
     const {
         points,
+        x, y,
         ...othreProps,
     } = props;
 
     return (
-        <polyline
-            {...othreProps}
-            points={
-                points && points.map((point) =>
-                    `${point.x},${point.y}`
-                ).join(',')
-            }
-        />
+        <g transform={`translate(${x || 0},${y || 0})`}>
+            <polyline
+                {...othreProps}
+                points={
+                    points && points.map((point) =>
+                        `${point.x},${point.y}`
+                    ).join(',')
+                }
+            />
+        </g>
     );
 };
 Polyline.propTypes = {
     points: PropTypes.arrayOf(PropTypes.shape({
         x: PropTypes.number,
         y: PropTypes.number,
-    })),
+    })).isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
 };
 
 export const Polygon = (props) => {
     const {
         points,
+        x, y,
         ...othreProps,
     } = props;
 
     return (
-        <polygon
-            {...othreProps}
-            points={
-                points && points.map((point) =>
-                    `${point.x},${point.y}`
-                ).join(',')
-            }
-        />
+        <g transform={`translate(${x || 0},${y || 0})`}>
+            <polygon
+                {...othreProps}
+                points={
+                    points && points.map((point) =>
+                        `${point.x},${point.y}`
+                    ).join(',')
+                }
+            />
+        </g>
     );
 };
 Polygon.propTypes = {
     points: PropTypes.arrayOf(PropTypes.shape({
         x: PropTypes.number,
         y: PropTypes.number,
-    })),
+    })).isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
 };
 
 export const Shapes = {

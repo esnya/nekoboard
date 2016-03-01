@@ -1,21 +1,28 @@
+import { pick } from 'lodash';
 import * as EDITOR from '../constants/actions/Editor';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 
 const key = 'nekoboard/editor';
+const SAVE_KEYS = [
+    'mode',
+    'shape',
+    'fill',
+    'shapeHistory',
+    'stroke',
+    'strokeWidth',
+    'snap',
+];
 const load = () => {
     if (!window.localStorage) return {};
 
     const data = localStorage.getItem(key);
 
-    return data && {
-        ...JSON.parse(data),
-        edit: null,
-    };
+    return data && pick(JSON.parse(data), SAVE_KEYS);
 };
 const save = (e) => {
     if (window.localStorage) {
-        localStorage.setItem(key, JSON.stringify(e));
+        localStorage.setItem(key, JSON.stringify(pick(e, SAVE_KEYS)));
     }
 
     return e;
@@ -25,12 +32,13 @@ const DefaultState = {
     mode: MODE.DEFAULT,
     shape: SHAPE.DEFAULT,
     fill: 'none',
+    styleHistory: [],
     stroke: '#000000',
     strokeWidth: 1,
     fontSize: 16,
     edit: null,
     snap: true,
-    styleHistory: [],
+    ox: 0, oy: 0,
 };
 const InitialState = {
     ...DefaultState,
@@ -82,6 +90,7 @@ export const editor = (state = InitialState, action) => {
             return save({
                 ...state,
                 edit: action.id,
+                ...pick(action, ['ox', 'oy']),
             });
         case EDITOR.EDIT_END:
         case EDITOR.EDIT_CANCEL:

@@ -26,7 +26,8 @@ const setPos = (shape, x, y) => {
         case SHAPE.POLYLINE:
             return {
                 ...shape,
-                points: [{ x, y }],
+                points: [{ x: 0, y: 0 }],
+                x, y,
             };
     }
 };
@@ -68,7 +69,10 @@ const setSize = (shape, x, y) => {
                 ...shape,
                 points: [
                     ...shape.points,
-                    { x, y },
+                    {
+                        x: x - shape.x,
+                        y: y - shape.y,
+                    },
                 ],
             };
     }
@@ -87,11 +91,19 @@ const moveTo = (shape, x, y) => {
             };
         case SHAPE.POLYGON:
         case SHAPE.POLYLINE:
-            return shape;
+            return {
+                ...shape,
+                x, y,
+            };
         default:
             return setPos(shape, x, y);
     }
 };
+
+const getShape = (state, id = null) =>
+    state
+        .shapes
+        .find((shape) => shape.id === (id || state.editor.edit));
 
 const snapToGrid = (snap, pos, size) => snap
     ? pos.map((value) => Math.round(value / size * 2) * size / 2)
@@ -128,6 +140,14 @@ const onBegin = ({dispatch, getState}, next, action) => {
         });
     } else if (e.mode === MODE.ERASE && action.id) {
         dispatch(remove(action.id));
+    } else if (e.mode === MODE.MOVE && action.id) {
+        const shape = getShape(getState(), action.id);
+
+        return next({
+            ...action,
+            ox: action.x - shape.x,
+            oy: action.y - shape.y,
+        });
     }
 
     return next(action);
@@ -137,7 +157,7 @@ const onUpdate = ({dispatch, getState}, next, action) => {
     const e = getState().editor;
 
     if (e.edit) {
-        const shape = getState().shapes.find(({id}) => id === e.edit);
+        const shape = getShape(getState());
 
         if (!shape) return next(action);
 
@@ -155,6 +175,9 @@ const onUpdate = ({dispatch, getState}, next, action) => {
                 )));
                 break;
             case MODE.MOVE:
+                pos[0] -= e.ox || 0;
+                pos[1] -= e.oy || 0;
+
                 dispatch(update(moveTo(
                     shape,
                     ...pos
