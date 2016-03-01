@@ -77,6 +77,11 @@ const Style = {
 };
 
 export class Canvas extends Component {
+    static get defaultProps() {
+        return {
+            zoom: 1,
+        };
+    }
     static get propTypes() {
         return {
             editor: PropTypes.object.isRequired,
@@ -89,12 +94,14 @@ export class Canvas extends Component {
             gridSize: PropTypes.number,
             height: PropTypes.number,
             width: PropTypes.number,
+            zoom: PropTypes.number,
         };
     }
 
     toLocalPos(e) {
         const offset = findDOMNode(this.canvas).getBoundingClientRect();
         const pos = e.touches && e.touches[0] || e;
+        const zoom = this.props.zoom;
 
         /*
         console.log(e.type);
@@ -121,8 +128,8 @@ export class Canvas extends Component {
         */
 
         return {
-            x: pos.clientX - offset.x,
-            y: pos.clientY - offset.y,
+            x: (pos.clientX - offset.x) / zoom,
+            y: (pos.clientY - offset.y) / zoom,
         };
     }
 
@@ -171,6 +178,7 @@ export class Canvas extends Component {
             width,
             height,
             shapes,
+            zoom,
         } = this.props;
 
         const gridElements = grid && [
@@ -211,6 +219,7 @@ export class Canvas extends Component {
                     cursor,
                     width,
                     height,
+                    transform: `scale(${zoom})`,
                 }}
                 onMouseDown={(e) => this.onMouseDown(e)}
                 onMouseMove={(e) => this.onMouseMove(e)}

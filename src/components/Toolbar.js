@@ -1,6 +1,7 @@
 /* eslint react/jsx-sort-props: 0 */
 
 import {
+    FlatButton,
     FontIcon,
     IconButton,
     Paper,
@@ -134,6 +135,9 @@ export class Toolbar extends Component {
             setMode: PropTypes.func.isRequired,
             setShape: PropTypes.func.isRequired,
             setSnap: PropTypes.func.isRequired,
+            onResetZoom: PropTypes.func.isRequired,
+            onZoomIn: PropTypes.func.isRequired,
+            onZoomOut: PropTypes.func.isRequired,
             fill: PropTypes.string,
             mode: PropTypes.string,
             shape: PropTypes.string,
@@ -155,6 +159,9 @@ export class Toolbar extends Component {
             setMode,
             setShape,
             setSnap,
+            onResetZoom,
+            onZoomIn,
+            onZoomOut,
         } = this.props;
         const menuProps = {
             mode,
@@ -169,6 +176,25 @@ export class Toolbar extends Component {
 
         return (
             <Paper style={Style.Toolbar}>
+                <IconButton
+                    iconClassName="material-icons"
+                    onTouchTap={onZoomIn}
+                >
+                    zoom_in
+                </IconButton>
+                <IconButton
+                    iconClassName="material-icons"
+                    onTouchTap={onZoomOut}
+                >
+                    zoom_out
+                </IconButton>
+                <FlatButton
+                    label="100%"
+                    labelStyle={{ paddingLeft: 8, paddingRight: 8 }}
+                    style={{ minWidth: 0 }}
+                    onTouchTap={onResetZoom}
+                />
+                <div style={Style.Separator} />
                 <ModeButton
                     {...menuProps}
                     name={MODE.MOVE}

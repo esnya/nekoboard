@@ -29,6 +29,7 @@
     "bluebird": "^3.3.0",
     "config": "^1.19.0",
     "connect-livereload": "^0.5.4",
+    "dom-storage": "^2.0.2",
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "knex": "^0.10.0",

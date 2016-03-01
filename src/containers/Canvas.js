@@ -21,6 +21,7 @@ export const Canvas = connect(
         move: state.editor.move,
         shape: state.editor.shape,
         shapes: state.shapes,
+        zoom: state.view.zoom,
     }),
     mapActionCreatorsToProps({
         beginEdit,

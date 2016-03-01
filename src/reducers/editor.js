@@ -2,61 +2,45 @@ import { pick } from 'lodash';
 import * as EDITOR from '../constants/actions/Editor';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
+import { StateStorage } from './state-storage';
 
-const key = 'nekoboard/editor';
-const SAVE_KEYS = [
-    'mode',
-    'shape',
-    'fill',
-    'shapeHistory',
-    'stroke',
-    'strokeWidth',
-    'snap',
-];
-const load = () => {
-    if (!window.localStorage) return {};
+const storage = new StateStorage(
+    'nekoboard/editor',
+    {
+        mode: MODE.DEFAULT,
+        shape: SHAPE.DEFAULT,
+        fill: 'none',
+        styleHistory: [],
+        stroke: '#000000',
+        strokeWidth: 1,
+        fontSize: 16,
+        edit: null,
+        snap: true,
+        ox: 0, oy: 0,
+    },
+    [
+        'mode',
+        'shape',
+        'fill',
+        'shapeHistory',
+        'stroke',
+        'strokeWidth',
+        'snap',
+    ]
+);
 
-    const data = localStorage.getItem(key);
-
-    return data && pick(JSON.parse(data), SAVE_KEYS);
-};
-const save = (e) => {
-    if (window.localStorage) {
-        localStorage.setItem(key, JSON.stringify(pick(e, SAVE_KEYS)));
-    }
-
-    return e;
-};
-
-const DefaultState = {
-    mode: MODE.DEFAULT,
-    shape: SHAPE.DEFAULT,
-    fill: 'none',
-    styleHistory: [],
-    stroke: '#000000',
-    strokeWidth: 1,
-    fontSize: 16,
-    edit: null,
-    snap: true,
-    ox: 0, oy: 0,
-};
-const InitialState = {
-    ...DefaultState,
-    ...load(),
-};
-
-export const editor = (state = InitialState, action) => {
+export const editor = storage.apply((state, action) => {
     switch (action.type) {
         case EDITOR.MODE:
-            return save({
+            return {
                 ...state,
                 mode: action.mode,
-            });
+            };
         case EDITOR.SHAPE:
-            return save({
+            return {
                 ...state,
                 shape: action.shape,
-            });
+            };
         case EDITOR.STYLE: {
             const style = {
                 stroke: action.stroke,
@@ -64,19 +48,19 @@ export const editor = (state = InitialState, action) => {
                 fontSize: action.fontSize,
                 strokeWidth: action.strokeWidth,
             };
-            return save({
+            return {
                 ...state,
                 ...style,
                 styleHistory: [
                     style,
                     ...state.styleHistory,
                 ].slice(0, 10),
-            });
+            };
         } case EDITOR.SNAP:
-            return save({
+            return {
                 ...state,
                 snap: action.snap,
-            });
+            };
         case EDITOR.EDIT_BEGIN:
             if (state.mode === MODE.EDIT) {
                 switch (state.shape) {
@@ -87,18 +71,17 @@ export const editor = (state = InitialState, action) => {
             } else if (state.mode === MODE.ERASE || !action.id) {
                 return state;
             }
-            return save({
+            return {
                 ...state,
                 edit: action.id,
                 ...pick(action, ['ox', 'oy']),
-            });
+            };
         case EDITOR.EDIT_END:
         case EDITOR.EDIT_CANCEL:
-            return save({
+            return {
                 ...state,
                 edit: null,
-            });
-        default:
-            return state;
+            };
     }
-};
+    return state;
+});
