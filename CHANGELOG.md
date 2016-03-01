@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Zoom
+
 ### Changed
 - Keeping the clciked position of shape on moveing (#6)
 
