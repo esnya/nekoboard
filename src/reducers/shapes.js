@@ -1,6 +1,12 @@
 import * as SHAPE from '../constants/actions/Shape';
 
-export const shapes = (state = [], action) => {
+/**
+ * Board reducer
+ * @param{object} state - State
+ * @param{object} action - Action
+ * @returns{object} Next state
+ */
+export function shapes(state = [], action) {
     switch (action.type) {
         case SHAPE.ADD:
             return [
@@ -33,4 +39,4 @@ export const shapes = (state = [], action) => {
         default:
             return state;
     }
-};
+}

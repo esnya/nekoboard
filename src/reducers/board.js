@@ -1,6 +1,12 @@
 import * as BOARD from '../constants/actions/Board';
 
-export const board = (state = null, action) => {
+/**
+ * Board reducer
+ * @param{object} state - State
+ * @param{object} action - Action
+ * @returns{object} Next state
+ */
+export function board(state = null, action) {
     switch (action.type) {
         case BOARD.CREATE:
         case BOARD.UPDATE:
@@ -10,4 +16,4 @@ export const board = (state = null, action) => {
         default:
             return state;
     }
-};
+}

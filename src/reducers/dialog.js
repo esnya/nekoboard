@@ -1,6 +1,12 @@
 import * as DIALOG from '../constants/actions/Dialog';
 
-export const dialog = (state = {}, action) => {
+/**
+ * Board reducer
+ * @param{object} state - State
+ * @param{object} action - Action
+ * @returns{object} Next state
+ */
+export function dialog(state = {}, action) {
     switch (action.type) {
         case DIALOG.OPEN:
             return {
@@ -15,4 +21,4 @@ export const dialog = (state = {}, action) => {
         default:
             return state;
     }
-};
+}
