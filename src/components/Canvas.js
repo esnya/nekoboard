@@ -121,15 +121,12 @@ export class Canvas extends Component {
             x: pos.pageX,
             y: pos.pageY,
         });
-        console.log('offset', {
-            x: offset.x,
-            y: offset.y,
-        });
-        */
+        console.log('offset', offset);
+        // */
 
         return {
-            x: (pos.clientX - offset.x) / zoom,
-            y: (pos.clientY - offset.y) / zoom,
+            x: (pos.clientX - offset.left) / zoom,
+            y: (pos.clientY - offset.top) / zoom,
         };
     }
 
