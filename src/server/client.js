@@ -29,17 +29,22 @@ export class Client extends EventEmitter {
         this.id = genId();
 
         this.boardId = boardId;
-        const boardKey = this.boardKey = `nekoboard:${boardId}`;
-        const shapeListKey = this.shapeListKey = `nekoboard:${boardId}:shapes`;
-
-        const subscriber = this.subscriber = createClient();
-        const redis = this.redis = createClient();
+        this.boardKey = `nekoboard:${boardId}`;
+        this.shapeListKey = `nekoboard:${boardId}:shapes`;
+        this.redis = createClient();
 
         this.touch();
 
-        subscriber.subscribe(boardKey);
+        this.initSubscriber();
+        this.sendInitialState();
+    }
+
+    initSubscriber() {
+        const subscriber = this.subscriber = createClient();
+
+        subscriber.subscribe(this.boardKey);
         subscriber.on('message', (channel, message) => {
-            if (channel !== boardKey) return;
+            if (channel !== this.boardKey) return;
 
             const {
                 action,
@@ -49,14 +54,18 @@ export class Client extends EventEmitter {
 
             this.emit('action', action);
         });
+    }
 
-        redis.getAsync(boardKey)
+    sendInitialState() {
+        const redis = this.redis;
+
+        redis.getAsync(this.boardKey)
             .then((board) => board && JSON.parse(board) || {
                 ...DefaultBoard,
-                id: boardId,
+                id: this.boardId,
             })
             .then((board) => this.emit('action', Board.update(board)));
-        redis.lrangeAsync(shapeListKey, 0, -1)
+        redis.lrangeAsync(this.shapeListKey, 0, -1)
             .then((shapes) => shapes && Promise.all(
                 shapes.map((shapeKey) => redis.getAsync(shapeKey))
             ))
