@@ -144,8 +144,6 @@ export class Canvas extends Component {
             beginEdit,
         } = this.props;
 
-        e.preventDefault();
-
         beginEdit(this.toLocalPos(e.nativeEvent));
     }
 
