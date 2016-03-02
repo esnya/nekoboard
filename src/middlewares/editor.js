@@ -174,15 +174,21 @@ const onUpdate = ({dispatch, getState}, next, action) => {
                     ...pos
                 )));
                 break;
-            case MODE.MOVE:
-                pos[0] -= e.ox || 0;
-                pos[1] -= e.oy || 0;
+            case MODE.MOVE: {
+                const offset = snapToGrid(
+                    e.snap,
+                    [e.ox || 0, e.oy || 0],
+                    getState().board.gridSize
+                );
+                pos[0] -= offset[0];
+                pos[1] -= offset[1];
 
                 dispatch(update(moveTo(
                     shape,
                     ...pos
                 )));
                 break;
+            }
         }
     }
 
