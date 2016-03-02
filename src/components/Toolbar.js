@@ -144,6 +144,7 @@ export class Toolbar extends Component {
             snap: PropTypes.bool,
             stroke: PropTypes.string,
             strokeWidth: PropTypes.number,
+            style: PropTypes.object,
         };
     }
 
@@ -155,6 +156,7 @@ export class Toolbar extends Component {
             mode,
             shape,
             snap,
+            style,
             open,
             setMode,
             setShape,
@@ -175,7 +177,12 @@ export class Toolbar extends Component {
         const theme = getMuiTheme(this.context.muiTheme).rawTheme;
 
         return (
-            <Paper style={Style.Toolbar}>
+            <Paper
+                style={{
+                    ...Style.Toolbar,
+                    ...style,
+                }}
+            >
                 <IconButton
                     iconClassName="material-icons"
                     onTouchTap={onZoomIn}
@@ -191,7 +198,7 @@ export class Toolbar extends Component {
                 <FlatButton
                     label="100%"
                     labelStyle={{ paddingLeft: 8, paddingRight: 8 }}
-                    style={{ minWidth: 0 }}
+                    style={{ flex: '0 0 auto', minWidth: 0 }}
                     onTouchTap={onResetZoom}
                 />
                 <div style={Style.Separator} />

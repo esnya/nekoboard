@@ -44,7 +44,7 @@ export const App = ({title, open}) => {
             <div style={Style.CanvasContainer}>
                 <Canvas />
             </div>
-            <Toolbar />
+            <Toolbar style={{ flex: '0 0 auto' }} />
             <BoardConfigDialog />
             <EditStyleDialog />
             <EditTextDialog />
