@@ -214,9 +214,8 @@ export class Canvas extends Component {
                 style={{
                     ...Style,
                     cursor,
-                    width,
-                    height,
-                    transform: `scale(${zoom})`,
+                    width: width * zoom,
+                    height: height * zoom,
                 }}
                 onMouseDown={(e) => this.onMouseDown(e)}
                 onMouseMove={(e) => this.onMouseMove(e)}
@@ -225,52 +224,56 @@ export class Canvas extends Component {
                 onTouchMove={(e) => this.onMouseMove(e)}
                 onTouchEnd={(e) => this.onMouseUp(e)}
             >
-                <svg width={width} height={height}>
-                    {gridElements}
-                    {
-                        shapes.filter((shape) => shape.shape !== SHAPE.PIECE)
-                            .map((shape, i) => (
-                                <Shape
-                                    {...shape}
-                                    expand={expandShape}
-                                    gridSize={gridSize}
-                                    key={shape.id || i}
-                                    style={{
-                                        cursor: shapeCursor,
-                                    }}
-                                    onMouseDown={
-                                        (e) => this
-                                            .onMouseDownOnShape(e, shape.id)
-                                    }
-                                    onTouchStart={
-                                        (e) => this
-                                            .onMouseDownOnShape(e, shape.id)
-                                    }
-                                />
-                            ))
-                    }
-                    {
-                        shapes.filter((shape) => shape.shape === SHAPE.PIECE)
-                            .map((shape, i) => (
-                                <Shape
-                                    {...shape}
-                                    gridSize={gridSize}
-                                    key={shape.id || i}
-                                    style={{
-                                        cursor: shapeCursor,
-                                    }}
-                                    onMouseDown={
-                                        (e) => this
-                                            .onMouseDownOnShape(e, shape.id)
-                                    }
-                                    onTouchStart={
-                                        (e) => this
-                                            .onMouseDownOnShape(e, shape.id)
-                                    }
-                                />
-                            ))
-                    }
-                    {edit && <Shape {...edit} />}
+                <svg width={width * zoom} height={height * zoom}>
+                    <g transform={`scale(${zoom})`}>
+                        {gridElements}
+                        {
+                            shapes
+                                .filter((shape) => shape.shape !== SHAPE.PIECE)
+                                .map((shape, i) => (
+                                    <Shape
+                                        {...shape}
+                                        expand={expandShape}
+                                        gridSize={gridSize}
+                                        key={shape.id || i}
+                                        style={{
+                                            cursor: shapeCursor,
+                                        }}
+                                        onMouseDown={
+                                            (e) => this
+                                                .onMouseDownOnShape(e, shape.id)
+                                        }
+                                        onTouchStart={
+                                            (e) => this
+                                                .onMouseDownOnShape(e, shape.id)
+                                        }
+                                    />
+                                ))
+                        }
+                        {
+                            shapes
+                                .filter((shape) => shape.shape === SHAPE.PIECE)
+                                .map((shape, i) => (
+                                    <Shape
+                                        {...shape}
+                                        gridSize={gridSize}
+                                        key={shape.id || i}
+                                        style={{
+                                            cursor: shapeCursor,
+                                        }}
+                                        onMouseDown={
+                                            (e) => this
+                                                .onMouseDownOnShape(e, shape.id)
+                                        }
+                                        onTouchStart={
+                                            (e) => this
+                                                .onMouseDownOnShape(e, shape.id)
+                                        }
+                                    />
+                                ))
+                        }
+                        {edit && <Shape {...edit} />}
+                    </g>
                 </svg>
             </Paper>
         );
