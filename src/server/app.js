@@ -19,7 +19,7 @@ if (config.get('app.livereload')) {
 
 app.use(express.static(join(__dirname, '../../dist')));
 app.use('/css', express.static(
-    join(__dirname, '../../node_modules/sanitize.css/dist')
+    join(__dirname, '../../node_modules/sanitize.css/lib')
 ));
 
 app.get('/', (req, res) => res.redirect(generate(16)));
