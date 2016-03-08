@@ -1,3 +1,5 @@
+import Color from 'color';
+import { pick } from 'lodash';
 import {
     Dialog,
     FlatButton,
@@ -7,7 +9,7 @@ import {
     Toggle,
 } from 'material-ui';
 import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
+import ColorPicker from 'react-color';
 import { Rect } from './Shape';
 
 export class EditStyleDialog extends Component {
@@ -20,51 +22,23 @@ export class EditStyleDialog extends Component {
         };
     }
 
-    constructor(props) {
-        super(props);
-
+    handleChange(key, value) {
         const {
             editor,
-        } = props;
-
-        this.state = {
-            stroke: !editor || editor.stroke !== 'none',
-            fill: !editor || editor.fill !== 'none',
-        };
-    }
-
-    componentWillUpdate(nextProps) {
-        const editor = this.props;
-        const nextEditor = nextProps.editor;
-
-        if (!editor && nextEditor && (
-            editor.stroke !== nextEditor.stroke ||
-                editor.fill !== nextEditor.fill
-        )) {
-            this.setState({
-                stroke: nextEditor.stroke !== 'none',
-                fill: nextEditor.fill !== 'none',
-            });
-        }
-    }
-
-    onOK() {
-        const {
-            close,
             setStyle,
         } = this.props;
-        const {
-            fill,
-            stroke,
-        } = this.state;
 
         setStyle({
-            stroke: stroke ? findDOMNode(this.stroke).value : 'none',
-            fill: fill ? findDOMNode(this.fill).value : 'none',
-            strokeWidth: this.strokeWidth.getValue(),
-            fontSize: this.fontSize.getValue(),
+            ...pick(editor, [
+                'fill',
+                'fillColor',
+                'fontSize',
+                'stroke',
+                'strokeColor',
+                'strokeWidth',
+            ]),
+            [key]: value,
         });
-        close('editStyle');
     }
 
     onHistory(style) {
@@ -84,29 +58,37 @@ export class EditStyleDialog extends Component {
         } = this.props;
         const {
             fill,
+            fillColor,
+            fontSize,
             stroke,
-        } = this.state;
+            strokeColor,
+            strokeWidth,
+        } = editor;
 
         const actions = [
             <FlatButton primary
-                key="ok"
-                label="OK"
-                onTouchTap={() => this.onOK()}
-            />,
-            <FlatButton secondary
-                key="cancel"
-                label="CANCEL"
+                key="close"
+                label="Close"
                 onTouchTap={() => close('editStyle')}
             />,
         ];
+        const flexStyle = {
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+        };
+        const fillStyle = {
+            flex: '1 1 0',
+        };
 
         return (
             <Dialog
+                autoScrollBodyContent
                 actions={actions}
                 open={!!dialog.editStyle}
                 title="Edit Style"
             >
-                <div>
+                <div style={{ height: 48 }}>
                     {
                         editor.styleHistory.map((style, i) => (
                             <IconButton
@@ -116,7 +98,19 @@ export class EditStyleDialog extends Component {
                                 <SvgIcon>
                                     <Rect
                                         {...style}
+                                        fill={
+                                            style.fill
+                                                ? Color(style.fillColor)
+                                                    .rgbString()
+                                                : 'none'
+                                        }
                                         height={22}
+                                        stroke={
+                                            style.stroke
+                                                ? Color(style.strokeColor)
+                                                    .rgbString()
+                                                : 'none'
+                                        }
                                         width={22}
                                         x={1} y={1}
                                     />
@@ -125,46 +119,76 @@ export class EditStyleDialog extends Component {
                         ))
                     }
                 </div>
-                <div>
-                    <Toggle
-                        label="Stroke"
-                        labelPosition="right"
-                        toggled={stroke}
-                        onToggle={() => this.setState({stroke: !stroke})}
+                <div style={flexStyle}>
+                    <div style={fillStyle}>
+                        <Toggle
+                            label="Stroke"
+                            labelPosition="right"
+                            toggled={stroke}
+                            onToggle={
+                                () => this.handleChange('stroke', !stroke)
+                            }
+                        />
+                        {
+                            stroke ? (
+                                <ColorPicker
+                                    color={strokeColor}
+                                    type="sketch"
+                                    onChangeComplete={({rgb}) =>
+                                        this.handleChange(
+                                            'strokeColor',
+                                            rgb
+                                        )
+                                    }
+                                />
+                            ) : null
+                        }
+                    </div>
+                    <div style={fillStyle}>
+                        <Toggle
+                            label="Fill"
+                            labelPosition="right"
+                            toggled={fill}
+                            onToggle={() => this.handleChange('fill', !fill)}
+                        />
+                        {
+                            fill ? (
+                                <ColorPicker
+                                    color={fillColor}
+                                    type="sketch"
+                                    onChangeComplete={({rgb}) =>
+                                        this.handleChange(
+                                            'fillColor',
+                                            rgb
+                                        )
+                                    }
+                                />
+                            ) : null
+                        }
+                    </div>
+                </div>
+                <div style={flexStyle}>
+                    <TextField fullWidth
+                        defaultValue={strokeWidth}
+                        floatingLabelText="Stroke Width"
+                        style={fillStyle}
+                        type="number"
+                        onBlur={
+                            ({target}) =>
+                                this.handleChange('strokeWidth', +target.value)
+                        }
                     />
-                    <input
-                        defaultValue={editor.stroke}
-                        disabled={!stroke}
-                        ref={(c) => c && (this.stroke = c)}
-                        type="color"
+                    <TextField fullWidth
+                        defaultValue={fontSize}
+                        floatingLabelText="Font Size"
+                        style={fillStyle}
+                        type="number"
+                        onBlur={
+                            ({target}) =>
+                                this.handleChange('fontSize', +target.value)
+                        }
                     />
                 </div>
-                <div>
-                    <Toggle
-                        label="Fill"
-                        labelPosition="right"
-                        toggled={fill}
-                        onToggle={() => this.setState({fill: !fill})}
-                    />
-                    <input
-                        defaultValue={editor.fill}
-                        disabled={!fill}
-                        ref={(c) => c && (this.fill = c)}
-                        type="color"
-                    />
-                </div>
-                <TextField fullWidth
-                    defaultValue={editor.strokeWidth}
-                    floatingLabelText="Stroke Width"
-                    ref={(c) => c && (this.strokeWidth = c)}
-                    type="number"
-                />
-                <TextField fullWidth
-                    defaultValue={editor.fontSize}
-                    floatingLabelText="Font Size"
-                    ref={(c) => c && (this.fontSize = c)}
-                    type="number"
-                />
             </Dialog>
         );
     }

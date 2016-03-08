@@ -1,5 +1,6 @@
 /* eslint react/jsx-sort-props: 0 */
 
+import Color from 'color';
 import {
     FlatButton,
     FontIcon,
@@ -138,11 +139,13 @@ export class Toolbar extends Component {
             onResetZoom: PropTypes.func.isRequired,
             onZoomIn: PropTypes.func.isRequired,
             onZoomOut: PropTypes.func.isRequired,
-            fill: PropTypes.string,
+            fill: PropTypes.bool,
+            fillColor: PropTypes.string,
             mode: PropTypes.string,
             shape: PropTypes.string,
             snap: PropTypes.bool,
-            stroke: PropTypes.string,
+            stroke: PropTypes.bool,
+            strokeColor: PropTypes.string,
             strokeWidth: PropTypes.number,
             style: PropTypes.object,
         };
@@ -151,7 +154,9 @@ export class Toolbar extends Component {
     render() {
         const {
             fill,
+            fillColor,
             stroke,
+            strokeColor,
             strokeWidth,
             mode,
             shape,
@@ -334,8 +339,16 @@ export class Toolbar extends Component {
                                 <Rect
                                     x={8} y={8}
                                     width={14} height={14}
-                                    fill={fill}
-                                    stroke={stroke}
+                                    fill={
+                                        fill
+                                            ? Color(fillColor).rgbString()
+                                            : 'none'
+                                    }
+                                    stroke={
+                                        stroke
+                                            ? Color(strokeColor).rgbString()
+                                            : 'none'
+                                    }
                                     strokeWidth={strokeWidth}
                                 />
                             </SvgIcon>

@@ -1,3 +1,4 @@
+import Color from 'color';
 import { open } from '../actions/Dialog';
 import { endEdit } from '../actions/Editor';
 import { add, update, remove } from '../actions/Shape';
@@ -122,8 +123,8 @@ const onBegin = ({dispatch, getState}, next, action) => {
         const shape = setPos({
             id: generate(),
             shape: e.shape,
-            fill: e.fill,
-            stroke: e.stroke,
+            fill: e.fill ? Color(e.fillColor).rgbString() : 'none',
+            stroke: e.stroke ? Color(e.strokeColor).rgbString() : 'none',
             strokeWidth: e.strokeWidth,
             fontSize: e.fontSize,
         },  ...snapToGrid(

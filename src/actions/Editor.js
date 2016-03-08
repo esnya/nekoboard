@@ -1,3 +1,4 @@
+import { pick } from 'lodash';
 import * as EDITOR from '../constants/actions/Editor';
 
 export const setMode = (mode) => ({
@@ -8,12 +9,16 @@ export const setShape = (shape) => ({
     type: EDITOR.SHAPE,
     shape,
 });
-export const setStyle = ({stroke, fill, strokeWidth, fontSize}) => ({
+export const setStyle = (style) => ({
+    ...pick(style, [
+        'fill',
+        'fillColor',
+        'fontSize',
+        'stroke',
+        'strokeColor',
+        'strokeWidth',
+    ]),
     type: EDITOR.STYLE,
-    stroke,
-    fill,
-    strokeWidth,
-    fontSize,
 });
 export const setSnap = (snap) => ({
     type: EDITOR.SNAP,

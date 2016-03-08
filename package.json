@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "bluebird": "^3.3.0",
+    "color": "^0.11.1",
     "config": "^1.19.0",
     "connect-livereload": "^0.5.4",
     "dom-storage": "^2.0.2",
@@ -37,6 +38,7 @@
     "log4js": "^0.6.30",
     "material-ui": "^0.14.3",
     "react": "^0.14.7",
+    "react-color": "^2.0.0",
     "react-dom": "^0.14.7",
     "react-redux": "^4.1.1",
     "react-tap-event-plugin": "^0.2.1",
