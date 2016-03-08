@@ -61,6 +61,7 @@ describe('StateStorage', () => {
                         [action.key]: action.value,
                     };
             }
+
             return state;
         });
 

@@ -24,6 +24,7 @@ export const runGC = () => {
         )
         .then((ids) => {
             logger.info(`Found: ${ids.length} boards.`);
+
             return ids;
         })
         .then((ids) => Promise.all(ids.map((id) =>
@@ -37,6 +38,7 @@ export const runGC = () => {
         )
         .then((ids) => {
             logger.info(`Delete: ${ids.length} boards.`);
+
             return ids;
         })
         .then((ids) => Promise.all(

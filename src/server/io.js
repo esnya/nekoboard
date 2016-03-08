@@ -13,6 +13,7 @@ io.on('connection', (socket) => {
     const boardId = socket.handshake.query.boardId;
     if (!boardId) {
         socket.close();
+
         return;
     }
 

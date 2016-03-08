@@ -52,6 +52,7 @@ export class BoardConfigDialog extends Component {
                 }
 
                 result[key] = value;
+
                 return result;
             }, {});
 

@@ -48,6 +48,7 @@ export const editor = storage.apply((state, action) => {
                 fontSize: action.fontSize,
                 strokeWidth: action.strokeWidth,
             };
+
             return {
                 ...state,
                 ...style,
@@ -71,6 +72,7 @@ export const editor = storage.apply((state, action) => {
             } else if (state.mode === MODE.ERASE || !action.id) {
                 return state;
             }
+
             return {
                 ...state,
                 edit: action.id,
@@ -83,5 +85,6 @@ export const editor = storage.apply((state, action) => {
                 edit: null,
             };
     }
+
     return state;
 });

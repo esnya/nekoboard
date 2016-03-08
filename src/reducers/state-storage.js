@@ -40,6 +40,7 @@ export class StateStorage {
 
         return (state = initialState, action) => {
             const nextState = reducer(state, action);
+
             return nextState === state ? nextState : this.save(nextState);
         };
     }

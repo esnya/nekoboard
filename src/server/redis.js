@@ -11,5 +11,6 @@ promisifyAll(Multi.prototype);
 export const createClient = () => {
     const client = Redis.createClient(Config.get('redis'));
     client.on('error', (e) => logger.error(e));
+
     return client;
 };
