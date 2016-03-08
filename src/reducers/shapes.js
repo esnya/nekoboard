@@ -1,3 +1,4 @@
+import { sortBy } from 'lodash';
 import * as SHAPE from '../constants/actions/Shape';
 
 /**
@@ -16,9 +17,10 @@ export function shapes(state = [], action) {
                 },
             ];
         case SHAPE.LIST:
-            return (action.items || [])
+            return sortBy(action.items || [], 'timestamp')
                 .filter((a) => a)
-                .map((item) => ({...item}));
+                .map((item) => ({...item}))
+                .reverse();
         case SHAPE.PUSH:
             return [
                 ...state.filter(
@@ -27,13 +29,10 @@ export function shapes(state = [], action) {
                 ...action.items,
             ];
         case SHAPE.UPDATE:
-            return state.map((item) =>
-                item.id === action.item.id
-                    ? {
-                        ...item,
-                        ...action.item,
-                    } : item
-            );
+            return [
+                ...state.filter(({id}) => id !== action.item.id),
+                {...action.item},
+            ];
         case SHAPE.REMOVE:
             return state.filter(({id}) => id !== action.id);
         default:

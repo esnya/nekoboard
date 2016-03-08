@@ -111,7 +111,10 @@ export class Client extends EventEmitter {
     }
 
     addShape(shape) {
-        const picked = pick(shape, ShapeKeys);
+        const picked = {
+            ...pick(shape, ShapeKeys),
+            timestamp: Date.now(),
+        };
         const shapeKey = this.shapeKeyOf(picked.id);
 
         this.redis.set(shapeKey, JSON.stringify(picked));
@@ -121,7 +124,10 @@ export class Client extends EventEmitter {
     }
 
     updateShape(shape) {
-        const picked = pick(shape, ShapeKeys);
+        const picked = {
+            ...pick(shape, ShapeKeys),
+            timestamp: Date.now(),
+        };
         const shapeKey = this.shapeKeyOf(picked.id);
 
         this.redis.getAsync(shapeKey)
