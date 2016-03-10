@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.3.0] - 2016-03-10
 ### Changed
 - Enhance Color Picker (react-color)
 - Shape which has been changed recently to the top ([#12](https://github.com/ukatama/nekoboard/issues/12)
