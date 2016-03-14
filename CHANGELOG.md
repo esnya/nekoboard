@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Save/Load/Export as file. ([#13](https://github.com/ukatama/nekoboard/issues/13)
+### Changed
+- Theme color.
 ### Fixed
 - Fix board data has not been saved.
 

@@ -1,5 +1,6 @@
 import { AppBar, IconButton, LeftNav, MenuItem, Styles } from 'material-ui';
 import React, { Component, PropTypes } from 'react';
+import Theme from '../browser/theme';
 import { Canvas } from '../containers/Canvas';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
 import { EditStyleDialog } from '../containers/EditStyleDialog';
@@ -22,6 +23,11 @@ const Style = {
 };
 
 export class App extends Component {
+    static get childContextTypes() {
+        return {
+            muiTheme: PropTypes.object,
+        };
+    }
     static get propTypes() {
         return {
             title: PropTypes.string,
@@ -37,6 +43,12 @@ export class App extends Component {
 
         this.state = {
             leftNav: false,
+        };
+    }
+
+    getChildContext() {
+        return {
+            muiTheme: Styles.ThemeManager.getMuiTheme(Theme),
         };
     }
 
