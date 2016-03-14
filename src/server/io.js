@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     socket.on('action', (action) => {
         switch (action.type) {
             case BOARD.UPDATE:
-                return client.setBoard(action.data);
+                return client.updateBoard(action.data);
             case SHAPE.ADD:
                 return client.addShape(action.data);
             case SHAPE.UPDATE:

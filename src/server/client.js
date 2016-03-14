@@ -80,7 +80,7 @@ export class Client extends EventEmitter {
         }));
     }
 
-    setBoard(board) {
+    updateBoard(board) {
         const picked = pick(board, BOARD_KEYS);
 
         this.redis.getAsync(this.boardKey)
@@ -88,7 +88,10 @@ export class Client extends EventEmitter {
                 ...(prev && JSON.parse(prev)),
                 ...picked,
                 id: this.boardId,
-            }));
+            }))
+            .then((board) =>
+                this.redis.set(this.boardKey, JSON.stringify(board))
+            );
 
         this.publish(Board.update(picked));
     }
