@@ -1,4 +1,4 @@
-import * as FILE from '../constants/actions/file.js';
+import * as FILE from '../constants/actions/file';
 
 export const save = () => ({
     type: FILE.SAVE,
