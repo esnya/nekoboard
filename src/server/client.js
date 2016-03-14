@@ -4,23 +4,10 @@ import { pick } from 'lodash';
 import { createClient } from './redis';
 import * as Board from '../actions/Board';
 import * as Shape from '../actions/Shape';
+import {BOARD_KEYS, SHAPE_KEYS} from '../constants/keys';
 import { generate as genId } from '../utility/id';
 
 const DefaultBoard = Config.get('board');
-const BoardKeys = ['id', ...Object.keys(DefaultBoard)];
-
-const ShapeKeys = [
-    'id',
-    'shape',
-    'fill', 'stroke', 'strokeSize',
-    'fontSize',
-    'x', 'cx', 'x1', 'x2',
-    'y', 'cy', 'y1', 'y2',
-    'width', 'height',
-    'r', 'rx', 'ry',
-    'text',
-    'points',
-];
 
 export class Client extends EventEmitter {
     constructor(boardId) {
@@ -94,7 +81,7 @@ export class Client extends EventEmitter {
     }
 
     setBoard(board) {
-        const picked = pick(board, BoardKeys);
+        const picked = pick(board, BOARD_KEYS);
 
         this.redis.getAsync(this.boardKey)
             .then((prev) => ({
@@ -112,7 +99,7 @@ export class Client extends EventEmitter {
 
     addShape(shape) {
         const picked = {
-            ...pick(shape, ShapeKeys),
+            ...pick(shape, SHAPE_KEYS),
             timestamp: Date.now(),
         };
         const shapeKey = this.shapeKeyOf(picked.id);
@@ -125,7 +112,7 @@ export class Client extends EventEmitter {
 
     updateShape(shape) {
         const picked = {
-            ...pick(shape, ShapeKeys),
+            ...pick(shape, SHAPE_KEYS),
             timestamp: Date.now(),
         };
         const shapeKey = this.shapeKeyOf(picked.id);

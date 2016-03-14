@@ -1,5 +1,5 @@
-import { AppBar, IconButton, Styles } from 'material-ui';
-import React, { PropTypes } from 'react';
+import { AppBar, IconButton, LeftNav, MenuItem, Styles } from 'material-ui';
+import React, { Component, PropTypes } from 'react';
 import { Canvas } from '../containers/Canvas';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
 import { EditStyleDialog } from '../containers/EditStyleDialog';
@@ -21,37 +21,91 @@ const Style = {
     },
 };
 
-export const App = ({title, open}) => {
-    document.title = title
-        ? `${title} - Nekoboard`
-        : 'Nekoboard';
+export class App extends Component {
+    static get propTypes() {
+        return {
+            title: PropTypes.string,
+            onLoad: PropTypes.func,
+            onOpenConfig: PropTypes.func,
+            onSave: PropTypes.func,
+            onExportSVG: PropTypes.func,
+        };
+    }
 
-    return (
-        <div style={Style.Container}>
-            <AppBar
-                showMenuIconButton
-                iconElementRight={
-                    <IconButton
-                        iconClassName="material-icons"
-                        iconStyle={{color: 'white'}}
-                        onTouchTap={() => open('config')}
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            leftNav: false,
+        };
+    }
+
+    handleLeftNavItem(handler) {
+        this.setState({leftNav: false});
+        if (handler) handler();
+    }
+
+    render() {
+        const {
+            title,
+            onOpenConfig,
+            onLoad,
+            onSave,
+            onExportSVG,
+        } = this.props;
+        const {leftNav} = this.state;
+
+        document.title = title
+            ? `${title} - Nekoboard`
+            : 'Nekoboard';
+
+        return (
+            <div style={Style.Container}>
+                <AppBar
+                    showMenuIconButton
+                    iconElementRight={
+                        <IconButton
+                            iconClassName="material-icons"
+                            iconStyle={{color: 'white'}}
+                            onTouchTap={onOpenConfig}
+                        >
+                            settings
+                        </IconButton>
+                    }
+                    title={title || 'Nekoboard'}
+                    onLeftIconButtonTouchTap={
+                        () => this.setState({leftNav: !leftNav})
+                    }
+                />
+                <LeftNav
+                    docked={false}
+                    open={leftNav}
+                    onRequestChange={(open) => this.setState({leftNav: open})}
+                >
+                    <MenuItem
+                        onTouchTap={() => this.handleLeftNavItem(onLoad)}
                     >
-                        settings
-                    </IconButton>
-                }
-                title={title || 'Nekoboard'}
-            />
-            <div style={Style.CanvasContainer}>
-                <Canvas />
+                        Load
+                    </MenuItem>
+                    <MenuItem
+                        onTouchTap={() => this.handleLeftNavItem(onSave)}
+                    >
+                        Save
+                    </MenuItem>
+                    <MenuItem
+                        onTouchTap={() => this.handleLeftNavItem(onExportSVG)}
+                    >
+                        Export SVG
+                    </MenuItem>
+                </LeftNav>
+                <div style={Style.CanvasContainer}>
+                    <Canvas />
+                </div>
+                <Toolbar style={{ flex: '0 0 auto' }} />
+                <BoardConfigDialog />
+                <EditStyleDialog />
+                <EditTextDialog />
             </div>
-            <Toolbar style={{ flex: '0 0 auto' }} />
-            <BoardConfigDialog />
-            <EditStyleDialog />
-            <EditTextDialog />
-        </div>
-    );
-};
-App.propTypes = {
-    open: PropTypes.func.isRequired,
-    title: PropTypes.string,
-};
+        );
+    }
+}

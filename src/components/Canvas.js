@@ -222,7 +222,11 @@ export class Canvas extends Component {
                 onTouchMove={(e) => this.onMouseMove(e)}
                 onTouchEnd={(e) => this.onMouseUp(e)}
             >
-                <svg width={width * zoom} height={height * zoom}>
+                <svg
+                    id="canvas-svg"
+                    width={width * zoom}
+                    height={height * zoom}
+                >
                     <g transform={`scale(${zoom})`}>
                         {gridElements}
                         {

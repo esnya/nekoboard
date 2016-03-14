@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Save/Load/Export as file. ([#13](https://github.com/ukatama/nekoboard/issues/13)
+
 ## [1.3.0] - 2016-03-10
 ### Changed
 - Enhance Color Picker (react-color)
