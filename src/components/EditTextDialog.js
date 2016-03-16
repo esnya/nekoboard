@@ -55,6 +55,7 @@ export class EditTextDialog extends Component {
 
         return (
             <Dialog
+                autoScrollBodyContent
                 actions={actions}
                 open={!!dialog.editText}
                 title="Text"

@@ -70,13 +70,23 @@ export class EditStyleDialog extends Component {
                 onTouchTap={() => close('editStyle')}
             />,
         ];
+        const historyStyle = {
+            height: 48,
+            marginBottom: 8,
+            overflow: 'auto',
+            webkitOverflowScrolling: 'touch',
+            whiteSpace: 'nowrap',
+        };
         const flexStyle = {
             display: 'flex',
+            flexWrap: 'wrap',
             justifyContent: 'center',
             width: '100%',
         };
         const fillStyle = {
-            flex: '1 1 0',
+            flex: '1 0 225px',
+            minWidth: 225,
+            marginBottom: 8,
         };
 
         return (
@@ -86,7 +96,7 @@ export class EditStyleDialog extends Component {
                 open={!!dialog.editStyle}
                 title="Edit Style"
             >
-                <div style={{ height: 48 }}>
+                <div style={historyStyle}>
                     {
                         editor.styleHistory.map((style, i) => (
                             <IconButton

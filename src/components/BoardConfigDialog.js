@@ -95,7 +95,8 @@ export class BoardConfigDialog extends Component {
         ];
 
         return (
-            <Dialog autoScrollBodyContent
+            <Dialog
+                autoScrollBodyContent
                 {...otherProps}
                 actions={actions}
                 open={!!dialog.config}
