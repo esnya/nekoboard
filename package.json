@@ -7,8 +7,8 @@
     "build": "gulp build",
     "start": "node .",
     "test": "gulp test",
-    "test-build": "gulp build test",
-    "watch": "gulp watch",
+    "production": "gulp production",
+    "watch": "gulp watch babel browserify test serve",
     "version": "update-changelog && git add CHANGELOG.md"
   },
   "repository": {

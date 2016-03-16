@@ -10,7 +10,7 @@ COPY package.json /usr/src/app
 RUN npm install
 
 COPY . /usr/src/app
-RUN npm run build
+RUN npm run production
 
 EXPOSE 80
 CMD ["npm", "start"]
