@@ -1,4 +1,7 @@
-import { FlatButton, Dialog, TextField, Toggle } from 'material-ui';
+import Dialog from 'material-ui/lib/dialog';
+import FlatButton from 'material-ui/lib/flat-button';
+import TextField from 'material-ui/lib/text-field';
+import Toggle from 'material-ui/lib/toggle';
 import React, { Component, PropTypes } from 'react';
 
 export class BoardConfigDialog extends Component {

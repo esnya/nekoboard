@@ -4,5 +4,6 @@
     },
     "browser": {
         "debug": false
-    }
+    },
+    "script": "/js/browser.js"
 }

@@ -1,4 +1,9 @@
-import { AppBar, IconButton, LeftNav, MenuItem, Styles } from 'material-ui';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import LeftNav from 'material-ui/lib/left-nav';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import Colors from 'material-ui/lib/styles/colors';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import React, { Component, PropTypes } from 'react';
 import Theme from '../browser/theme';
 import { Canvas } from '../containers/Canvas';
@@ -11,7 +16,7 @@ const Style = {
     Container: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: Styles.Colors.grey300,
+        backgroundColor: Colors.grey300,
         height: '100%',
     },
     CanvasContainer: {
@@ -48,7 +53,7 @@ export class App extends Component {
 
     getChildContext() {
         return {
-            muiTheme: Styles.ThemeManager.getMuiTheme(Theme),
+            muiTheme: ThemeManager.getMuiTheme(Theme),
         };
     }
 

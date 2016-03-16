@@ -1,14 +1,13 @@
 /* eslint react/jsx-sort-props: 0 */
 
 import Color from 'color';
-import {
-    FlatButton,
-    FontIcon,
-    IconButton,
-    Paper,
-    SvgIcon,
-    Styles,
-} from 'material-ui';
+
+import FlatButton from 'material-ui/lib/flat-button';
+import FontIcon from 'material-ui/lib/font-icon';
+import IconButton from 'material-ui/lib/icon-button';
+import SvgIcon from 'material-ui/lib/svg-icon';
+import Paper from 'material-ui/lib/paper';
+import Colors from 'material-ui/lib/styles/colors';
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import React, { Component, PropTypes, cloneElement } from 'react';
 import {
@@ -40,10 +39,10 @@ const Style = {
     Separator: {
         flex: '0 0 1px',
         height: 24,
-        backgroundColor: Styles.Colors.grey600,
+        backgroundColor: Colors.grey600,
         margin: '0 2px',
     },
-    SelectedColor: Styles.Colors.pink500,
+    SelectedColor: Colors.pink500,
     Button: {
         flex: '0 0 auto',
         width: 48,

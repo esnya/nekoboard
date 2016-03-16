@@ -1,6 +1,7 @@
 /* eslint react/jsx-sort-props: 0 */
 
-import { Paper, Styles } from 'material-ui';
+import Paper from 'material-ui/lib/paper';
+import Colors from 'material-ui/lib/styles/colors';
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import * as MODE from '../constants/Mode';
@@ -29,7 +30,7 @@ const GridLine = ({width, height, step}) => {
         );
     }
 
-    return <g stroke={Styles.Colors.grey300}>{lines}</g>;
+    return <g stroke={Colors.grey300}>{lines}</g>;
 };
 
 const GridLabel = ({width, height, step}) => {
@@ -62,7 +63,7 @@ const GridLabel = ({width, height, step}) => {
         }
     }
 
-    return <g fill={Styles.Colors.grey300}>{labels}</g>;
+    return <g fill={Colors.grey300}>{labels}</g>;
 };
 
 GridLine.propTypes = GridLabel.propTypes = {
