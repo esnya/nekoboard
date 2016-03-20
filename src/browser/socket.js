@@ -6,7 +6,7 @@ import { getLogger } from './log';
 
 const logger = getLogger('[SOCKET]');
 
-export const socket = io(`http://${location.host}`, {
+export const socket = io(location.origin, {
     query: { boardId: document.body.getAttribute('data-boardId') },
 });
 

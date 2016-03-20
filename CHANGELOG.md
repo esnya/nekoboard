@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix board data has not been saved.
 - Fix style of dialogs for mobile.
+- Fix error on HTTPS.
 
 ## [1.3.0] - 2016-03-10
 ### Changed
