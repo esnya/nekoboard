@@ -1,6 +1,6 @@
 {
   "name": "nekoboard",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Online whiteboard made for tabletop role-play games.",
   "main": "lib/server/index.js",
   "scripts": {
