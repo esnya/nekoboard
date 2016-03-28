@@ -49,3 +49,6 @@ export const updateMove = (x, y) => ({
 export const endMove = () => ({
     type: EDITOR.MOVE_END,
 });
+export const pushHistory = () => ({
+    type: EDITOR.PUSH_HISTORY,
+});

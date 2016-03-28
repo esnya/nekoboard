@@ -17,6 +17,7 @@ export class EditStyleDialog extends Component {
             editor: PropTypes.object.isRequired,
             dialog: PropTypes.object.isRequired,
             setStyle: PropTypes.func.isRequired,
+            onPushHistory: PropTypes.func.isRequired,
         };
     }
 
@@ -41,18 +42,26 @@ export class EditStyleDialog extends Component {
 
     onHistory(style) {
         const {
-            close,
             setStyle,
         } = this.props;
         setStyle(style);
+        this.handleClose();
+    }
+
+    handleClose() {
+        const {
+            close,
+            onPushHistory,
+        } = this.props;
+
         close('editStyle');
+        onPushHistory();
     }
 
     render() {
         const {
             editor,
             dialog,
-            close,
         } = this.props;
         const {
             fill,
@@ -67,7 +76,7 @@ export class EditStyleDialog extends Component {
             <FlatButton primary
                 key="close"
                 label="Close"
-                onTouchTap={() => close('editStyle')}
+                onTouchTap={() => this.handleClose()}
             />,
         ];
         const historyStyle = {
@@ -95,6 +104,7 @@ export class EditStyleDialog extends Component {
                 actions={actions}
                 open={!!dialog.editStyle}
                 title="Edit Style"
+                onRequestClose={() => this.handleClose()}
             >
                 <div style={historyStyle}>
                     {

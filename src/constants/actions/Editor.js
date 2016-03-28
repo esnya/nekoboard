@@ -9,3 +9,4 @@ export const EDIT_END = 'EDITOR_END_END';
 export const MOVE_BEGIN = 'EDIT_MOVE_BEGIN';
 export const MOVE_UPDATE = 'EDIT_MOVE_UPDATE';
 export const MOVE_END = 'EDIT_MOVE_END';
+export const PUSH_HISTORY = 'EDIT_PUSH_HISTORY';

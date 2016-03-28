@@ -1,4 +1,4 @@
-import { eq, pick } from 'lodash';
+import {eq, pick} from 'lodash';
 import * as EDITOR from '../constants/actions/Editor';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
@@ -34,6 +34,15 @@ const storage = new StateStorage(
     ]
 );
 
+const StyleKeys = [
+    'fill',
+    'fillColor',
+    'fontSize',
+    'stroke',
+    'strokeColor',
+    'strokeWidth',
+];
+
 export const editor = storage.apply((state, action) => {
     switch (action.type) {
         case EDITOR.MODE:
@@ -46,28 +55,25 @@ export const editor = storage.apply((state, action) => {
                 ...state,
                 shape: action.shape,
             };
-        case EDITOR.STYLE: {
-            const keys = [
-                'fill',
-                'fillColor',
-                'fontSize',
-                'stroke',
-                'strokeColor',
-                'strokeWidth',
-            ];
-            const style = pick(action, keys);
-
-            if (eq(style, pick(state, keys))) return state;
+        case EDITOR.PUSH_HISTORY:
+            if (
+                state.styleHistory.length > 0 &&
+                    eq(pick(state, StyleKeys), state.styleHistory[0])
+            ) return state;
 
             return {
                 ...state,
-                ...style,
                 styleHistory: [
-                    style,
+                    pick(state, StyleKeys),
                     ...state.styleHistory,
                 ].slice(0, 10),
             };
-        } case EDITOR.SNAP:
+        case EDITOR.STYLE:
+            return {
+                ...state,
+                ...pick(action, StyleKeys),
+            };
+        case EDITOR.SNAP:
             return {
                 ...state,
                 snap: action.snap,
