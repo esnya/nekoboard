@@ -19,6 +19,7 @@ export const Canvas = connect(
         editor: state.editor,
         edit: state.editor.edit,
         move: state.editor.move,
+        perspective: state.view.perspective,
         shape: state.editor.shape,
         shapes: state.shapes,
         zoom: state.view.zoom,

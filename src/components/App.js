@@ -21,6 +21,7 @@ const Style = {
     },
     CanvasContainer: {
         flex: '1 1 auto',
+        perspective: '10000px',
         textAlign: 'center',
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',

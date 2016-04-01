@@ -5,8 +5,9 @@ const storage = new StateStorage(
     'nekoboard/view',
     {
         zoom: 1,
+        perspective: false,
     },
-    ['zoom']
+    ['zoom', 'perspective']
 );
 
 export const view = storage.apply((state, action) => {
@@ -25,6 +26,11 @@ export const view = storage.apply((state, action) => {
             return {
                 ...state,
                 zoom: 1,
+            };
+        case VIEW.PERSPECTIVE:
+            return {
+                ...state,
+                perspective: action.perspective,
             };
     }
 

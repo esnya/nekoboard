@@ -7,6 +7,7 @@ describe('View reducer', () => {
     it('sets initial state', () => {
         state = view(state, { type: 'INIT' });
         expect(state).toEqual({
+            perspective: false,
             zoom: 1,
         });
     });
@@ -14,6 +15,7 @@ describe('View reducer', () => {
     it('zooms in', () => {
         state = view(state, View.zoomIn());
         expect(state).toEqual({
+            perspective: false,
             zoom: 1.1,
         });
     });
@@ -21,6 +23,7 @@ describe('View reducer', () => {
     it('resets zoom', () => {
         state = view(state, View.resetZoom());
         expect(state).toEqual({
+            perspective: false,
             zoom: 1.0,
         });
     });
@@ -28,6 +31,22 @@ describe('View reducer', () => {
     it('zooms out', () => {
         state = view(state, View.zoomOut());
         expect(state).toEqual({
+            perspective: false,
+            zoom: 1.0 / 1.1,
+        });
+    });
+
+
+    it('sets perspective', () => {
+        state = view(state, View.perspective(true));
+        expect(state).toEqual({
+            perspective: true,
+            zoom: 1.0 / 1.1,
+        });
+
+        state = view(state, View.perspective(false));
+        expect(state).toEqual({
+            perspective: false,
             zoom: 1.0 / 1.1,
         });
     });

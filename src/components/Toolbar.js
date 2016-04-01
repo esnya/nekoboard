@@ -135,12 +135,14 @@ export class Toolbar extends Component {
             setMode: PropTypes.func.isRequired,
             setShape: PropTypes.func.isRequired,
             setSnap: PropTypes.func.isRequired,
+            onChangePerspective: PropTypes.func.isRequired,
             onResetZoom: PropTypes.func.isRequired,
             onZoomIn: PropTypes.func.isRequired,
             onZoomOut: PropTypes.func.isRequired,
             fill: PropTypes.bool,
             fillColor: PropTypes.string,
             mode: PropTypes.string,
+            perspective: PropTypes.bool,
             shape: PropTypes.string,
             snap: PropTypes.bool,
             stroke: PropTypes.bool,
@@ -162,10 +164,12 @@ export class Toolbar extends Component {
             snap,
             style,
             open,
+            perspective,
             setMode,
             setShape,
             setSnap,
             onResetZoom,
+            onChangePerspective,
             onZoomIn,
             onZoomOut,
         } = this.props;
@@ -204,6 +208,12 @@ export class Toolbar extends Component {
                     labelStyle={{ paddingLeft: 8, paddingRight: 8 }}
                     style={{ flex: '0 0 auto', minWidth: 0 }}
                     onTouchTap={onResetZoom}
+                />
+                <FlatButton
+                    label="3D"
+                    labelStyle={{ paddingLeft: 8, paddingRight: 8 }}
+                    style={{ flex: '0 0 auto', minWidth: 0 }}
+                    onTouchTap={() => onChangePerspective(!perspective)}
                 />
                 <div style={Style.Separator} />
                 <ModeButton

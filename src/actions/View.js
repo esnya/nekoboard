@@ -29,3 +29,15 @@ export function resetZoom() {
         type: VIEW.ZOOM_RESET,
     };
 }
+
+/**
+ * Perspective action creator.
+ * @param{boolean} perspective - Perspective
+ * @returns{object} Action
+ */
+export function perspective(perspective) {
+    return {
+        type: VIEW.PERSPECTIVE,
+        perspective,
+    };
+}

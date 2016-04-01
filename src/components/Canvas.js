@@ -94,6 +94,7 @@ export class Canvas extends Component {
             grid: PropTypes.bool,
             gridSize: PropTypes.number,
             height: PropTypes.number,
+            perspective: PropTypes.bool,
             width: PropTypes.number,
             zoom: PropTypes.number,
         };
@@ -173,6 +174,7 @@ export class Canvas extends Component {
             gridSize,
             width,
             height,
+            perspective,
             shapes,
             zoom,
         } = this.props;
@@ -207,11 +209,17 @@ export class Canvas extends Component {
         const expandShape = editor.mode === MODE.MOVE ||
             editor.mode === MODE.ERASE;
 
+        const paperStyle = perspective ? {
+            perspective: 100,
+            transform: 'rotateX(60deg)',
+        } : {};
+
         return (
             <Paper
                 ref={(c) => c && (this.canvas = c)}
                 style={{
                     ...Style,
+                    ...paperStyle,
                     cursor,
                     width: width * zoom,
                     height: height * zoom,
