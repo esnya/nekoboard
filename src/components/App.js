@@ -10,6 +10,7 @@ import { Canvas } from '../containers/Canvas';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
 import { EditStyleDialog } from '../containers/EditStyleDialog';
 import { EditTextDialog } from '../containers/EditTextDialog';
+import { PieceDialog } from '../containers/piece-dialog';
 import { Toolbar } from '../containers/Toolbar';
 
 const Style = {
@@ -123,6 +124,7 @@ export class App extends Component {
                 <BoardConfigDialog />
                 <EditStyleDialog />
                 <EditTextDialog />
+                <PieceDialog />
             </div>
         );
     }

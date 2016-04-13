@@ -247,6 +247,7 @@ export class Canvas extends Component {
                                         expand={expandShape}
                                         gridSize={gridSize}
                                         key={shape.id || i}
+                                        perspective={perspective}
                                         style={{
                                             cursor: shapeCursor,
                                         }}
@@ -269,6 +270,7 @@ export class Canvas extends Component {
                                         {...shape}
                                         gridSize={gridSize}
                                         key={shape.id || i}
+                                        perspective={perspective}
                                         style={{
                                             cursor: shapeCursor,
                                         }}

@@ -14,6 +14,7 @@ export const SHAPE_KEYS = [
     'y', 'cy', 'y1', 'y2',
     'width', 'height',
     'r', 'rx', 'ry',
+    'name',
     'text',
     'points',
 ];

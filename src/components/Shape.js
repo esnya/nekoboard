@@ -71,26 +71,48 @@ Text.propTypes = {
 export const Piece = (props) => {
     const {
         x, y,
-        style,
+        name,
+        stroke,
         ...otherProps,
     } = props;
 
+    const nameElement = name && (
+        <text
+            fill={stroke}
+            stroke="none"
+            textAnchor="middle"
+            y="20"
+        >
+            {name}
+        </text>
+    );
+
     return (
-        <circle
+        <g
             {...otherProps}
-            cx={x} cy={y}
-            r={20}
-            style={{
-                ...style,
-                zIndex: 1000,
-            }}
-        />
+            stroke={stroke}
+            transform={`translate(${x}, ${y})`}
+        >
+            <path
+                d={'M0,5 Q' + [
+                    '-18,-10 -18,-20',
+                    '-16,-38 0,-40',
+                    '16,-38 18,-20',
+                    '18,-10 0,5',
+                ].join(' ')}
+                transform="translate(0, -10)"
+            />
+            <circle r="3" />
+            {nameElement}
+        </g>
     );
 };
 Piece.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
-    style: PropTypes.object,
+    name: PropTypes.string,
+    perspective: PropTypes.bool,
+    stroke: PropTypes.string,
 };
 
 export const Measure = (props) => {

@@ -116,8 +116,11 @@ const onBegin = ({dispatch, getState}, next, action) => {
     if (e.edit && e.mode !== MODE.MOVE) {
         return next(endEdit());
     } else if (e.mode === MODE.EDIT && !action.id) {
-        if (e.shape === SHAPE.TEXT) {
-            return next(open('editText', action));
+        switch (e.shape) {
+            case SHAPE.TEXT:
+                return next(open('editText', action));
+            case SHAPE.PIECE:
+                return next(open('piece', action));
         }
 
         const shape = setPos({
