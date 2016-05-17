@@ -1,17 +1,17 @@
-import AppBar from 'material-ui/lib/app-bar';
-import IconButton from 'material-ui/lib/icon-button';
-import LeftNav from 'material-ui/lib/left-nav';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import Colors from 'material-ui/lib/styles/colors';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import React, { Component, PropTypes } from 'react';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import * as Colors from 'material-ui/styles/colors';
+import ThemeManager from 'material-ui/styles/themeManager';
+import React, {Component, PropTypes} from 'react';
 import Theme from '../browser/theme';
-import { Canvas } from '../containers/Canvas';
-import { BoardConfigDialog } from '../containers/BoardConfigDialog';
-import { EditStyleDialog } from '../containers/EditStyleDialog';
-import { EditTextDialog } from '../containers/EditTextDialog';
-import { PieceDialog } from '../containers/piece-dialog';
-import { Toolbar } from '../containers/Toolbar';
+import {Canvas} from '../containers/Canvas';
+import {BoardConfigDialog} from '../containers/BoardConfigDialog';
+import {EditStyleDialog} from '../containers/EditStyleDialog';
+import {EditTextDialog} from '../containers/EditTextDialog';
+import {PieceDialog} from '../containers/piece-dialog';
+import {Toolbar} from '../containers/Toolbar';
 
 const Style = {
     Container: {
@@ -96,7 +96,7 @@ export class App extends Component {
                         () => this.setState({leftNav: !leftNav})
                     }
                 />
-                <LeftNav
+                <Drawer
                     docked={false}
                     open={leftNav}
                     onRequestChange={(open) => this.setState({leftNav: open})}
@@ -116,7 +116,7 @@ export class App extends Component {
                     >
                         Export SVG
                     </MenuItem>
-                </LeftNav>
+                </Drawer>
                 <div style={Style.CanvasContainer}>
                     <Canvas />
                 </div>

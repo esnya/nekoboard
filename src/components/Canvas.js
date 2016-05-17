@@ -1,7 +1,7 @@
 /* eslint react/jsx-sort-props: 0 */
 
-import Paper from 'material-ui/lib/paper';
-import Colors from 'material-ui/lib/styles/colors';
+import Paper from 'material-ui/Paper';
+import * as Colors from 'material-ui/styles/colors';
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import * as MODE from '../constants/Mode';

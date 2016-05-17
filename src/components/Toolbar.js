@@ -2,13 +2,13 @@
 
 import Color from 'color';
 
-import FlatButton from 'material-ui/lib/flat-button';
-import FontIcon from 'material-ui/lib/font-icon';
-import IconButton from 'material-ui/lib/icon-button';
-import SvgIcon from 'material-ui/lib/svg-icon';
-import Paper from 'material-ui/lib/paper';
-import Colors from 'material-ui/lib/styles/colors';
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
+import SvgIcon from 'material-ui/SvgIcon';
+import Paper from 'material-ui/Paper';
+import * as Colors from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import React, { Component, PropTypes, cloneElement } from 'react';
 import {
     Circle,
