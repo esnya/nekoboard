@@ -1,4 +1,4 @@
-FROM node
+FROM node:6.2
 MAINTAINER ukatama dev.ukatama@gmail.com
 
 RUN mkdir -p /usr/src/app
