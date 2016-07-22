@@ -1,5 +1,7 @@
 describe('components/EditStyleDialog', () => {
-    jest.dontMock('react');
-    jest.dontMock('../EditStyleDialog');
+    jest.unmock('react');
+    jest.unmock('color-convert/route');
+    jest.unmock('color-convert');
+    jest.unmock('../EditStyleDialog');
     require('../EditStyleDialog');
 });

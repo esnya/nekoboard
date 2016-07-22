@@ -1,4 +1,6 @@
 describe('middlewares/editor', () => {
-    jest.dontMock('../editor');
+    jest.unmock('color-convert/route');
+    jest.unmock('color-convert');
+    jest.unmock('../editor');
     require('../editor');
 });
