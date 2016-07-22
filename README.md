@@ -11,7 +11,21 @@ Online whiteboard made for tabletop role-play games.
 * Node.js and npm
 * Redis
 
-## Installation
+## As a Docker container
+
+```
+$ docker run -d --name redis redis
+$ docker run -d \
+    --name nekoboard \
+    -p 80:80 \
+    --env NODE_ENV=production \
+    --link redis:redis \
+    -v /path/to/nekoboard/config.yml:/usr/src/app/config/local.yml:ro \
+    nekorpg/nekoboard
+```
+
+## As a Node.js application
+
 1. Clone
 
   ```bash
@@ -31,8 +45,11 @@ Online whiteboard made for tabletop role-play games.
   $ npm run build
   ```
 
-## Usage
-You can run Nekoboard as a standalone server.
+4. Run
+
+  ```bash
+  $ npm start
+  ```
 
 ```bash
 $ npm start
