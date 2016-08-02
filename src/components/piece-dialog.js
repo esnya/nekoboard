@@ -2,7 +2,7 @@ import Color from 'color';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export class PieceDialog extends Component {
     static get propTypes() {
@@ -47,8 +47,8 @@ export class PieceDialog extends Component {
                 onTouchTap={(e) => onCreate(e, {
                     shape,
                     x, y,
-                    fill: fill ? Color(fillColor).rgbString() : 'none',
-                    stroke: stroke ? Color(strokeColor).rgbString() : 'none',
+                    fill: fill ? new Color(fillColor).rgbString() : 'none',
+                    stroke: stroke ? new Color(strokeColor).rgbString() : 'none',
                     strokeWidth,
                     name: this.name,
                 })}

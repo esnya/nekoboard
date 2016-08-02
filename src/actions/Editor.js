@@ -24,11 +24,11 @@ export const setSnap = (snap) => ({
     type: EDITOR.SNAP,
     snap,
 });
-export const beginEdit = ({x, y, id}) => ({
+export const beginEdit = ({ x, y, id }) => ({
     type: EDITOR.EDIT_BEGIN,
     x, y, id,
 });
-export const updateEdit = ({x, y}) => ({
+export const updateEdit = ({ x, y }) => ({
     type: EDITOR.EDIT_UPDATE,
     x, y,
 });

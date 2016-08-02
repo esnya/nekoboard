@@ -54,12 +54,11 @@ describe('StateStorage', () => {
 
     it('wraps reducer', () => {
         const reducer = storage.apply((state, action) => {
-            switch (action.type) {
-                case 'SET':
-                    return {
-                        ...state,
-                        [action.key]: action.value,
-                    };
+            if (action.type === 'SET') {
+                return {
+                    ...state,
+                    [action.key]: action.value,
+                };
             }
 
             return state;

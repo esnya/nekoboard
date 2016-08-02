@@ -1,4 +1,6 @@
 jest.autoMockOff();
 describe('components/App', () => {
-    require('../App');
+    it('can be required', () => {
+        require('../App');
+    });
 });

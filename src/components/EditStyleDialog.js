@@ -21,6 +21,14 @@ export class EditStyleDialog extends Component {
         };
     }
 
+    onHistory(style) {
+        const {
+            setStyle,
+        } = this.props;
+        setStyle(style);
+        this.handleClose();
+    }
+
     handleChange(key, value) {
         const {
             editor,
@@ -38,14 +46,6 @@ export class EditStyleDialog extends Component {
             ]),
             [key]: value,
         });
-    }
-
-    onHistory(style) {
-        const {
-            setStyle,
-        } = this.props;
-        setStyle(style);
-        this.handleClose();
     }
 
     handleClose() {
@@ -73,7 +73,8 @@ export class EditStyleDialog extends Component {
         } = editor;
 
         const actions = [
-            <FlatButton primary
+            <FlatButton
+                primary
                 key="close"
                 label="Close"
                 onTouchTap={() => this.handleClose()}
@@ -118,14 +119,14 @@ export class EditStyleDialog extends Component {
                                         {...style}
                                         fill={
                                             style.fill
-                                                ? Color(style.fillColor)
+                                                ? new Color(style.fillColor)
                                                     .rgbString()
                                                 : 'none'
                                         }
                                         height={22}
                                         stroke={
                                             style.stroke
-                                                ? Color(style.strokeColor)
+                                                ? new Color(style.strokeColor)
                                                     .rgbString()
                                                 : 'none'
                                         }
@@ -152,7 +153,7 @@ export class EditStyleDialog extends Component {
                                 <ColorPicker
                                     color={strokeColor}
                                     type="sketch"
-                                    onChangeComplete={({rgb}) =>
+                                    onChangeComplete={({ rgb }) =>
                                         this.handleChange(
                                             'strokeColor',
                                             rgb
@@ -174,7 +175,7 @@ export class EditStyleDialog extends Component {
                                 <ColorPicker
                                     color={fillColor}
                                     type="sketch"
-                                    onChangeComplete={({rgb}) =>
+                                    onChangeComplete={({ rgb }) =>
                                         this.handleChange(
                                             'fillColor',
                                             rgb
@@ -186,23 +187,25 @@ export class EditStyleDialog extends Component {
                     </div>
                 </div>
                 <div style={flexStyle}>
-                    <TextField fullWidth
+                    <TextField
+                        fullWidth
                         defaultValue={strokeWidth}
                         floatingLabelText="Stroke Width"
                         style={fillStyle}
                         type="number"
                         onBlur={
-                            ({target}) =>
+                            ({ target }) =>
                                 this.handleChange('strokeWidth', +target.value)
                         }
                     />
-                    <TextField fullWidth
+                    <TextField
+                        fullWidth
                         defaultValue={fontSize}
                         floatingLabelText="Font Size"
                         style={fillStyle}
                         type="number"
                         onBlur={
-                            ({target}) =>
+                            ({ target }) =>
                                 this.handleChange('fontSize', +target.value)
                         }
                     />

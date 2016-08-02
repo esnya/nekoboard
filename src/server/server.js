@@ -3,7 +3,7 @@ import { Server } from 'http';
 import { getLogger } from 'log4js';
 import { app } from './app';
 
-export const server = Server(app);
+export const server = new Server(app);
 
 server.listen(config.get('server'), () => {
     const {

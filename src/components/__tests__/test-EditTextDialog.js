@@ -1,5 +1,7 @@
 describe('components/EditTextDialog', () => {
-    jest.dontMock('react');
-    jest.dontMock('../EditTextDialog');
-    require('../EditTextDialog');
+    it('can be required', () => {
+        jest.dontMock('react');
+        jest.dontMock('../EditTextDialog');
+        require('../EditTextDialog');
+    });
 });

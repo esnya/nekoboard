@@ -4,7 +4,7 @@ import { pick } from 'lodash';
 import { createClient } from './redis';
 import * as Board from '../actions/Board';
 import * as Shape from '../actions/Shape';
-import {BOARD_KEYS, SHAPE_KEYS} from '../constants/keys';
+import { BOARD_KEYS, SHAPE_KEYS } from '../constants/keys';
 import { generate as genId } from '../utility/id';
 
 const DefaultBoard = Config.get('board');
@@ -89,8 +89,8 @@ export class Client extends EventEmitter {
                 ...picked,
                 id: this.boardId,
             }))
-            .then((board) =>
-                this.redis.set(this.boardKey, JSON.stringify(board))
+            .then((next) =>
+                this.redis.set(this.boardKey, JSON.stringify(next))
             );
 
         this.publish(Board.update(picked));

@@ -41,12 +41,14 @@ export class EditTextDialog extends Component {
         } = this.props;
 
         const actions = [
-            <FlatButton primary
+            <FlatButton
+                primary
                 key="ok"
                 label="OK"
                 onTouchTap={() => this.onOK()}
             />,
-            <FlatButton secondary
+            <FlatButton
+                secondary
                 key="cancel"
                 label="CANCEL"
                 onTouchTap={() => close('editText')}

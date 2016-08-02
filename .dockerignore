@@ -1,0 +1,5 @@
+coverage
+dist/js/*.js
+lib/*
+node_modules
+tmp

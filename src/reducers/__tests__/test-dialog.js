@@ -1,4 +1,6 @@
 describe('reducers/dialog', () => {
-    jest.dontMock('../dialog');
-    require('../dialog');
+    it('can be required', () => {
+        jest.dontMock('../dialog');
+        require('../dialog');
+    });
 });

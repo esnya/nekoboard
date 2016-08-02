@@ -1,7 +1,6 @@
 /* eslint react/jsx-sort-props: 0 */
 
 import Color from 'color';
-
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
@@ -50,9 +49,9 @@ const Style = {
 };
 
 const getIconColor = (theme, state) =>
-    state ? theme.palette.accent1Color : theme.palette.textColor;
+    (state ? theme.palette.accent1Color : theme.palette.textColor);
 
-const ModeButton = ({name, mode, icon, setMode, theme}) => (
+const ModeButton = ({ name, mode, icon, setMode, theme }) => (
     <IconButton
         iconClassName="material-icons"
         iconStyle={{
@@ -122,6 +121,8 @@ ShapeButton.propTypes = {
     icon: PropTypes.string,
 };
 
+// ToDo: to SFC
+// eslint-disable-next-line react/prefer-stateless-function
 export class Toolbar extends Component {
     static get contextTypes() {
         return {
@@ -298,11 +299,11 @@ export class Toolbar extends Component {
                         >
                             <Polyline
                                 points={[
-                                    {x: 22, y: 2},
-                                    {x: 16, y: 12},
-                                    {x: 22, y: 22},
-                                    {x: 2, y: 22},
-                                    {x: 2, y: 2},
+                                    { x: 22, y: 2 },
+                                    { x: 16, y: 12 },
+                                    { x: 22, y: 22 },
+                                    { x: 2, y: 22 },
+                                    { x: 2, y: 2 },
                                 ]}
                             />
                         </ShapeButton>
@@ -313,11 +314,11 @@ export class Toolbar extends Component {
                         >
                             <Polygon
                                 points={[
-                                    {x: 22, y: 2},
-                                    {x: 16, y: 12},
-                                    {x: 22, y: 22},
-                                    {x: 2, y: 22},
-                                    {x: 2, y: 2},
+                                    { x: 22, y: 2 },
+                                    { x: 16, y: 12 },
+                                    { x: 22, y: 22 },
+                                    { x: 2, y: 22 },
+                                    { x: 2, y: 2 },
                                 ]}
                             />
                         </ShapeButton>
@@ -350,12 +351,12 @@ export class Toolbar extends Component {
                                     width={14} height={14}
                                     fill={
                                         fill
-                                            ? Color(fillColor).rgbString()
+                                            ? new Color(fillColor).rgbString()
                                             : 'none'
                                     }
                                     stroke={
                                         stroke
-                                            ? Color(strokeColor).rgbString()
+                                            ? new Color(strokeColor).rgbString()
                                             : 'none'
                                     }
                                     strokeWidth={strokeWidth}

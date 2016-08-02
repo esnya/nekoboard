@@ -4,14 +4,14 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import * as Colors from 'material-ui/styles/colors';
 import ThemeManager from 'material-ui/styles/themeManager';
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import Theme from '../browser/theme';
-import {Canvas} from '../containers/Canvas';
-import {BoardConfigDialog} from '../containers/BoardConfigDialog';
-import {EditStyleDialog} from '../containers/EditStyleDialog';
-import {EditTextDialog} from '../containers/EditTextDialog';
-import {PieceDialog} from '../containers/piece-dialog';
-import {Toolbar} from '../containers/Toolbar';
+import { Canvas } from '../containers/Canvas';
+import { BoardConfigDialog } from '../containers/BoardConfigDialog';
+import { EditStyleDialog } from '../containers/EditStyleDialog';
+import { EditTextDialog } from '../containers/EditTextDialog';
+import { PieceDialog } from '../containers/piece-dialog';
+import { Toolbar } from '../containers/Toolbar';
 
 const Style = {
     Container: {
@@ -60,7 +60,7 @@ export class App extends Component {
     }
 
     handleLeftNavItem(handler) {
-        this.setState({leftNav: false});
+        this.setState({ leftNav: false });
         if (handler) handler();
     }
 
@@ -72,7 +72,7 @@ export class App extends Component {
             onSave,
             onExportSVG,
         } = this.props;
-        const {leftNav} = this.state;
+        const { leftNav } = this.state;
 
         document.title = title
             ? `${title} - Nekoboard`
@@ -85,7 +85,7 @@ export class App extends Component {
                     iconElementRight={
                         <IconButton
                             iconClassName="material-icons"
-                            iconStyle={{color: 'white'}}
+                            iconStyle={{ color: 'white' }}
                             onTouchTap={onOpenConfig}
                         >
                             settings
@@ -93,13 +93,13 @@ export class App extends Component {
                     }
                     title={title || 'Nekoboard'}
                     onLeftIconButtonTouchTap={
-                        () => this.setState({leftNav: !leftNav})
+                        () => this.setState({ leftNav: !leftNav })
                     }
                 />
                 <Drawer
                     docked={false}
                     open={leftNav}
-                    onRequestChange={(open) => this.setState({leftNav: open})}
+                    onRequestChange={(open) => this.setState({ leftNav: open })}
                 >
                     <MenuItem
                         onTouchTap={() => this.handleLeftNavItem(onLoad)}

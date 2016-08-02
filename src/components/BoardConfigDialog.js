@@ -1,6 +1,9 @@
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
+import FlatButton
+from 'material-ui/FlatButton';
+import TextField
+from
+'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import React, { Component, PropTypes } from 'react';
 
@@ -47,16 +50,17 @@ export class BoardConfigDialog extends Component {
                 let value;
 
                 switch (key) {
-                    case 'grid':
-                        value = this.state[key];
-                        break;
-                    default:
-                        value = this[key].getValue();
+                case 'grid':
+                    value = this.state[key];
+                    break;
+                default:
+                    value = this[key].getValue();
                 }
 
-                result[key] = value;
-
-                return result;
+                return {
+                    ...result,
+                    [key]: value,
+                };
             }, {});
 
         const {
@@ -82,12 +86,14 @@ export class BoardConfigDialog extends Component {
         const board = this.props.board || {};
 
         const actions = [
-            <FlatButton primary
+            <FlatButton
+                primary
                 key="update"
                 label="Update"
                 onTouchTap={(e) => this.onSubmit(e)}
             />,
-            <FlatButton secondary
+            <FlatButton
+                secondary
                 key="cancel"
                 label="Cancel"
                 onTouchTap={() => close('config')}
@@ -103,27 +109,33 @@ export class BoardConfigDialog extends Component {
                 title="Board Config"
             >
                 <form onSubmit={(e) => this.onSubmit(e)} >
-                    <TextField fullWidth isRequired
+                    <TextField
+                        fullWidth
+                        isRequired
                         defaultValue={board.title}
                         floatingLabelText="Title"
                         name="title"
                         ref={(c) => c && (this.title = c)}
                     />
-                    <TextField fullWidth isRequired
+                    <TextField
+                        fullWidth
+                        isRequired
                         defaultValue={board.width}
                         floatingLabelText="Width"
                         name="width"
                         ref={(c) => c && (this.width = c)}
                         type="number"
                     />
-                    <TextField fullWidth isRequired
+                    <TextField
+                        fullWidth
+                        isRequired
                         defaultValue={board.height}
                         floatingLabelText="Height"
                         name="height"
                         ref={(c) => c && (this.height = c)}
                         type="number"
                     />
-                    <div style={{height: 16}} />
+                    <div style={{ height: 16 }} />
                     <Toggle
                         label="Grid"
                         name="grid"
@@ -131,7 +143,9 @@ export class BoardConfigDialog extends Component {
                         toggled={this.state.grid}
                         onToggle={() => this.onToggle('grid')}
                     />
-                    <TextField fullWidth isRequired
+                    <TextField
+                        fullWidth
+                        isRequired
                         defaultValue={board.gridSize}
                         floatingLabelText="Grid Size"
                         name="gridSize"

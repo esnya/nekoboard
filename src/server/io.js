@@ -7,7 +7,7 @@ import { server } from './server';
 
 const logger = getLogger('[SOCKET]');
 
-export const io = IO(server);
+export const io = new IO(server);
 
 io.on('connection', (socket) => {
     const boardId = socket.handshake.query.boardId;
@@ -26,14 +26,16 @@ io.on('connection', (socket) => {
 
     socket.on('action', (action) => {
         switch (action.type) {
-            case BOARD.UPDATE:
-                return client.updateBoard(action.data);
-            case SHAPE.ADD:
-                return client.addShape(action.data);
-            case SHAPE.UPDATE:
-                return client.updateShape(action.item);
-            case SHAPE.REMOVE:
-                return client.removeShape(action.id);
+        case BOARD.UPDATE:
+            return client.updateBoard(action.data);
+        case SHAPE.ADD:
+            return client.addShape(action.data);
+        case SHAPE.UPDATE:
+            return client.updateShape(action.item);
+        case SHAPE.REMOVE:
+            return client.removeShape(action.id);
+        default:
+            return logger.error(`Unexcepted action type: ${action.type}`);
         }
     });
 });

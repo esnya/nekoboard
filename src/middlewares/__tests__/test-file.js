@@ -1,4 +1,6 @@
 describe('middleware/file', () => {
-    jest.unmock('../file');
-    require('../file');
+    it('can be required', () => {
+        jest.unmock('../file');
+        require('../file');
+    });
 });

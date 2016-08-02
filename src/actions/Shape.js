@@ -19,10 +19,10 @@ export const push = (items) => ({
         Array.isArray(items)
             ? items
             : items && [items]
-    ).map((item) => item.id ? item : {
+    ).map((item) => (item.id ? item : {
         ...item,
         id: generate(),
-    }),
+    })),
     sync: true,
     broadcast: true,
 });

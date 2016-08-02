@@ -1,4 +1,6 @@
 describe('reducers/board', () => {
-    jest.dontMock('../board');
-    require('../board');
+    it('can be required', () => {
+        jest.dontMock('../board');
+        require('../board');
+    });
 });

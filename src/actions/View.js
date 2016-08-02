@@ -35,9 +35,9 @@ export function resetZoom() {
  * @param{boolean} perspective - Perspective
  * @returns{object} Action
  */
-export function perspective(perspective) {
+export function perspective(p) {
     return {
         type: VIEW.PERSPECTIVE,
-        perspective,
+        perspective: p,
     };
 }

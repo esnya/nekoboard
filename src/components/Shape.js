@@ -94,12 +94,12 @@ export const Piece = (props) => {
             transform={`translate(${x}, ${y})`}
         >
             <path
-                d={'M0,5 Q' + [
+                d={`M0,5 Q${[
                     '-18,-10 -18,-20',
                     '-16,-38 0,-40',
                     '16,-38 18,-20',
                     '18,-10 0,5',
-                ].join(' ')}
+                ].join(' ')}`}
                 transform="translate(0, -10)"
             />
             <circle r="3" />

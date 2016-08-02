@@ -1,6 +1,4 @@
-export const mockServer = {
+export const Server = jest.genMockFn();
+Server.prototype = {
     listen: jest.genMockFn(),
 };
-
-export const Server = jest.genMockFn()
-    .mockReturnValue(mockServer);

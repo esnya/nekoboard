@@ -8,7 +8,7 @@ import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 import { Shape } from './Shape';
 
-const GridLine = ({width, height, step}) => {
+const GridLine = ({ width, height, step }) => {
     const lines = [];
 
     for (let x = 0; x < width; x += step) {
@@ -33,7 +33,7 @@ const GridLine = ({width, height, step}) => {
     return <g stroke={Colors.grey300}>{lines}</g>;
 };
 
-const GridLabel = ({width, height, step}) => {
+const GridLabel = ({ width, height, step }) => {
     const labels = [];
 
     for (let y = 0; y < height; y += step) {
@@ -100,38 +100,6 @@ export class Canvas extends Component {
         };
     }
 
-    toLocalPos(e) {
-        const offset = findDOMNode(this.canvas).getBoundingClientRect();
-        const pos = e.touches && e.touches[0] || e;
-        const zoom = this.props.zoom;
-
-        /*
-        console.log(e.type);
-        console.log('local', {
-            x: pos.clientX - offset.x,
-            y: pos.clientY - offset.y,
-        });
-        console.log('client', {
-            x: pos.clientX,
-            y: pos.clientY,
-        });
-        console.log('layer', {
-            x: pos.layerX,
-            y: pos.layerY,
-        });
-        console.log('page', {
-            x: pos.pageX,
-            y: pos.pageY,
-        });
-        console.log('offset', offset);
-        // */
-
-        return {
-            x: (pos.clientX - offset.left) / zoom,
-            y: (pos.clientY - offset.top) / zoom,
-        };
-    }
-
     onMouseDownOnShape(e, id) {
         e.preventDefault();
 
@@ -164,6 +132,38 @@ export class Canvas extends Component {
 
     onMouseUp() {
         this.props.endEdit();
+    }
+
+    toLocalPos(e) {
+        const offset = findDOMNode(this.canvas).getBoundingClientRect();
+        const pos = e.touches && e.touches[0] || e;
+        const zoom = this.props.zoom;
+
+        /*
+        console.log(e.type);
+        console.log('local', {
+            x: pos.clientX - offset.x,
+            y: pos.clientY - offset.y,
+        });
+        console.log('client', {
+            x: pos.clientX,
+            y: pos.clientY,
+        });
+        console.log('layer', {
+            x: pos.layerX,
+            y: pos.layerY,
+        });
+        console.log('page', {
+            x: pos.pageX,
+            y: pos.pageY,
+        });
+        console.log('offset', offset);
+        // */
+
+        return {
+            x: (pos.clientX - offset.left) / zoom,
+            y: (pos.clientY - offset.top) / zoom,
+        };
     }
 
     render() {

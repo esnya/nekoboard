@@ -1,5 +1,7 @@
 jest.mock('http');
 describe('server/server', () => {
-    jest.dontMock('../server');
-    require('../server');
+    it('can be required', () => {
+        jest.dontMock('../server');
+        require('../server');
+    });
 });

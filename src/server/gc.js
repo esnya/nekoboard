@@ -30,11 +30,11 @@ export const runGC = () => {
         .then((ids) => Promise.all(ids.map((id) =>
                 redis.getAsync(`nekoboard:${id}:timestamp`)
                     .then((timestamp) => parseInt(timestamp, 10))
-                    .then((timestamp) => ({id, timestamp}))
+                    .then((timestamp) => ({ id, timestamp }))
         )))
         .then((list) =>
-            list.filter(({timestamp}) => !(timestamp + Expires > now))
-                .map(({id}) => id)
+            list.filter(({ timestamp }) => !(timestamp + Expires > now))
+                .map(({ id }) => id)
         )
         .then((ids) => {
             logger.info(`Delete: ${ids.length} boards.`);

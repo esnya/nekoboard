@@ -1,5 +1,5 @@
 export const debuglogger =
-    (enabled, logger, verbose) => ({getState}) => (next) => (action) => {
+    (enabled, logger, verbose) => ({ getState }) => (next) => (action) => {
         if (enabled) {
             if (verbose) logger.debug(action.type, action, getState());
             else if (action.socket) {
@@ -11,6 +11,6 @@ export const debuglogger =
     };
 
 export const pre = (enabled, getLogger, verbose) =>
-    debuglogger(enabled, getLogger(`[ACTION:PRE]`), verbose);
+    debuglogger(enabled, getLogger('[ACTION:PRE]'), verbose);
 export const post = (enabled, getLogger, verbose) =>
-    debuglogger(enabled, getLogger(`[ACTION:POST]`), verbose);
+    debuglogger(enabled, getLogger('[ACTION:POST]'), verbose);
