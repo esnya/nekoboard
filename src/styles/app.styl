@@ -1,0 +1,14 @@
+@import './flex'
+@import './materialColor'
+@import './scroll'
+
+.container
+    @extend .flexColumn
+    background-color: palette('Grey', '300')
+    height: 100%
+
+.canvas
+    @extend .flexFlex
+    @extend .scroll
+    perspective: 10000px
+    text-align: center

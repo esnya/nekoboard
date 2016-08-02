@@ -9,6 +9,7 @@ import Toggle from 'material-ui/Toggle';
 import React, { Component, PropTypes } from 'react';
 import ColorPicker from 'react-color';
 import { Rect } from './Shape';
+import styles from '../styles/editStyleDialog.styl';
 
 export class EditStyleDialog extends Component {
     static get propTypes() {
@@ -80,24 +81,6 @@ export class EditStyleDialog extends Component {
                 onTouchTap={() => this.handleClose()}
             />,
         ];
-        const historyStyle = {
-            height: 48,
-            marginBottom: 8,
-            overflow: 'auto',
-            webkitOverflowScrolling: 'touch',
-            whiteSpace: 'nowrap',
-        };
-        const flexStyle = {
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            width: '100%',
-        };
-        const fillStyle = {
-            flex: '1 0 225px',
-            minWidth: 225,
-            marginBottom: 8,
-        };
 
         return (
             <Dialog
@@ -107,7 +90,7 @@ export class EditStyleDialog extends Component {
                 title="Edit Style"
                 onRequestClose={() => this.handleClose()}
             >
-                <div style={historyStyle}>
+                <div className={styles.history}>
                     {
                         editor.styleHistory.map((style, i) => (
                             <IconButton
@@ -138,8 +121,8 @@ export class EditStyleDialog extends Component {
                         ))
                     }
                 </div>
-                <div style={flexStyle}>
-                    <div style={fillStyle}>
+                <div className={styles.colorPickerContainer}>
+                    <div className={styles.colorPicker}>
                         <Toggle
                             label="Stroke"
                             labelPosition="right"
@@ -163,7 +146,7 @@ export class EditStyleDialog extends Component {
                             ) : null
                         }
                     </div>
-                    <div style={fillStyle}>
+                    <div className={styles.colorPicker}>
                         <Toggle
                             label="Fill"
                             labelPosition="right"
@@ -186,12 +169,12 @@ export class EditStyleDialog extends Component {
                         }
                     </div>
                 </div>
-                <div style={flexStyle}>
+                <div className={styles.inputContainer}>
                     <TextField
                         fullWidth
+                        className={styles.input}
                         defaultValue={strokeWidth}
                         floatingLabelText="Stroke Width"
-                        style={fillStyle}
                         type="number"
                         onBlur={
                             ({ target }) =>
@@ -200,9 +183,9 @@ export class EditStyleDialog extends Component {
                     />
                     <TextField
                         fullWidth
+                        className={styles.input}
                         defaultValue={fontSize}
                         floatingLabelText="Font Size"
-                        style={fillStyle}
                         type="number"
                         onBlur={
                             ({ target }) =>

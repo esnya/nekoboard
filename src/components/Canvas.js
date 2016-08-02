@@ -7,6 +7,7 @@ import { findDOMNode } from 'react-dom';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 import { Shape } from './Shape';
+import styles from '../styles/canvas.styl';
 
 const GridLine = ({ width, height, step }) => {
     const lines = [];
@@ -70,11 +71,6 @@ GridLine.propTypes = GridLabel.propTypes = {
     height: PropTypes.number.isRequired,
     step: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
-};
-
-const Style = {
-    display: 'inline-block',
-    margin: 32,
 };
 
 export class Canvas extends Component {
@@ -209,17 +205,11 @@ export class Canvas extends Component {
         const expandShape = editor.mode === MODE.MOVE ||
             editor.mode === MODE.ERASE;
 
-        const paperStyle = perspective ? {
-            perspective: 100,
-            transform: 'rotateX(60deg)',
-        } : {};
-
         return (
             <Paper
+                className={`${styles.canvas} ${perspective ? styles.perspective : ''}`}
                 ref={(c) => c && (this.canvas = c)}
                 style={{
-                    ...Style,
-                    ...paperStyle,
                     cursor,
                     width: width * zoom,
                     height: height * zoom,

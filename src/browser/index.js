@@ -1,3 +1,6 @@
-require('react-tap-event-plugin')();
-require('./render');
-require('./socket');
+import injectTouchTapEvent from 'react-tap-event-plugin';
+import render from './render';
+import './socket';
+
+injectTouchTapEvent();
+render();

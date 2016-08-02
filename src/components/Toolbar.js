@@ -6,7 +6,6 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import SvgIcon from 'material-ui/SvgIcon';
 import Paper from 'material-ui/Paper';
-import * as Colors from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import React, { Component, PropTypes, cloneElement } from 'react';
 import {
@@ -20,44 +19,18 @@ import {
 } from '../components/Shape';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
-
-const Style = {
-    Toolbar: {
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        overflow: 'hidden',
-        overflowX: 'auto',
-        WebkitOverflowScrolling: 'touch',
-    },
-    Group: {
-        flex: '0 1 auto',
-        display: 'flex',
-        alignItems: 'center',
-    },
-    Separator: {
-        flex: '0 0 1px',
-        height: 24,
-        backgroundColor: Colors.grey600,
-        margin: '0 2px',
-    },
-    SelectedColor: Colors.pink500,
-    Button: {
-        flex: '0 0 auto',
-        width: 48,
-    },
-};
+import styles from '../styles/toolbar.styl';
 
 const getIconColor = (theme, state) =>
     (state ? theme.palette.accent1Color : theme.palette.textColor);
 
 const ModeButton = ({ name, mode, icon, setMode, theme }) => (
     <IconButton
+        className={styles.button}
         iconClassName="material-icons"
         iconStyle={{
             color: getIconColor(theme, name === mode),
         }}
-        style={Style.Button}
         onTouchTap={() => setMode(name)}
     >
         {icon}
@@ -86,9 +59,9 @@ const ShapeButton = ({
     if (icon) {
         return (
             <IconButton
+                className={styles.button}
                 iconClassName="material-icons"
                 iconStyle={{ color }}
-                style={Style.Button}
                 onTouchTap={() => setShape(name)}
             >
                 {icon}
@@ -97,7 +70,7 @@ const ShapeButton = ({
     }
 
     return (
-        <IconButton style={Style.Button} onTouchTap={() => setShape(name)}>
+        <IconButton className={styles.button} onTouchTap={() => setShape(name)}>
             <SvgIcon>
                 {cloneElement(children, {
                     fill: 'none',
@@ -187,10 +160,8 @@ export class Toolbar extends Component {
 
         return (
             <Paper
-                style={{
-                    ...Style.Toolbar,
-                    ...style,
-                }}
+                className={styles.toolbar}
+                style={style}
             >
                 <IconButton
                     iconClassName="material-icons"
@@ -205,18 +176,18 @@ export class Toolbar extends Component {
                     zoom_out
                 </IconButton>
                 <FlatButton
+                    className={styles.zoomButton}
                     label="100%"
                     labelStyle={{ paddingLeft: 8, paddingRight: 8 }}
-                    style={{ flex: '0 0 auto', minWidth: 0 }}
                     onTouchTap={onResetZoom}
                 />
                 <FlatButton
+                    className={styles.zoomButton}
                     label="3D"
                     labelStyle={{ paddingLeft: 8, paddingRight: 8 }}
-                    style={{ flex: '0 0 auto', minWidth: 0 }}
                     onTouchTap={() => onChangePerspective(!perspective)}
                 />
-                <div style={Style.Separator} />
+                <div className={styles.separetor} />
                 <ModeButton
                     {...menuProps}
                     name={MODE.MOVE}
@@ -235,20 +206,20 @@ export class Toolbar extends Component {
                     icon="delete"
                     theme={theme}
                 />
-                <div style={Style.Separator} />
+                <div className={styles.separetor} />
                 <IconButton
+                    className={styles.button}
                     iconClassName="material-icons"
                     iconStyle={{
                         color: getIconColor(theme, snap),
                     }}
-                    style={Style.Button}
                     onTouchTap={() => setSnap(!snap)}
                 >
                     grid_on
                 </IconButton>
                 {mode === MODE.EDIT ? (
-                    <div style={Style.Group}>
-                        <div style={Style.Separator} />
+                    <div className={styles.group}>
+                        <div className={styles.separetor} />
                         <ShapeButton
                             {...shapeProps}
                             name={SHAPE.PIECE}
@@ -340,12 +311,12 @@ export class Toolbar extends Component {
                                 y1={24} y2={0}
                             />
                         </ShapeButton>
-                        <div style={Style.Separator} />
+                        <div className={styles.separetor} />
                         <IconButton onTouchTap={() => open('editStyle')}>
                             <FontIcon className="material-icons">
                                 color_lens
                             </FontIcon>
-                            <SvgIcon style={{ marginTop: -24 }}>
+                            <SvgIcon className={styles.palettePreview}>
                                 <Rect
                                     x={8} y={8}
                                     width={14} height={14}

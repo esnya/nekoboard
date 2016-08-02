@@ -2,7 +2,6 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import * as Colors from 'material-ui/styles/colors';
 import ThemeManager from 'material-ui/styles/themeManager';
 import React, { Component, PropTypes } from 'react';
 import Theme from '../browser/theme';
@@ -12,22 +11,7 @@ import { EditStyleDialog } from '../containers/EditStyleDialog';
 import { EditTextDialog } from '../containers/EditTextDialog';
 import { PieceDialog } from '../containers/piece-dialog';
 import { Toolbar } from '../containers/Toolbar';
-
-const Style = {
-    Container: {
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: Colors.grey300,
-        height: '100%',
-    },
-    CanvasContainer: {
-        flex: '1 1 auto',
-        perspective: '10000px',
-        textAlign: 'center',
-        overflow: 'auto',
-        WebkitOverflowScrolling: 'touch',
-    },
-};
+import styles from '../styles/app.styl';
 
 export class App extends Component {
     static get childContextTypes() {
@@ -79,7 +63,7 @@ export class App extends Component {
             : 'Nekoboard';
 
         return (
-            <div style={Style.Container}>
+            <div className={styles.container}>
                 <AppBar
                     showMenuIconButton
                     iconElementRight={
@@ -117,10 +101,10 @@ export class App extends Component {
                         Export SVG
                     </MenuItem>
                 </Drawer>
-                <div style={Style.CanvasContainer}>
+                <div className={styles.canvas}>
                     <Canvas />
                 </div>
-                <Toolbar style={{ flex: '0 0 auto' }} />
+                <Toolbar />
                 <BoardConfigDialog />
                 <EditStyleDialog />
                 <EditTextDialog />

@@ -1,0 +1,32 @@
+@import './flex'
+@import './materialColor'
+@import './scroll'
+
+.toolbar
+    @extend .flexRow
+    @extend .scrollX
+    width: 100%
+    align-items: center
+
+.group
+    @extend .flexRow
+    flex: 0 1 auto
+    height: 24px
+    align-items: center
+
+.separetor
+    flex: 0 0 1px
+    margin: 0 2px
+    height: 24px
+    background-color: palette('Grey', '600')
+
+.button
+    flex: 0 0 48px
+    width: 48px
+
+.zoomButton
+    @extend .button
+    min-width: 0 !important
+
+.palettePreview
+    margin-top: -24px

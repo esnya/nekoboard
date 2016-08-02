@@ -14,7 +14,15 @@ export default {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
+                loaders: ['babel'],
+            },
+            {
+                test: /\.css$/,
+                loaders: ['style', 'css?modules'],
+            },
+            {
+                test: /\.styl$/,
+                loaders: ['style', 'css?modules', 'stylus'],
             },
         ],
     },

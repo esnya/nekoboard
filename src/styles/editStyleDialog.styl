@@ -1,0 +1,25 @@
+@import './flex.styl'
+
+.history
+    height: 48px
+    margin-bottom: 8px
+    overflow: auto
+    -webkit-overflow-scrolling: touch
+    white-space: nowrap
+
+.wrapContainer
+    @extend .flexRow
+    flex-wrap: wrap
+    justify-content: center
+    width: 100%
+
+    & > *
+        flex: 1 0 255px
+        min-width: 255px
+        margin-bottom: 8px
+
+.colorPickerContainer
+    @extend .wrapContainer
+
+.inputContainer
+    @extend .wrapContainer

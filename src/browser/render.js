@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { App } from '../containers/App';
 import { store } from '../stores/browser';
 
-render((
+export default () => render((
     <Provider store={store}>
         <App />
     </Provider>
