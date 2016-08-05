@@ -86,7 +86,8 @@
     "sanitize.css": "^4.0.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
-    "source-map-support": "^0.4.0"
+    "source-map-support": "^0.4.0",
+    "why-did-you-update": "0.0.8"
   },
   "jest": {
     "moduleFileExtensions": [
