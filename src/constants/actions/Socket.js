@@ -1,2 +1,3 @@
 export const CONNECTED = 'SOCKET_CONNECTED';
 export const DISCONNECTED = 'SOCKET_DISCONNECTED';
+export const ERROR = 'SOCKET_ERROR';

@@ -1,30 +1,24 @@
 import io from 'socket.io-client';
 import { join } from '../actions/Board';
-import { connected, disconnected } from '../actions/Socket';
-import { store } from '../stores/browser';
-import { getLogger } from './log';
-
-const logger = getLogger('[SOCKET]');
+import * as Socket from '../actions/Socket';
+import store from './store';
 
 export const socket = io(location.origin, {
     query: { boardId: document.body.getAttribute('data-boardId') },
 });
 
 socket.on('connect', () => {
-    logger.info('Connected', socket.id);
-
-    store.dispatch(connected(socket));
+    store.dispatch(Socket.connected(socket));
 
     const boardId = document.body.getAttribute('data-boardId');
 
     store.dispatch(join(boardId));
 });
 socket.on('error', (e) => {
-    logger.error('Error', e);
+    store.dispatch(Socket.error(e));
 });
 socket.on('disconnect', () => {
-    logger.info('Disconnected');
-    store.dispatch(disconnected(socket));
+    store.dispatch(Socket.disconnected(socket));
 });
 socket.on('action', (action) => {
     if (action.type) {
