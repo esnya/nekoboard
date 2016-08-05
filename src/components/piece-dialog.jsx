@@ -46,7 +46,8 @@ export class PieceDialog extends Component {
                 label="Create"
                 onTouchTap={(e) => onCreate(e, {
                     shape,
-                    x, y,
+                    x,
+                    y,
                     fill: fill ? new Color(fillColor).rgbString() : 'none',
                     stroke: stroke ? new Color(strokeColor).rgbString() : 'none',
                     strokeWidth,

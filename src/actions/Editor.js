@@ -26,11 +26,14 @@ export const setSnap = (snap) => ({
 });
 export const beginEdit = ({ x, y, id }) => ({
     type: EDITOR.EDIT_BEGIN,
-    x, y, id,
+    x,
+    y,
+    id,
 });
 export const updateEdit = ({ x, y }) => ({
     type: EDITOR.EDIT_UPDATE,
-    x, y,
+    x,
+    y,
 });
 export const endEdit = () => ({
     type: EDITOR.EDIT_END,
@@ -44,7 +47,8 @@ export const beginMove = (id) => ({
 });
 export const updateMove = (x, y) => ({
     type: EDITOR.MOVE_UPDATE,
-    x, y,
+    x,
+    y,
 });
 export const endMove = () => ({
     type: EDITOR.MOVE_END,

@@ -52,7 +52,7 @@ export const file = ({ dispatch, getState }) => (next) => (action) => {
     switch (action.type) {
     case FILE.LOAD:
         load().then((data) => {
-            if (typeof(data.board) === 'object') {
+            if (typeof data.board === 'object') {
                 dispatch(update(pick(
                         data.board,
                         BOARD_KEYS.filter((key) => key !== 'id')

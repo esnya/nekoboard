@@ -1,3 +1,5 @@
+/* eslint import/no-extraneous-dependencies: off */
+
 import path from 'path';
 import webpack from 'webpack';
 
@@ -12,7 +14,7 @@ export default {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loaders: ['babel'],
             },
@@ -33,4 +35,11 @@ export default {
     plugins: DEBUG ? [] : [
         new webpack.optimize.UglifyJsPlugin(),
     ],
+    resolve: {
+        extensions: [
+            '',
+            '.js',
+            '.jsx',
+        ],
+    },
 };

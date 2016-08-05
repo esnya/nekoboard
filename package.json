@@ -18,7 +18,7 @@
     "watch": "run-p -l -s watch:*",
     "watch:build-babel": "npm run -s build:babel -- -w",
     "watch:build-webpack": "npm run -s build:webpack -- -w",
-    "watch:lint-modules": "chokidar --silent --initial src/**/*.js -i src/**/__tests__/**/*.js src/**/__mocks__/**/*.js -c \"npm run -s lint:modules\"",
+    "watch:lint-modules": "chokidar --silent --initial src/**/*.js src/**/*.jsx -i src/**/__tests__/**/* src/**/__mocks__/**/* -c \"npm run -s lint:modules\"",
     "watch:lint-jest": "chokidar --silent --initial src/**/__tests__/**/*.js src/**/__mocks__/**/*.js -c \"npm run -s lint:jest\"",
     "watch:lint-scripts": "chokidar --silent --initial ./**/*.js -i node_modules/**/* -i src/**/* -i dist/**/* -i lib/**/* -c \"npm run -s lint:scripts\"",
     "watch:start": "nodemon -w lib -d 3 -x \"npm start\"",
@@ -49,10 +49,10 @@
     "cross-env": "^2.0.0",
     "css-loader": "^0.23.1",
     "eslint": "^3.2.2",
-    "eslint-config-airbnb": "^9.0.1",
+    "eslint-config-airbnb": "^10.0.0",
     "eslint-plugin-import": "^1.12.0",
     "eslint-plugin-jsx-a11y": "^2.0.1",
-    "eslint-plugin-react": "^5.0.1",
+    "eslint-plugin-react": "^6.0.0",
     "jest-cli": "^14.1.0",
     "nodemon": "^1.10.0",
     "npm-run-all": "^2.3.0",
@@ -89,10 +89,17 @@
     "source-map-support": "^0.4.0"
   },
   "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node",
+      "jsx"
+    ],
     "moduleNameMapper": {
       "^.+\\.(css|styl)$": "<rootDir>/jest/styleMock.js"
     },
     "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/bluebird",
       "<rootDir>/node_modules/lodash",
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",

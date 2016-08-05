@@ -19,3 +19,7 @@ rules:
     react/jsx-indent-props:
         - error
         - 4
+
+# ToDo: airbnb 10.0.0
+    import/prefer-default-export: off
+    no-mixed-operators: off

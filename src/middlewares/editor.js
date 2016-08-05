@@ -13,8 +13,10 @@ const setPos = (shape, x, y) => {
     case SHAPE.MEASURE:
         return {
             ...shape,
-            x1: x, y1: y,
-            x2: x, y2: y,
+            x1: x,
+            y1: y,
+            x2: x,
+            y2: y,
         };
     case SHAPE.RECT:
     case SHAPE.TEXT:
@@ -28,7 +30,8 @@ const setPos = (shape, x, y) => {
         return {
             ...shape,
             points: [{ x: 0, y: 0 }],
-            x, y,
+            x,
+            y,
         };
     default:
         return shape;
@@ -99,7 +102,8 @@ const moveTo = (shape, x, y) => {
     case SHAPE.POLYLINE:
         return {
             ...shape,
-            x, y,
+            x,
+            y,
         };
     default:
         return setPos(shape, x, y);

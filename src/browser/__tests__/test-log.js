@@ -16,6 +16,7 @@ describe('Browser/Log', () => {
 
     it('should expose interfaces like log4js', () => {
         const logger = require('../log').getLogger('[test]');
+
         logger.log('log');
         logger.info('info');
         logger.debug('debug');

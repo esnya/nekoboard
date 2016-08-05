@@ -18,7 +18,8 @@ const storage = new StateStorage(
         styleHistory: [],
         edit: null,
         snap: true,
-        ox: 0, oy: 0,
+        ox: 0,
+        oy: 0,
     },
     [
         'mode',

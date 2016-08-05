@@ -14,7 +14,7 @@ describe('Actions', () => {
                 it('should be camelCase', () => {
                     Object
                         .keys(actions)
-                        .filter((key) => typeof(actions[key]) === 'function')
+                        .filter((key) => typeof (actions[key]) === 'function')
                         .forEach((key) => {
                             expect(key.match(/^[a-z][A-Z]+$/)).not.toBe(false);
                         });
@@ -23,12 +23,12 @@ describe('Actions', () => {
                 it('should return action', () => {
                     Object
                         .keys(actions)
-                        .filter((key) => typeof(actions[key]) === 'function')
+                        .filter((key) => typeof (actions[key]) === 'function')
                         .map((key) => actions[key]({}, {}, {}))
                         .forEach((action) => {
                             expect(action.type).toBeDefined();
                             expect(action.type).not.toBeNull();
-                            expect(typeof(action.type)).toEqual('string');
+                            expect(typeof (action.type)).toEqual('string');
                         });
                 });
             });

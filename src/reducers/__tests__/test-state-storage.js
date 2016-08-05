@@ -6,6 +6,7 @@ describe('StateStorage', () => {
     } = require('../state-storage');
 
     const DOMStorage = require('dom-storage');
+
     const localStorage =
         window.localStorage =
             new DOMStorage(null, { strict: true });

@@ -3,6 +3,6 @@ describe('theme', () => {
     const theme = require('../theme').default;
 
     it('is object', () => {
-        expect(typeof(theme)).toEqual('object');
+        expect(typeof (theme)).toEqual('object');
     });
 });
