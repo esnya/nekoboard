@@ -7,6 +7,8 @@
 
 Online whiteboard made for tabletop role-play games.
 
+![Screenshot](https://rawgit.com/ukatama/nekoboard/master/docs/img/ss01.png)
+
 ## Requirements
 * Node.js and npm
 * Redis
@@ -29,7 +31,7 @@ $ docker run -d \
 1. Clone
 
   ```bash
-  $ git clone --recursive https://github.com/ukatama/nekoboard.git
+  $ git clone https://github.com/ukatama/nekoboard.git
   $ cd nekoboard
   ```
 
@@ -42,23 +44,14 @@ $ docker run -d \
 3. Build
 
   ```bash
-  $ npm run build
+  $ npm run production
   ```
 
 4. Run
 
   ```bash
-  $ npm start
+  $ NODE_ENV=production npm start
   ```
-
-```bash
-$ npm start
-```
-
-## Gulp tasks
-* `build`: Build with babel and browserify.
-* `test`: Test with Jest/Jasmine and ESLint.
-* `watch`: Watch changes and runs `build` and `test`.
 
 ## Contributing
 Open Issue or Pull Request.
