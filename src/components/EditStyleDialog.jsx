@@ -6,12 +6,12 @@ import IconButton from 'material-ui/IconButton';
 import SvgIcon from 'material-ui/SvgIcon';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import ColorPicker from 'react-color';
 import { Rect } from './Shape';
 import styles from '../styles/editStyleDialog.styl';
 
-export class EditStyleDialog extends Component {
+export class EditStyleDialog extends PureComponent {
     static get propTypes() {
         return {
             close: PropTypes.func.isRequired,

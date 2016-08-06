@@ -1,9 +1,9 @@
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 
-export class EditTextDialog extends Component {
+export class EditTextDialog extends PureComponent {
     static get propTypes() {
         return {
             add: PropTypes.func.isRequired,

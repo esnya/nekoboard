@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import SvgIcon from 'material-ui/SvgIcon';
 import Paper from 'material-ui/Paper';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import React, { Component, PropTypes, cloneElement } from 'react';
+import React, { PureComponent, PropTypes, cloneElement } from 'react';
 import {
     Circle,
     Ellipse,
@@ -96,7 +96,7 @@ ShapeButton.propTypes = {
 
 // ToDo: to SFC
 // eslint-disable-next-line react/prefer-stateless-function
-export class Toolbar extends Component {
+export class Toolbar extends PureComponent {
     static get contextTypes() {
         return {
             muiTheme: PropTypes.object,

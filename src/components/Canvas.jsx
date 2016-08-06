@@ -1,79 +1,19 @@
 /* eslint react/jsx-sort-props: 0 */
 
 import Paper from 'material-ui/Paper';
-import * as Colors from 'material-ui/styles/colors';
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions/editor';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
+import { toEventHandlers } from '../utility/actions';
 import { Shape } from './Shape';
+import Grid from './Grid';
 import styles from '../styles/canvas.styl';
 
-const GridLine = ({ width, height, step }) => {
-    const lines = [];
-
-    for (let x = 0; x < width; x += step) {
-        lines.push(
-            <line
-                key={`x${x}`}
-                x1={x} x2={x}
-                y1={0} y2={height}
-            />
-        );
-    }
-    for (let y = 0; y < height; y += step) {
-        lines.push(
-            <line
-                key={`y${y}`}
-                x1={0} x2={width}
-                y1={y} y2={y}
-            />
-        );
-    }
-
-    return <g stroke={Colors.grey300}>{lines}</g>;
-};
-
-const GridLabel = ({ width, height, step }) => {
-    const labels = [];
-
-    for (let y = 0; y < height; y += step) {
-        const ylabel = Math.floor(y / step + 1);
-
-        for (let x = 0; x < width; x += step) {
-            const xlabel = String.fromCharCode(
-                'A'.charCodeAt(0) + Math.floor(x / step)
-            );
-
-            labels.push(
-                <text
-                    key={`${y}${x}`}
-                    style={{
-                        cursor: 'default',
-                        userSelect: 'none',
-                        MozUserSelect: 'none',
-                        WebkitUserSelect: 'none',
-                        MsUserSelect: 'none',
-                    }}
-                    textAnchor="middle"
-                    x={x + step / 2} y={y + step - 4}
-                >
-                    {`${xlabel}${ylabel}`}
-                </text>
-            );
-        }
-    }
-
-    return <g fill={Colors.grey300}>{labels}</g>;
-};
-
-GridLine.propTypes = GridLabel.propTypes = {
-    height: PropTypes.number.isRequired,
-    step: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-};
-
-export class Canvas extends Component {
+class Canvas extends PureComponent {
     static get defaultProps() {
         return {
             zoom: 1,
@@ -82,10 +22,10 @@ export class Canvas extends Component {
     static get propTypes() {
         return {
             editor: PropTypes.object.isRequired,
-            beginEdit: PropTypes.func.isRequired,
-            endEdit: PropTypes.func.isRequired,
             shapes: PropTypes.array.isRequired,
-            updateEdit: PropTypes.func.isRequired,
+            onBeginEdit: PropTypes.func.isRequired,
+            onEndEdit: PropTypes.func.isRequired,
+            onUpdateEdit: PropTypes.func.isRequired,
             edit: PropTypes.object,
             grid: PropTypes.bool,
             gridSize: PropTypes.number,
@@ -99,35 +39,31 @@ export class Canvas extends Component {
     onMouseDownOnShape(e, id) {
         e.preventDefault();
 
-        this.props.beginEdit({
+        this.props.onBeginEdit({
             ...this.toLocalPos(e.nativeEvent),
             id,
         });
     }
 
     onMouseDown(e) {
-        const {
-            beginEdit,
-        } = this.props;
-
-        beginEdit(this.toLocalPos(e.nativeEvent));
+        this.props.onBeginEdit(this.toLocalPos(e.nativeEvent));
     }
 
     onMouseMove(e) {
         const {
             edit,
-            updateEdit,
+            onUpdateEdit,
         } = this.props;
 
         if (edit) {
             e.preventDefault();
             e.stopPropagation();
-            updateEdit(this.toLocalPos(e));
+            onUpdateEdit(this.toLocalPos(e));
         }
     }
 
     onMouseUp() {
-        this.props.endEdit();
+        this.props.onEndEdit();
     }
 
     toLocalPos(e) {
@@ -175,19 +111,6 @@ export class Canvas extends Component {
             zoom,
         } = this.props;
 
-        const gridElements = grid && [
-            <GridLine
-                key="line"
-                step={+gridSize}
-                width={width} height={height}
-            />,
-            <GridLabel
-                key="lebel"
-                step={+gridSize}
-                width={width} height={height}
-            />,
-        ] || null;
-
         let cursor = 'auto';
 
         if (editor.mode === MODE.EDIT) cursor = 'crosshair';
@@ -227,7 +150,7 @@ export class Canvas extends Component {
                     height={height * zoom || 0}
                 >
                     <g transform={`scale(${zoom})`}>
-                        {gridElements}
+                        {grid ? <Grid width={width} height={height} step={+gridSize} /> : null}
                         {
                             shapes
                                 .filter((shape) => shape.shape !== SHAPE.PIECE)
@@ -282,3 +205,16 @@ export class Canvas extends Component {
         );
     }
 }
+export default connect(
+    (state) => ({
+        ...state.board,
+        editor: state.editor,
+        edit: state.editor.edit,
+        move: state.editor.move,
+        perspective: state.view.perspective,
+        shape: state.editor.shape,
+        shapes: state.shapes,
+        zoom: state.view.zoom,
+    }),
+    dispatch => bindActionCreators(toEventHandlers(Actions), dispatch)
+)(Canvas);

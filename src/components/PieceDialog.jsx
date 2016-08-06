@@ -2,9 +2,9 @@ import Color from 'color';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 
-export class PieceDialog extends Component {
+export class PieceDialog extends PureComponent {
     static get propTypes() {
         return {
             open: PropTypes.bool.isRequired,

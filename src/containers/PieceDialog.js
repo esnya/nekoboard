@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { close } from '../actions/dialog';
 import { add } from '../actions/shape';
-import { PieceDialog as Component } from '../components/piece-dialog';
+import { PieceDialog as Component } from '../components/PieceDialog';
 
 export const PieceDialog = connect(
     ({ editor, dialog }) => ({
