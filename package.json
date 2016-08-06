@@ -104,6 +104,7 @@
     },
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/bluebird",
+      "<rootDir>/node_modules/immutable",
       "<rootDir>/node_modules/lodash",
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",
