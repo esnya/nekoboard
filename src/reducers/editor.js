@@ -1,5 +1,5 @@
 import { eq, pick } from 'lodash';
-import * as EDITOR from '../constants/actions/Editor';
+import * as EDITOR from '../actions/editor';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 import { StateStorage } from './state-storage';
@@ -47,12 +47,12 @@ const StyleKeys = [
 export const editor = storage.apply((state, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
-    case EDITOR.MODE:
+    case EDITOR.SET_MODE:
         return {
             ...state,
             mode: action.mode,
         };
-    case EDITOR.SHAPE:
+    case EDITOR.SET_SHAPE:
         return {
             ...state,
             shape: action.shape,
@@ -70,17 +70,17 @@ export const editor = storage.apply((state, action) => {
                 ...state.styleHistory,
             ].slice(0, 10),
         };
-    case EDITOR.STYLE:
+    case EDITOR.SET_STYLE:
         return {
             ...state,
             ...pick(action, StyleKeys),
         };
-    case EDITOR.SNAP:
+    case EDITOR.SET_SNAP:
         return {
             ...state,
             snap: action.snap,
         };
-    case EDITOR.EDIT_BEGIN:
+    case EDITOR.BEGIN_EDIT:
         if (state.mode === MODE.EDIT) {
             // eslint-disable-next-line default-case
             switch (state.shape) {
@@ -97,8 +97,8 @@ export const editor = storage.apply((state, action) => {
             edit: action.id,
             ...pick(action, ['ox', 'oy']),
         };
-    case EDITOR.EDIT_END:
-    case EDITOR.EDIT_CANCEL:
+    case EDITOR.END_EDIT:
+    case EDITOR.CANCEL_EDIT:
         return {
             ...state,
             edit: null,

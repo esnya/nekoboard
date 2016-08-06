@@ -1,7 +1,7 @@
 import { pick } from 'lodash';
-import { update } from '../actions/Board';
-import { add } from '../actions/Shape';
-import * as FILE from '../constants/actions/file';
+import { update } from '../actions/board';
+import { add } from '../actions/shape';
+import * as FILE from '../actions/file';
 import { BOARD_KEYS, SHAPE_KEYS } from '../constants/keys';
 
 const getData = ({ board, shapes }) => ({

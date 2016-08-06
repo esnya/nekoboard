@@ -1,4 +1,4 @@
-import * as VIEW from '../constants/actions/View';
+import * as VIEW from '../actions/view';
 import { StateStorage } from './state-storage';
 
 const storage = new StateStorage(
@@ -23,7 +23,7 @@ export const view = storage.apply((state, action) => {
             ...state,
             zoom: state.zoom / 1.1,
         };
-    case VIEW.ZOOM_RESET:
+    case VIEW.RESET_ZOOM:
         return {
             ...state,
             zoom: 1,

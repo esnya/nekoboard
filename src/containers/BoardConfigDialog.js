@@ -3,8 +3,8 @@ import { mapActionCreatorsToProps } from './Container';
 import {
     BoardConfigDialog as Component,
 } from '../components/BoardConfigDialog';
-import { update } from '../actions/Board';
-import { close } from '../actions/Dialog';
+import { update } from '../actions/board';
+import { close } from '../actions/dialog';
 
 export const BoardConfigDialog = connect(
     (state) => ({

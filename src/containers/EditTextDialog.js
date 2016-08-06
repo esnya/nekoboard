@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { close } from '../actions/Dialog';
-import { add } from '../actions/Shape';
+import { close } from '../actions/dialog';
+import { add } from '../actions/shape';
 import { EditTextDialog as Component } from '../components/EditTextDialog';
 import { mapStateToProps, mapActionCreatorsToProps } from './Container';
 

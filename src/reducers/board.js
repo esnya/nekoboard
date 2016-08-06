@@ -1,4 +1,4 @@
-import * as BOARD from '../constants/actions/Board';
+import * as BOARD from '../actions/board';
 
 /**
  * Board reducer

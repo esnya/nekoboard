@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { open } from '../actions/Dialog';
+import { open } from '../actions/dialog';
 import {
     save as onSave,
     load as onLoad,

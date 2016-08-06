@@ -1,5 +1,5 @@
 import { sortBy } from 'lodash';
-import * as SHAPE from '../constants/actions/Shape';
+import * as SHAPE from '../actions/shape';
 
 /**
  * Board reducer

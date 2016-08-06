@@ -1,20 +1,24 @@
-import * as SHAPE from '../constants/actions/Shape';
 import { generate } from '../utility/id';
 
+export const ADD = 'SHAPE/ADD';
 export const add = (data) => ({
-    type: SHAPE.ADD,
+    type: ADD,
     sync: true,
     data: data.id ? data : {
         ...data,
         id: generate(),
     },
 });
+
+export const LIST = 'SHAPE/LIST';
 export const list = (items) => ({
-    type: SHAPE.LIST,
+    type: LIST,
     items,
 });
+
+export const PUSH = 'SHAPE/PUSH';
 export const push = (items) => ({
-    type: SHAPE.PUSH,
+    type: PUSH,
     items: (
         Array.isArray(items)
             ? items
@@ -26,14 +30,18 @@ export const push = (items) => ({
     sync: true,
     broadcast: true,
 });
+
+export const UPDATE = 'SHAPE/UPDATE';
 export const update = (item) => ({
-    type: SHAPE.UPDATE,
+    type: UPDATE,
     sync: true,
     broadcast: true,
     item,
 });
+
+export const REMOVE = 'SHAPE/REMOVE';
 export const remove = (id) => ({
-    type: SHAPE.REMOVE,
+    type: REMOVE,
     sync: true,
     broadcast: true,
     id,

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { open } from '../actions/Dialog';
-import { setMode, setShape, setSnap } from '../actions/Editor';
+import { open } from '../actions/dialog';
+import { setMode, setShape, setSnap } from '../actions/editor';
 import {
     resetZoom as onResetZoom,
     zoomIn as onZoomIn,
     zoomOut as onZoomOut,
     perspective as onChangePerspective,
-} from '../actions/View';
+} from '../actions/view';
 import { Toolbar as Component } from '../components/Toolbar';
 import { mapActionCreatorsToProps } from './Container';
 

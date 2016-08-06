@@ -1,4 +1,4 @@
-import * as DIALOG from '../constants/actions/Dialog';
+import * as DIALOG from '../actions/dialog';
 
 /**
  * Board reducer

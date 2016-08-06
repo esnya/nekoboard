@@ -1,11 +1,14 @@
-import * as FILE from '../constants/actions/file';
-
+export const SAVE = 'FILE/SAVE';
 export const save = () => ({
-    type: FILE.SAVE,
+    type: SAVE,
 });
+
+export const LOAD = 'FILE/LOAD';
 export const load = () => ({
-    type: FILE.LOAD,
+    type: LOAD,
 });
+
+export const EXPORT_SVG = 'FILE/EXPORT_SVG';
 export const exportSVG = () => ({
-    type: FILE.EXPORT_SVG,
+    type: EXPORT_SVG,
 });

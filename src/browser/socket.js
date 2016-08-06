@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
-import { join } from '../actions/Board';
-import * as Socket from '../actions/Socket';
+import { join } from '../actions/board';
+import * as Socket from '../actions/socket';
 import store from './store';
 
 export const socket = io(location.origin, {

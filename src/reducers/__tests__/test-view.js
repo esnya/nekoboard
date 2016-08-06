@@ -1,6 +1,6 @@
 describe('View reducer', () => {
     jest.autoMockOff();
-    const View = require('../../actions/View');
+    const View = require('../../actions/view');
     const view = require('../view').view;
 
     let state;

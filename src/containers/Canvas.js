@@ -7,9 +7,9 @@ import {
     beginMove,
     updateMove,
     endMove,
-} from '../actions/Editor';
-import { open } from '../actions/Dialog';
-import { push } from '../actions/Shape';
+} from '../actions/editor';
+import { open } from '../actions/dialog';
+import { push } from '../actions/shape';
 import { Canvas as Component } from '../components/Canvas';
 import { mapActionCreatorsToProps } from './Container';
 

@@ -1,8 +1,7 @@
 import color from 'color';
-import { open } from '../actions/Dialog';
-import { endEdit } from '../actions/Editor';
-import { add, update, remove } from '../actions/Shape';
-import * as EDITOR from '../constants/actions/Editor';
+import { open } from '../actions/dialog';
+import * as Editor from '../actions/editor';
+import { add, update, remove } from '../actions/shape';
 import * as MODE from '../constants/Mode';
 import * as SHAPE from '../constants/Shape';
 import { generate } from '../utility/id';
@@ -123,7 +122,7 @@ const onBegin = ({ dispatch, getState }, next, action) => {
     const e = getState().editor;
 
     if (e.edit && e.mode !== MODE.MOVE) {
-        return next(endEdit());
+        return next(Editor.endEdit());
     } else if (e.mode === MODE.EDIT && !action.id) {
         // eslint-disable-next-line default-case
         switch (e.shape) {
@@ -213,9 +212,9 @@ const onUpdate = ({ dispatch, getState }, next, action) => {
 export const editor = ({ dispatch, getState }) => (next) => (action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
-    case EDITOR.EDIT_BEGIN:
+    case Editor.BEGIN_EDIT:
         return onBegin({ dispatch, getState }, next, action);
-    case EDITOR.EDIT_UPDATE:
+    case Editor.UPDATE_EDIT:
         return onUpdate({ dispatch, getState }, next, action);
     }
 

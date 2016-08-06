@@ -2,8 +2,8 @@ import Config from 'config';
 import EventEmitter from 'events';
 import { pick } from 'lodash';
 import { createClient } from './redis';
-import * as Board from '../actions/Board';
-import * as Shape from '../actions/Shape';
+import * as Board from '../actions/board';
+import * as Shape from '../actions/shape';
 import { BOARD_KEYS, SHAPE_KEYS } from '../constants/keys';
 import { generate as genId } from '../utility/id';
 

@@ -1,7 +1,7 @@
 import IO from 'socket.io';
 import { getLogger } from 'log4js';
-import * as BOARD from '../constants/actions/Board';
-import * as SHAPE from '../constants/actions/Shape';
+import * as BOARD from '../actions/board';
+import * as SHAPE from '../actions/shape';
 import { Client } from './client';
 import { server } from './server';
 
