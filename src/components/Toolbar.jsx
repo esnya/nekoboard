@@ -114,13 +114,19 @@ export class Toolbar extends Component {
             onZoomIn: PropTypes.func.isRequired,
             onZoomOut: PropTypes.func.isRequired,
             fill: PropTypes.bool,
-            fillColor: PropTypes.string,
+            fillColor: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.object,
+            ]),
             mode: PropTypes.string,
             perspective: PropTypes.bool,
             shape: PropTypes.string,
             snap: PropTypes.bool,
             stroke: PropTypes.bool,
-            strokeColor: PropTypes.string,
+            strokeColor: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.object,
+            ]),
             strokeWidth: PropTypes.number,
             style: PropTypes.object,
         };

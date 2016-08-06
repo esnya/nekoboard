@@ -2,9 +2,7 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import ThemeManager from 'material-ui/styles/themeManager';
 import React, { Component, PropTypes } from 'react';
-import Theme from '../browser/theme';
 import { Canvas } from '../containers/Canvas';
 import { BoardConfigDialog } from '../containers/BoardConfigDialog';
 import { EditStyleDialog } from '../containers/EditStyleDialog';
@@ -14,11 +12,6 @@ import { Toolbar } from '../containers/Toolbar';
 import styles from '../styles/app.styl';
 
 export class App extends Component {
-    static get childContextTypes() {
-        return {
-            muiTheme: PropTypes.object,
-        };
-    }
     static get propTypes() {
         return {
             title: PropTypes.string,
@@ -34,12 +27,6 @@ export class App extends Component {
 
         this.state = {
             leftNav: false,
-        };
-    }
-
-    getChildContext() {
-        return {
-            muiTheme: ThemeManager.getMuiTheme(Theme),
         };
     }
 

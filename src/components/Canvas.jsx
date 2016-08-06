@@ -211,8 +211,8 @@ export class Canvas extends Component {
                 ref={(c) => c && (this.canvas = c)}
                 style={{
                     cursor,
-                    width: width * zoom,
-                    height: height * zoom,
+                    width: width * zoom || 0,
+                    height: height * zoom || 0,
                 }}
                 onMouseDown={(e) => this.onMouseDown(e)}
                 onMouseMove={(e) => this.onMouseMove(e)}
@@ -223,8 +223,8 @@ export class Canvas extends Component {
             >
                 <svg
                     id="canvas-svg"
-                    width={width * zoom}
-                    height={height * zoom}
+                    width={width * zoom || 0}
+                    height={height * zoom || 0}
                 >
                     <g transform={`scale(${zoom})`}>
                         {gridElements}
