@@ -67,7 +67,6 @@ export class PieceDialog extends PureComponent {
                 actions={actions}
                 open={open}
                 title="Piece"
-                onRequestClose={onClose}
             >
                 <TextField
                     fullWidth
