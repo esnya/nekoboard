@@ -11,7 +11,7 @@ export const app = express();
 
 app.use(connectLogger(logger, { level: levels.INFO }));
 
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 if (config.get('app.livereload')) {
     app.use(livereload());
