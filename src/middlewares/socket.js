@@ -3,7 +3,7 @@ import { socket as soc } from '../browser/socket';
 export const socket = () => (next) => (action) => {
     const {
         sync,
-        ...nextAction,
+        ...nextAction
     } = action;
 
     if (sync) {
