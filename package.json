@@ -56,7 +56,7 @@
     "jest-cli": "^14.1.0",
     "nodemon": "^1.10.0",
     "npm-run-all": "^2.3.0",
-    "pug": "^2.0.0-rc.3",
+    "pug": "^3.0.1",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
@@ -86,7 +86,7 @@
     "redux": "^3.1.2",
     "redux-actions": "^0.10.1",
     "sanitize.css": "^4.0.0",
-    "socket.io": "^1.4.5",
+    "socket.io": "^2.4.0",
     "socket.io-client": "^1.4.5",
     "source-map-support": "^0.4.0",
     "why-did-you-update": "0.0.8"
