@@ -47,7 +47,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "chokidar-cli": "^1.2.0",
     "cross-env": "^2.0.0",
-    "css-loader": "^0.23.1",
+    "css-loader": "^7.1.4",
     "eslint": "^3.2.2",
     "eslint-config-airbnb": "^10.0.0",
     "eslint-plugin-import": "^1.12.0",
