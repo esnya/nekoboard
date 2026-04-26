@@ -70,7 +70,7 @@
     "config": "^1.19.0",
     "connect-livereload": "^0.5.4",
     "dom-storage": "^2.0.2",
-    "express": "^4.13.4",
+    "express": "^4.22.1",
     "google-material-color": "^1.2.6",
     "immutable": "^3.8.1",
     "knex": "^0.21.5",
